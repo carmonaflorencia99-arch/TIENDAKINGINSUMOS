@@ -1,0 +1,469 @@
+﻿pagina,categoria,marca,producto,variante,sku,precio_lista,precio_efectivo_10,stock,sin_stock_en_catalogo,revisar,fotos
+1,adhesivos,Neicha,Adhesivo Black Glue Neicha,Inicial (2-3 seg) · 2 g,ADHESIVO-BLACK-GLUE-NEICHA-INICIAL2-3SEG-2G,21500,19350,10,,,3
+1,adhesivos,Neicha,Adhesivo Black Glue Neicha,Inicial (2-3 seg) · 3 g,ADHESIVO-BLACK-GLUE-NEICHA-INICIAL2-3SEG-3G,26300,23670,10,,,3
+1,adhesivos,Neicha,Adhesivo Black Glue Neicha,Inicial (2-3 seg) · 5 g,ADHESIVO-BLACK-GLUE-NEICHA-INICIAL2-3SEG-5G,32800,29520,10,,,3
+1,adhesivos,Neicha,Adhesivo Black Glue Neicha,Intermedio (1-2 seg) · 2 g,ADHESIVO-BLACK-GLUE-NEICHA-INTERMEDIO1-2SEG-2G,21500,19350,10,,,3
+1,adhesivos,Neicha,Adhesivo Black Glue Neicha,Intermedio (1-2 seg) · 3 g,ADHESIVO-BLACK-GLUE-NEICHA-INTERMEDIO1-2SEG-3G,26300,23670,10,,,3
+1,adhesivos,Neicha,Adhesivo Black Glue Neicha,Intermedio (1-2 seg) · 5 g,ADHESIVO-BLACK-GLUE-NEICHA-INTERMEDIO1-2SEG-5G,32800,29520,10,,,3
+1,adhesivos,Neicha,Adhesivo Black Glue Neicha,"Avanzado (0,5 seg) · 2 g",ADHESIVO-BLACK-GLUE-NEICHA-AVANZADO05SEG-2G,21500,19350,10,,,3
+1,adhesivos,Neicha,Adhesivo Black Glue Neicha,"Avanzado (0,5 seg) · 3 g",ADHESIVO-BLACK-GLUE-NEICHA-AVANZADO05SEG-3G,26300,23670,10,,,3
+1,adhesivos,Neicha,Adhesivo Black Glue Neicha,"Avanzado (0,5 seg) · 5 g",ADHESIVO-BLACK-GLUE-NEICHA-AVANZADO05SEG-5G,32800,29520,10,,,3
+1,adhesivos,The Lion Beauty,Adhesivo Lion Beauty,Magno · 3 g,ADHESIVO-LION-BEAUTY-MAGNO-3G,26833,24140,10,,,3
+1,adhesivos,The Lion Beauty,Adhesivo Lion Beauty,Magno · 5 g,ADHESIVO-LION-BEAUTY-MAGNO-5G,33666,30290,10,,,3
+1,adhesivos,The Lion Beauty,Adhesivo Lion Beauty,Sublime · 3 g,ADHESIVO-LION-BEAUTY-SUBLIME-3G,26833,24140,10,,,3
+1,adhesivos,The Lion Beauty,Adhesivo Lion Beauty,Sublime · 5 g,ADHESIVO-LION-BEAUTY-SUBLIME-5G,33666,30290,10,,,3
+1,adhesivos,The Lion Beauty,Adhesivo Lion Beauty,Extreme · 3 g,ADHESIVO-LION-BEAUTY-EXTREME-3G,26833,24140,10,,,3
+1,adhesivos,The Lion Beauty,Adhesivo Lion Beauty,Extreme · 5 g,ADHESIVO-LION-BEAUTY-EXTREME-5G,33666,30290,10,,,3
+1,adhesivos,The Lion Beauty,Adhesivo Lion Beauty,Odín · 3 g,ADHESIVO-LION-BEAUTY-ODN-3G,26833,24140,10,,,3
+1,adhesivos,The Lion Beauty,Adhesivo Lion Beauty,Odín · 5 g,ADHESIVO-LION-BEAUTY-ODN-5G,33666,30290,10,,,3
+1,adhesivos,Zaphiria,Adhesivo Lumi Zaphiria 5 g,"Lumiglow (0,5 seg)",ADHESIVO-LUMI-ZAPHIRIA-5-G-LUMIGLOW05SEG,18300,16470,10,,,0
+1,adhesivos,Zaphiria,Adhesivo Lumi Zaphiria 5 g,"Lumibloom (0,5-1 seg)",ADHESIVO-LUMI-ZAPHIRIA-5-G-LUMIBLOOM05-1SEG,18300,16470,10,,,0
+1,adhesivos,Zaphiria,Adhesivo Lumi Zaphiria 5 g,"Purple Glue (0,5 seg)",ADHESIVO-LUMI-ZAPHIRIA-5-G-PURPLEGLUE05SEG,18300,16470,10,,,0
+1,adhesivos,Zaphiria,Adhesivo Lumi Zaphiria 5 g,"Flex Glue (0,3 seg)",ADHESIVO-LUMI-ZAPHIRIA-5-G-FLEXGLUE03SEG,20500,18450,10,,,0
+1,adhesivos,Golle,Adhesivo Golle 5 g,"Genius Fix (0,5-1 seg)",ADHESIVO-GOLLE-5-G-GENIUSFIX05-1SEG,29000,26100,10,,,2
+1,adhesivos,Golle,Adhesivo Golle 5 g,Thin and Fast (1-2 seg),ADHESIVO-GOLLE-5-G-THINANDFAST1-2SEG,29000,26100,10,,,2
+2,adhesivos,,Adhesivo Elite HS-16 5 g,,ADHESIVO-ELITE-HS-16-5-G,32400,29160,10,,,2
+2,adhesivos,Abruxlashes,Adhesivo Abruxlashes 5 g,"Rápida (0,3 seg)",ADHESIVO-ABRUXLASHES-5-G-RPIDA03SEG,37700,33930,10,,,3
+2,adhesivos,Abruxlashes,Adhesivo Abruxlashes 5 g,"Furia (0,5 seg)",ADHESIVO-ABRUXLASHES-5-G-FURIA05SEG,37700,33930,10,,,3
+2,adhesivos,Abruxlashes,Adhesivo Abruxlashes 5 g,"Eclipse (0,8 seg)",ADHESIVO-ABRUXLASHES-5-G-ECLIPSE08SEG,37000,33300,10,,,3
+2,adhesivos,Clione,Adhesivo Clione Prime,"Love (0,3-1 seg) · 3 g",ADHESIVO-CLIONE-PRIME-LOVE03-1SEG-3G,25200,22680,10,,,3
+2,adhesivos,Clione,Adhesivo Clione Prime,"Love (0,3-1 seg) · 5 g",ADHESIVO-CLIONE-PRIME-LOVE03-1SEG-5G,28888,25990,10,,,3
+2,adhesivos,Clione,Adhesivo Clione Prime,Luna (1-2 seg) · 3 g,ADHESIVO-CLIONE-PRIME-LUNA1-2SEG-3G,25200,22680,10,,,3
+2,adhesivos,Clione,Adhesivo Clione Prime,Luna (1-2 seg) · 5 g,ADHESIVO-CLIONE-PRIME-LUNA1-2SEG-5G,28888,25990,10,,,3
+2,adhesivos,Clione,Adhesivo Clione Prime,Sol (1-2 seg) · 3 g,ADHESIVO-CLIONE-PRIME-SOL1-2SEG-3G,25200,22680,10,,,3
+2,adhesivos,Clione,Adhesivo Clione Prime,Sol (1-2 seg) · 5 g,ADHESIVO-CLIONE-PRIME-SOL1-2SEG-5G,28888,25990,10,,,3
+2,adhesivos,Cherimoya,Adhesivo Eyelash Glue Cherimoya 5 g,1 seg (intermedio),ADHESIVO-EYELASH-GLUE-CHERIMOYA-5-G-1SEGINTERMEDIO,31300,28170,10,,,2
+2,adhesivos,Cherimoya,Adhesivo Eyelash Glue Cherimoya 5 g,"0,5 seg (avanzado)",ADHESIVO-EYELASH-GLUE-CHERIMOYA-5-G-05SEGAVANZADO,31300,28170,10,,,2
+3,medidores-humedad,,Medidor de humedad y temperatura con reloj,,MEDIDOR-DE-HUMEDAD-Y-TEMPERATURA-CON-RELOJ,16390,14750,10,,,1
+3,medidores-humedad,,Medidor de humedad digital compacto,,MEDIDOR-DE-HUMEDAD-DIGITAL-COMPACTO,4523,4070,10,,,0
+3,medidores-humedad,,Mini medidor de humedad,,MINI-MEDIDOR-DE-HUMEDAD,6000,5400,10,,,1
+3,medidores-humedad,,Medidor de humedad con reloj y alarma,,MEDIDOR-DE-HUMEDAD-CON-RELOJ-Y-ALARMA,8200,7380,10,,,1
+3,medidores-humedad,,Medidor de humedad rosa,,MEDIDOR-DE-HUMEDAD-ROSA,8700,7830,10,,,1
+3,removedores,Iconsign,Removedor lápiz Iconsign blanco,,REMOVEDOR-LAPIZ-ICONSIGN-BLANCO,4645,4180,10,,,1
+3,removedores,Navina,Removedor en crema Navina x 5 g (nueva fórmula),,REMOVEDOR-EN-CREMA-NAVINA-X-5-G-NUEVA-FORMULA,5500,4950,10,,,0
+3,removedores,Nagaraku,Removedor en crema Nagaraku x 5 g,,REMOVEDOR-EN-CREMA-NAGARAKU-X-5-G,5745,5170,10,,,1
+3,removedores,Navina,Removedor en crema Navina Clásico x 5 g,,REMOVEDOR-EN-CREMA-NAVINA-CLASICO-X-5-G,5012,4510,10,,,1
+3,removedores,Cherimoya,Removedor en crema Cherimoya x 5 g,,REMOVEDOR-EN-CREMA-CHERIMOYA-X-5-G,6723,6050,10,,,2
+3,removedores,,Removedor lápiz en gel Debby Rose,,REMOVEDOR-LAPIZ-EN-GEL-DEBBY-ROSE,3912,3520,10,,,1
+3,removedores,,Removedor lápiz en gel 10 g,,REMOVEDOR-LAPIZ-EN-GEL-10-G,3912,3520,10,,,0
+3,removedores,Iconsign,Removedor lápiz en gel Iconsign 5 g,,REMOVEDOR-LAPIZ-EN-GEL-ICONSIGN-5-G,4525,4070,10,,,1
+3,removedores,Navina,Removedor lápiz en gel Navina 10 g,,REMOVEDOR-LAPIZ-EN-GEL-NAVINA-10-G,6234,5610,10,,,1
+3,removedores,The Lion Beauty,Removedor en crema Lion Beauty 15 g,,REMOVEDOR-EN-CREMA-LION-BEAUTY-15-G,23900,21510,10,,,1
+3,removedores,,Removedor en crema 15 g,Clásico,REMOVEDOR-EN-CREMA-15-G-CLSICO,19678,17710,10,,,1
+3,removedores,,Removedor en crema 15 g,Light,REMOVEDOR-EN-CREMA-15-G-LIGHT,19678,17710,10,,,1
+3,removedores,Nagaraku,Removedor lápiz Nagaraku,,REMOVEDOR-LAPIZ-NAGARAKU,3056,2750,10,,,1
+4,removedores,Zaphiria,Removedor en gel Zaphiria Lumi 15 g,,REMOVEDOR-EN-GEL-ZAPHIRIA-LUMI-15-G,14912,13420,10,,,1
+4,removedores,,Removedor en gel City Girl 15 g,,REMOVEDOR-EN-GEL-CITY-GIRL-15-G,8250,7420,10,,,1
+4,removedores,Zaphiria,Removedor en gel Zaphiria 15 g,,REMOVEDOR-EN-GEL-ZAPHIRIA-15-G,19678,17710,10,,,1
+4,removedores,The Lion Beauty,Removedor en gel Lion Beauty 20 ml,,REMOVEDOR-EN-GEL-LION-BEAUTY-20-ML,20890,18800,10,,,0
+4,removedores,Zaphiria,Removedor en gel Express Zaphiria 10 g,,REMOVEDOR-EN-GEL-EXPRESS-ZAPHIRIA-10-G,11000,9900,10,,,1
+4,removedores,Iconsign,Removedor en gel Iconsign 1 g,,REMOVEDOR-EN-GEL-ICONSIGN-1-G,5600,5040,10,,,1
+4,removedores,Stars Colors,Removedor en crema Stars Colors 5 g,,REMOVEDOR-EN-CREMA-STARS-COLORS-5-G,5378,4840,10,,,1
+4,removedores,Stars Colors,Removedor en lápiz Stars Colors 5 ml,,REMOVEDOR-EN-LAPIZ-STARS-COLORS-5-ML,3900,3510,10,,,1
+4,removedores,Stars Colors,Removedor en gel Stars Colors 15 ml,,REMOVEDOR-EN-GEL-STARS-COLORS-15-ML,8678,7810,10,,,1
+5,complementos-adhesivos,,Repuesto wipes limpia pegamento x 200,,REPUESTO-WIPES-LIMPIA-PEGAMENTO-X-200,2570,2310,10,,,1
+5,complementos-adhesivos,,Wipes limpia pegamento x 200,Blanco,WIPES-LIMPIA-PEGAMENTO-X-200-BLANCO,3178,2860,10,,,1
+5,complementos-adhesivos,,Wipes limpia pegamento x 200,Rosa,WIPES-LIMPIA-PEGAMENTO-X-200-ROSA,3178,2860,10,,,1
+5,complementos-adhesivos,,Mezclador de adhesivo,,MEZCLADOR-DE-ADHESIVO,22000,19800,10,,,1
+5,complementos-adhesivos,,Limpia pegamento paquete x 300,,LIMPIA-PEGAMENTO-PAQUETE-X-300,5625,5060,10,,,1
+5,complementos-adhesivos,,Anillo con ranuras para adhesivo,x 100,ANILLO-CON-RANURAS-PARA-ADHESIVO-X100,3910,3510,10,,,2
+5,complementos-adhesivos,,Anillo con ranuras para adhesivo,x 10,ANILLO-CON-RANURAS-PARA-ADHESIVO-X10,820,730,10,,,2
+5,complementos-adhesivos,,Base flor rosa x 10 (solo base),,BASE-FLOR-ROSA-X-10-SOLO-BASE,540,480,10,,,1
+5,complementos-adhesivos,,Líquido limpia pinzas,,LIQUIDO-LIMPIA-PINZAS,2445,2200,10,,,1
+5,complementos-adhesivos,,Anillo portapegamento,x 100 rosa,ANILLO-PORTAPEGAMENTO-X100ROSA,2445,2200,10,,,1
+5,complementos-adhesivos,,Anillo portapegamento,x 100 blanco,ANILLO-PORTAPEGAMENTO-X100BLANCO,2445,2200,10,,,1
+5,complementos-adhesivos,,Anillo portapegamento,x 10,ANILLO-PORTAPEGAMENTO-X10,320,280,10,,,1
+5,complementos-adhesivos,,Base flor para adhesivo x 10,,BASE-FLOR-PARA-ADHESIVO-X-10,810,720,10,,,0
+5,complementos-adhesivos,,Tapón para pegamento x unidad,,TAPON-PARA-PEGAMENTO-X-UNIDAD,540,480,10,,,1
+6,complementos-adhesivos,,Piedra jade,Verde,PIEDRA-JADE-VERDE,675,600,10,,,1
+6,complementos-adhesivos,,Piedra jade,Negra,PIEDRA-JADE-NEGRA,675,600,10,,,1
+6,complementos-adhesivos,,Porta pegamento PVC x 10,Redondo,PORTA-PEGAMENTO-PVC-X-10-REDONDO,1230,1100,10,,,1
+6,complementos-adhesivos,,Porta pegamento PVC x 10,Cuadrado,PORTA-PEGAMENTO-PVC-X-10-CUADRADO,1230,1100,10,,,1
+6,complementos-adhesivos,,Destapador de adhesivo,,DESTAPADOR-DE-ADHESIVO,2670,2400,10,,,1
+6,complementos-adhesivos,,Portapegamento rosa con medidor de humedad,,PORTAPEGAMENTO-ROSA-CON-MEDIDOR-DE-HUMEDAD,11980,10780,10,,,1
+6,complementos-adhesivos,,Cristal portapegamento rosa,,CRISTAL-PORTAPEGAMENTO-ROSA,3800,3420,10,,,1
+6,complementos-adhesivos,,Portapegamento negro,,PORTAPEGAMENTO-NEGRO,5000,4500,10,,,1
+6,complementos-adhesivos,,Tanque portapegamento de plástico Press,,TANQUE-PORTAPEGAMENTO-DE-PLASTICO-PRESS,9170,8250,10,,,1
+6,complementos-adhesivos,,Tanque portapegamento de plástico rosa,,TANQUE-PORTAPEGAMENTO-DE-PLASTICO-ROSA,8440,7590,10,,,1
+6,complementos-adhesivos,,Portapegamento rosa hermético,,PORTAPEGAMENTO-ROSA-HERMETICO,7500,6750,10,,,1
+7,shampoo-y-limpieza,The Lion Beauty,Shampoo para pestañas Lion Beauty,40 ml,SHAMPOO-PARA-PESTANAS-LION-BEAUTY-40ML,7200,6480,10,,,1
+7,shampoo-y-limpieza,The Lion Beauty,Shampoo para pestañas Lion Beauty,150 ml,SHAMPOO-PARA-PESTANAS-LION-BEAUTY-150ML,16600,14940,10,,,1
+7,shampoo-y-limpieza,Navina,Shampoo Navina 80 ml,,SHAMPOO-NAVINA-80-ML,3555,3190,10,,,1
+7,shampoo-y-limpieza,Zaphiria,Shampoo Ice Cream Zaphiria,,SHAMPOO-ICE-CREAM-ZAPHIRIA,10300,9270,0,sí,,1
+7,shampoo-y-limpieza,Iconsign,Shampoo Iconsign,,SHAMPOO-ICONSIGN,9400,8460,10,,,1
+7,shampoo-y-limpieza,,Shampoo Lash,60 ml,SHAMPOO-LASH-60ML,4000,3600,0,sí,Precio de lista de 100 ml estimado desde la oferta ($3.900),1
+7,shampoo-y-limpieza,,Shampoo Lash,100 ml,SHAMPOO-LASH-100ML,4330,3890,0,sí,Precio de lista de 100 ml estimado desde la oferta ($3.900),1
+7,shampoo-y-limpieza,,Agua micelar Thelma y Louise,160 ml,AGUA-MICELAR-THELMA-Y-LOUISE-160ML,4900,4410,10,,,1
+7,shampoo-y-limpieza,,Agua micelar Thelma y Louise,70 ml,AGUA-MICELAR-THELMA-Y-LOUISE-70ML,3000,2700,10,,,1
+7,shampoo-y-limpieza,,Espumero 150 ml,,ESPUMERO-150-ML,2310,2070,10,,,0
+7,shampoo-y-limpieza,,Espumero rojo 100 ml,,ESPUMERO-ROJO-100-ML,4280,3850,10,,,0
+7,shampoo-y-limpieza,,Espumero rosa,30 ml,ESPUMERO-ROSA-30ML,1800,1620,10,,,1
+7,shampoo-y-limpieza,,Espumero rosa,120 ml,ESPUMERO-ROSA-120ML,3300,2970,10,,,1
+7,shampoo-y-limpieza,,Espumero 100 ml,100 ml,ESPUMERO-100-ML-100ML,1900,1710,10,,,1
+7,shampoo-y-limpieza,,Espumero 100 ml,50 ml,ESPUMERO-100-ML-50ML,1400,1260,10,,,1
+7,shampoo-y-limpieza,,Espumero 30 ml,,ESPUMERO-30-ML,1470,1320,10,,,1
+7,shampoo-y-limpieza,,Espumero dorado o rosa con frasco transparente 50 ml,Dorado,ESPUMERO-DORADO-O-ROSA-CON-FRASCO-TRANSPARENTE-50-ML-DORADO,3300,2970,10,,,0
+7,shampoo-y-limpieza,,Espumero dorado o rosa con frasco transparente 50 ml,Rosa,ESPUMERO-DORADO-O-ROSA-CON-FRASCO-TRANSPARENTE-50-ML-ROSA,3300,2970,10,,,0
+7,shampoo-y-limpieza,,Agua micelar Mely común,,AGUA-MICELAR-MELY-COMUN,6200,5580,10,,,1
+7,shampoo-y-limpieza,,Agua micelar bifásica Thelma y Louise,,AGUA-MICELAR-BIFASICA-THELMA-Y-LOUISE,7335,6600,10,,,1
+7,shampoo-y-limpieza,Zaphiria,Shampoo concentrado Zaphiria Lumi para 60 ml,,SHAMPOO-CONCENTRADO-ZAPHIRIA-LUMI-PARA-60-ML,2100,1890,10,,,1
+8,primers-selladores,Nagaraku,Sellador Nagaraku,,SELLADOR-NAGARAKU,10510,9450,10,,,1
+8,primers-selladores,Navina,Sellador para extensiones transparente Navina,,SELLADOR-PARA-EXTENSIONES-TRANSPARENTE-NAVINA,8435,7590,10,,,1
+8,primers-selladores,Iconsign,Sellador Iconsign,,SELLADOR-ICONSIGN,10390,9350,10,,,1
+8,primers-selladores,,Lash Primer 10 ml,,LASH-PRIMER-10-ML,11735,10560,10,,,1
+8,primers-selladores,Navina,Primer para pestañas Navina,,PRIMER-PARA-PESTANAS-NAVINA,4770,4290,10,,,1
+8,primers-selladores,,Primer Dlux,,PRIMER-DLUX,16010,14400,10,,,1
+8,primers-selladores,Zaphiria,Primer Zaphiria 20 ml,,PRIMER-ZAPHIRIA-20-ML,16700,15030,0,sí,,1
+8,primers-selladores,Iconsign,Lash Bonder Iconsign,,LASH-BONDER-ICONSIGN,13700,12330,0,sí,,1
+8,primers-selladores,Stars Colors,Lash Primer Stars Colors,,LASH-PRIMER-STARS-COLORS,11620,10450,10,,,1
+8,primers-selladores,Zaphiria,Primer Melon Zaphiria 15 ml,,PRIMER-MELON-ZAPHIRIA-15-ML,9780,8800,10,,,1
+8,primers-selladores,Zaphiria,Natural Primer Zaphiria,,NATURAL-PRIMER-ZAPHIRIA,22245,20020,0,sí,,1
+8,primers-selladores,Zaphiria,Primer Lumi Zaphiria 15 ml,,PRIMER-LUMI-ZAPHIRIA-15-ML,10000,9000,10,,El catálogo dice $1000 (oferta $9000); se tomó $10.000,2
+9,primers-selladores,Golle,Super Booster Golle,,SUPER-BOOSTER-GOLLE,12710,11430,10,,,0
+9,primers-selladores,,Ultrabalance 15 ml,,ULTRABALANCE-15-ML,9535,8580,10,,,1
+9,primers-selladores,Golle,Super Bonder Golle 15 ml,,SUPER-BONDER-GOLLE-15-ML,24080,21670,10,,,1
+9,primers-selladores,Zaphiria,Bonder Zaphiria 20 ml,,BONDER-ZAPHIRIA-20-ML,28845,25960,10,,,1
+9,primers-selladores,Zaphiria,Bonder Zaphiria Lumi 15 ml,,BONDER-ZAPHIRIA-LUMI-15-ML,20700,18630,10,,,2
+9,primers-selladores,,Booster Dlux,,BOOSTER-DLUX,22245,20020,10,,,1
+9,primers-selladores,Iconsign,Cleanser Iconsign,,CLEANSER-ICONSIGN,5320,4780,10,,,1
+9,primers-selladores,Clione,Bonder Clione 20 ml,,BONDER-CLIONE-20-ML,25900,23310,10,,,1
+9,primers-selladores,Abruxlashes,Magic Bonder Abruxlashes,,MAGIC-BONDER-ABRUXLASHES,18900,17010,10,,,1
+9,primers-selladores,Abruxlashes,Super Booster Abruxlashes,,SUPER-BOOSTER-ABRUXLASHES,16700,15030,10,,,1
+10,brochas-cepillos,,Hisopo aplicador cristal x 50,,HISOPO-APLICADOR-CRISTAL-X-50,2060,1850,10,,,1
+10,brochas-cepillos,,Pack cepillos para pestañas x 50,,PACK-CEPILLOS-PARA-PESTANAS-X-50,2090,1880,10,,,1
+10,brochas-cepillos,,Pack cepillos de silicona para laminado,,PACK-CEPILLOS-DE-SILICONA-PARA-LAMINADO,3300,2970,10,,,1
+10,brochas-cepillos,,"Hisopo regular 2,5 pack x 100",,HISOPO-REGULAR-2-5-PACK-X-100,2080,1870,10,,El catálogo solo muestra el precio de oferta; la lista se calculó (+10 %),1
+10,brochas-cepillos,,Microhisopos en bolsa x 100,,MICROHISOPOS-EN-BOLSA-X-100,1350,1210,10,,El catálogo solo muestra el precio de oferta; la lista se calculó (+10 %),1
+10,brochas-cepillos,,Brocha limpia pestañas,Lisa,BROCHA-LIMPIA-PESTANAS-LISA,1100,990,10,,El catálogo solo muestra el precio de oferta; la lista se calculó (+10 %),1
+10,brochas-cepillos,,Brocha limpia pestañas,Glitter,BROCHA-LIMPIA-PESTANAS-GLITTER,1100,990,10,,El catálogo solo muestra el precio de oferta; la lista se calculó (+10 %),1
+10,brochas-cepillos,,Microhisopos en bolsa x 100 cristal glitter,,MICROHISOPOS-EN-BOLSA-X-100-CRISTAL-GLITTER,2080,1870,10,,,1
+10,brochas-cepillos,,Hisopo aplicador x 50,,HISOPO-APLICADOR-X-50,2000,1800,10,,El catálogo solo muestra el precio de oferta; la lista se calculó (+10 %),1
+10,brochas-cepillos,,Botella pico curvo grande,,BOTELLA-PICO-CURVO-GRANDE,1860,1670,10,,El catálogo solo muestra el precio de oferta; la lista se calculó (+10 %),1
+11,ventiladores,,Nano mister USB,Rosa,NANO-MISTER-USB-ROSA,6600,5940,10,,,1
+11,ventiladores,,Nano mister USB,Blanco,NANO-MISTER-USB-BLANCO,6600,5940,10,,,1
+11,ventiladores,,Nano mister huevito animal USB,,NANO-MISTER-HUEVITO-ANIMAL-USB,5380,4840,10,,,1
+11,ventiladores,,Ventilador USB animal,,VENTILADOR-USB-ANIMAL,7770,6990,10,,,1
+11,ventiladores,,Ventilador USB gatito,,VENTILADOR-USB-GATITO,6130,5510,10,,,1
+11,ventiladores,,Ventilador con luz,,VENTILADOR-CON-LUZ,8330,7490,10,,,1
+11,ventiladores,,Ventilador USB con cargador tipo C,,VENTILADOR-USB-CON-CARGADOR-TIPO-C,6110,5490,10,,,1
+11,ventiladores,,Mini cooling ventilador y humidificador grande,,MINI-COOLING-VENTILADOR-Y-HUMIDIFICADOR-GRANDE,23200,20880,10,,,1
+12,cintas-parches,,Cinta micropore color,,CINTA-MICROPORE-COLOR,860,770,10,,,1
+12,cintas-parches,,Cinta micropore ECO,,CINTA-MICROPORE-ECO,770,690,10,,,1
+12,cintas-parches,,Cinta micropore hipoalergénica 3M,,CINTA-MICROPORE-HIPOALERGENICA-3M,1100,990,10,,,1
+12,cintas-parches,,"Cinta gel blanca 2,5 cm x 5 m",,CINTA-GEL-BLANCA-2-5-CM-X-5-M,2290,2060,0,sí,,1
+12,cintas-parches,,Cinta plástica Transpore,Rosa,CINTA-PLASTICA-TRANSPORE-ROSA,860,770,10,,,1
+12,cintas-parches,,Cinta plástica Transpore,Verde,CINTA-PLASTICA-TRANSPORE-VERDE,860,770,10,,,1
+12,cintas-parches,,Cinta plástica Transpore,Transparente,CINTA-PLASTICA-TRANSPORE-TRANSPARENTE,860,770,10,,,1
+12,cintas-parches,,Cinta micropore para tapping 4 mm,,CINTA-MICROPORE-PARA-TAPPING-4-MM,780,700,10,,,1
+12,cintas-parches,,Cinta gel carrusel,,CINTA-GEL-CARRUSEL,2640,2370,10,,,1
+12,cintas-parches,,Portacinta acrílico ECO,,PORTACINTA-ACRILICO-ECO,1950,1750,10,,,1
+12,cintas-parches,,Portacinta corazón,,PORTACINTA-CORAZON,2455,2200,10,,,1
+12,cintas-parches,,Parches de lifting reutilizables de silicona con dibujitos,,PARCHES-DE-LIFTING-REUTILIZABLES-DE-SILICONA-CON-DIBUJITOS,5000,4500,10,,,1
+12,cintas-parches,,Parches de lifting reutilizables de silicona,,PARCHES-DE-LIFTING-REUTILIZABLES-DE-SILICONA,2450,2200,10,,El catálogo solo muestra el precio de oferta; la lista se calculó (+10 %),2
+12,cintas-parches,,Parches de silicona City Girl x 2 pares,,PARCHES-DE-SILICONA-CITY-GIRL-X-2-PARES,2300,2070,10,,,0
+12,cintas-parches,,Parches común de tela x 10,,PARCHES-COMUN-DE-TELA-X-10,1890,1700,10,,,1
+12,cintas-parches,,Parches de hidrogel x 10 pares,,PARCHES-DE-HIDROGEL-X-10-PARES,2500,2250,10,,,1
+12,cintas-parches,,Cinta contenedora de cejas para laminado,,CINTA-CONTENEDORA-DE-CEJAS-PARA-LAMINADO,2570,2310,10,,,1
+12,cintas-parches,,Cinta de silicona para lifting,,CINTA-DE-SILICONA-PARA-LIFTING,3000,2700,10,,,1
+12,cintas-parches,,Cintas contenedoras de pestañas para lifting de papel x 1000,,CINTAS-CONTENEDORAS-DE-PESTANAS-PARA-LIFTING-DE-PAPEL-X-1000,8440,7590,10,,,2
+13,herramientas-lifting,,Herramienta para lifting de acero inoxidable,Simple,HERRAMIENTA-PARA-LIFTING-DE-ACERO-INOXIDABLE-SIMPLE,2970,2670,10,,,2
+13,herramientas-lifting,,Herramienta para lifting de acero inoxidable,Con peine,HERRAMIENTA-PARA-LIFTING-DE-ACERO-INOXIDABLE-CONPEINE,4510,4050,10,,,2
+13,herramientas-lifting,,Perfilador blister x 3,,PERFILADOR-BLISTER-X-3,1210,1080,10,,,1
+13,herramientas-lifting,,Palito naranjo x 100,,PALITO-NARANJO-X-100,2690,2420,10,,,1
+13,herramientas-lifting,,Hisopo de madera x 100 (10 cm),,HISOPO-DE-MADERA-X-100-10-CM,1050,940,10,,,1
+13,herramientas-lifting,,Cepillos para laminado rectos x 10,,CEPILLOS-PARA-LAMINADO-RECTOS-X-10,3180,2860,10,,,1
+13,herramientas-lifting,,Herramienta para lifting x 1,,HERRAMIENTA-PARA-LIFTING-X-1,300,270,10,,,1
+13,herramientas-lifting,,Marcador para mapping doble punta,,MARCADOR-PARA-MAPPING-DOBLE-PUNTA,3300,2970,10,,,1
+13,herramientas-lifting,,Lápiz fibra para cejas blanco con regla,,LAPIZ-FIBRA-PARA-CEJAS-BLANCO-CON-REGLA,1600,1440,10,,,1
+13,herramientas-lifting,,Lapicera gel para cejas,Blanca,LAPICERA-GEL-PARA-CEJAS-BLANCA,2200,1980,10,,,1
+13,herramientas-lifting,,Lapicera gel para cejas,Rosa,LAPICERA-GEL-PARA-CEJAS-ROSA,2200,1980,10,,,1
+13,herramientas-lifting,,Lapicera gel para cejas,Verde,LAPICERA-GEL-PARA-CEJAS-VERDE,2200,1980,10,,,1
+13,herramientas-lifting,Birou,Lápiz para cejas con peine Birou,,LAPIZ-PARA-CEJAS-CON-PEINE-BIROU,9045,8140,10,,,1
+13,herramientas-lifting,,Lápiz dermográfico x unidad,Marrón,LAPIZ-DERMOGRAFICO-X-UNIDAD-MARRN,1710,1530,10,,,1
+13,herramientas-lifting,,Lápiz dermográfico x unidad,Negro,LAPIZ-DERMOGRAFICO-X-UNIDAD-NEGRO,1710,1530,10,,,1
+13,herramientas-lifting,,Lápiz dermográfico x unidad,Blanco,LAPIZ-DERMOGRAFICO-X-UNIDAD-BLANCO,1710,1530,10,,,1
+13,herramientas-lifting,,Calibre plástico,15 cm,CALIBRE-PLASTICO-15CM,2445,2200,10,,,1
+13,herramientas-lifting,,Calibre plástico,8 cm,CALIBRE-PLASTICO-8CM,1225,1100,10,,,1
+13,herramientas-lifting,,Film,,FILM,1780,1600,10,,,1
+13,herramientas-lifting,,Hilo marcador 10 m,Blanco,HILO-MARCADOR-10-M-BLANCO,3790,3410,10,,,1
+13,herramientas-lifting,,Hilo marcador 10 m,Negro,HILO-MARCADOR-10-M-NEGRO,3790,3410,10,,,1
+13,herramientas-lifting,,Hilo marcador 10 m,Rosa,HILO-MARCADOR-10-M-ROSA,3790,3410,10,,,1
+13,herramientas-lifting,,Peine para lifting x 3,,PEINE-PARA-LIFTING-X-3,1470,1320,10,,,1
+13,herramientas-lifting,,Regla para pestañas,,REGLA-PARA-PESTANAS,920,820,10,,,1
+13,herramientas-lifting,,Mapping pre-inked hilo 30 m,,MAPPING-PRE-INKED-HILO-30-M,6970,6270,10,,,1
+13,herramientas-lifting,,Cepillo doble madera con peine plástico,,CEPILLO-DOBLE-MADERA-CON-PEINE-PLASTICO,3300,2970,10,,,1
+13,herramientas-lifting,,Pincel de precisión para cejas,Grande,PINCEL-DE-PRECISION-PARA-CEJAS-GRANDE,1870,1680,10,,,1
+13,herramientas-lifting,,Pincel de precisión para cejas,Chico,PINCEL-DE-PRECISION-PARA-CEJAS-CHICO,1100,990,10,,,1
+13,herramientas-lifting,,Regla para pestañas portátil,,REGLA-PARA-PESTANAS-PORTATIL,575,510,10,,,1
+14,herramientas-lifting,,Piel sintética para cejas,,PIEL-SINTETICA-PARA-CEJAS,3180,2860,10,,,0
+14,herramientas-lifting,,Mezclador de tinta,,MEZCLADOR-DE-TINTA,4160,3740,10,,,1
+14,cuidado-facial-y-corporal,Zaphiria,Mini derretidor de cera Zaphiria,,MINI-DERRETIDOR-DE-CERA-ZAPHIRIA,16380,14740,10,,,1
+14,cuidado-facial-y-corporal,,Cera para depilar rostro Mely,100 g,CERA-PARA-DEPILAR-ROSTRO-MELY-100G,5400,4860,0,sí,,1
+14,cuidado-facial-y-corporal,,Cera para depilar rostro Mely,400 g,CERA-PARA-DEPILAR-ROSTRO-MELY-400G,8900,8010,0,sí,,1
+14,guantes-descartables,,Guantes 100% nitrilo caja x 100,Azul,GUANTES-100-NITRILO-CAJA-X-100-AZUL,9780,8800,10,,,3
+14,guantes-descartables,,Guantes 100% nitrilo caja x 100,Rosa,GUANTES-100-NITRILO-CAJA-X-100-ROSA,9780,8800,10,,,3
+14,guantes-descartables,,Guantes 100% nitrilo caja x 100,Negro,GUANTES-100-NITRILO-CAJA-X-100-NEGRO,9780,8800,10,,,3
+14,herramientas-lifting,,Bandeja de acero inoxidable,,BANDEJA-DE-ACERO-INOXIDABLE,4035,3630,10,,,1
+14,herramientas-lifting,,Bandeja esmaltada,,BANDEJA-ESMALTADA,3425,3080,10,,,1
+14,cuidado-facial-y-corporal,,Soporte de pigmentos para microblading y dermapen,,SOPORTE-DE-PIGMENTOS-PARA-MICROBLADING-Y-DERMAPEN,3700,3330,10,,,1
+15,espejos,,Espejo de acero inoxidable,,ESPEJO-DE-ACERO-INOXIDABLE,2200,1980,10,,,1
+15,espejos,,Espejito corazón sin glitter,,ESPEJITO-CORAZON-SIN-GLITTER,4400,3960,10,,,1
+15,espejos,,Espejito corazón con glitter,,ESPEJITO-CORAZON-CON-GLITTER,6970,6270,10,,,1
+15,espejos,,Espejito rectangular,Negro,ESPEJITO-RECTANGULAR-NEGRO,4520,4060,10,,,1
+15,espejos,,Espejito rectangular,Plateado,ESPEJITO-RECTANGULAR-PLATEADO,4520,4060,10,,,1
+15,espejos,,Espejito rectangular,Rosa,ESPEJITO-RECTANGULAR-ROSA,5010,4500,10,,,1
+15,espejos,,Espejito rectangular,Dorado,ESPEJITO-RECTANGULAR-DORADO,5010,4500,10,,,1
+15,espejos,,Espejito rectangular,Con glitter,ESPEJITO-RECTANGULAR-CONGLITTER,6600,5940,10,,,1
+15,espejos,,Espejo redondo 16 x 2 cm,,ESPEJO-REDONDO-16-X-2-CM,1345,1210,10,,,1
+15,espejos,,"Espejo de mano cuadrado 23,5 cm",,ESPEJO-DE-MANO-CUADRADO-23-5-CM,5260,4730,10,,,1
+15,espejos,,"Espejo redondo conejo 23,11 cm",,ESPEJO-REDONDO-CONEJO-23-11-CM,4645,4180,10,,,1
+15,accesorios-extensiones,Cherimoya,Muñequera porta pestañas,,MUNEQUERA-PORTA-PESTANAS,2080,1870,10,,,2
+15,accesorios-extensiones,,Base de vidrio con base para adhesivo,,BASE-DE-VIDRIO-CON-BASE-PARA-ADHESIVO,3545,3190,10,,,1
+15,accesorios-extensiones,,Base acrílica con imán,,BASE-ACRILICA-CON-IMAN,4400,3960,10,,,1
+15,accesorios-extensiones,,Lente macro 0.45X para fotos con celular,,LENTE-MACRO-0-45X-PARA-FOTOS-CON-CELULAR,20045,18040,10,,,1
+16,pestanas-de-practica,,Cabeza de práctica para pestañas,,CABEZA-DE-PRACTICA-PARA-PESTANAS,20290,18260,10,,,1
+16,complementos-adhesivos,,Anillo portapegamento con caja,,ANILLO-PORTAPEGAMENTO-CON-CAJA,1800,1620,10,,,0
+16,pestanas-de-practica,,Esponjas de práctica x 10,,ESPONJAS-DE-PRACTICA-X-10,1300,1170,10,,,1
+16,pestanas-de-practica,,Esponjitas x 10,,ESPONJITAS-X-10,2000,1800,10,,,1
+16,accesorios-extensiones,,Almohadilla porta pestañas rosa,,ALMOHADILLA-PORTA-PESTANAS-ROSA,1900,1710,10,,,0
+16,pestanas-de-practica,,Aislador de pestañas,,AISLADOR-DE-PESTANAS,2000,1800,10,,,1
+16,guantes-descartables,,Barbijo descartable x 10,Rosa,BARBIJO-DESCARTABLE-X-10-ROSA,1200,1080,10,,,1
+16,guantes-descartables,,Barbijo descartable x 10,Negro,BARBIJO-DESCARTABLE-X-10-NEGRO,1200,1080,10,,,1
+16,guantes-descartables,,Barbijo plástico transparente,,BARBIJO-PLASTICO-TRANSPARENTE,700,630,10,,,1
+16,guantes-descartables,,Compresas,x 100,COMPRESAS-X100,7200,6480,10,,,1
+16,guantes-descartables,,Compresas,x 50,COMPRESAS-X50,4200,3780,10,,,1
+16,guantes-descartables,,Cofias descartables x 10,,COFIAS-DESCARTABLES-X-10,1300,1170,10,,,1
+17,bigudies,Zaphiria,Bigudíes Zaphiria Fish curva U anatómicos,,BIGUDIES-ZAPHIRIA-FISH-CURVA-U-ANATOMICOS,8800,7920,10,,,1
+17,bigudies,Zaphiria,Bigudíes Zaphiria con ranuras efecto húmedo curva U,,BIGUDIES-ZAPHIRIA-CON-RANURAS-EFECTO-HUMEDO-CURVA-U,8800,7920,10,,,1
+17,bigudies,Zaphiria,Bigudíes Zaphiria Flat planos para técnica coreana,,BIGUDIES-ZAPHIRIA-FLAT-PLANOS-PARA-TECNICA-COREANA,6500,5850,10,,,1
+17,bigudies,Zaphiria,Bigudíes Zaphiria inferiores,,BIGUDIES-ZAPHIRIA-INFERIORES,6500,5850,10,,,1
+17,bigudies,,Bigudíes Frozen estuche rosado curva L,,BIGUDIES-FROZEN-ESTUCHE-ROSADO-CURVA-L,10000,9000,10,,,2
+17,bigudies,Zaphiria,Bigudíes Zaphiria Shell curva C anatómicos,,BIGUDIES-ZAPHIRIA-SHELL-CURVA-C-ANATOMICOS,8800,7920,10,,,1
+17,bigudies,Zaphiria,Bigudíes Zaphiria Moño curva M anatómicos,,BIGUDIES-ZAPHIRIA-MONO-CURVA-M-ANATOMICOS,8800,7920,10,,,1
+17,bigudies,,Bigudíes inferiores con ranuras (chiquitos),,BIGUDIES-INFERIORES-CON-RANURAS-CHIQUITOS,6600,5940,10,,,1
+17,bigudies,,Bigudíes en bolsa anatómicos naranja o amarillo flúor,Naranja,BIGUDIES-EN-BOLSA-ANATOMICOS-NARANJA-O-AMARILLO-FLUOR-NARANJA,10000,9000,10,,,1
+17,bigudies,,Bigudíes en bolsa anatómicos naranja o amarillo flúor,Amarillo flúor,BIGUDIES-EN-BOLSA-ANATOMICOS-NARANJA-O-AMARILLO-FLUOR-AMARILLOFLOR,10000,9000,10,,,1
+17,bigudies,,Googles para técnica coreana,,GOOGLES-PARA-TECNICA-COREANA,14400,12960,10,,,1
+17,bigudies,Iconsign,Pads de silicona Iconsign,,PADS-DE-SILICONA-ICONSIGN,8300,7470,10,,,1
+17,bigudies,,Bigudí para técnica inversa forma de corazón,,BIGUDI-PARA-TECNICA-INVERSA-FORMA-DE-CORAZON,9200,8280,10,,,1
+17,bigudies,,Bigudí para técnica inversa forma de huella,,BIGUDI-PARA-TECNICA-INVERSA-FORMA-DE-HUELLA,9200,8280,10,,,1
+17,bigudies,,Bigudí para técnica inversa forma de mariposa,,BIGUDI-PARA-TECNICA-INVERSA-FORMA-DE-MARIPOSA,9200,8280,10,,,1
+17,bigudies,,Bigudíes Kitty curva U,,BIGUDIES-KITTY-CURVA-U,9000,8100,10,,,1
+17,bigudies,,Bigudíes planos para técnica coreana delfín,,BIGUDIES-PLANOS-PARA-TECNICA-COREANA-DELFIN,12200,10980,10,,,1
+17,bigudies,,Bigudíes Frozen blanco glitter,,BIGUDIES-FROZEN-BLANCO-GLITTER,19450,17500,10,,,1
+18,tintes-henna,The Lion Beauty,Kit tinte y revelador Lion,,KIT-TINTE-Y-REVELADOR-LION,24800,22320,10,,,1
+18,tintes-henna,The Lion Beauty,Tinte gel Lion,,TINTE-GEL-LION,20900,18810,10,,,1
+18,tintes-henna,The Lion Beauty,Revelador Lion,,REVELADOR-LION,5280,4750,10,,,0
+18,tintes-henna,Iconsign,Tinte Iconsign Plant Extract,Negro,TINTE-ICONSIGN-PLANT-EXTRACT-NEGRO,7560,6800,10,,,1
+18,tintes-henna,Iconsign,Tinte Iconsign Plant Extract,Marrón,TINTE-ICONSIGN-PLANT-EXTRACT-MARRN,7560,6800,10,,,1
+18,tintes-henna,Iconsign,Tinte Iconsign Plant Extract,Café,TINTE-ICONSIGN-PLANT-EXTRACT-CAF,7560,6800,10,,,1
+18,tintes-henna,Iconsign,Henna Iconsign,,HENNA-ICONSIGN,9000,8100,10,,,1
+18,tintes-henna,Refectocil,Tintes Refectocil,Varios colores (consultar),TINTES-REFECTOCIL-VARIOSCOLORESCONSULTAR,25670,23100,10,,,1
+18,tintes-henna,Refectocil,Refectocil Blonde Brow 15 ml,,REFECTOCIL-BLONDE-BROW-15-ML,24640,22170,10,,,1
+18,tintes-henna,Charito Ferrari,Tinte Charito Ferrari,Negro,TINTE-CHARITO-FERRARI-NEGRO,15340,13800,10,,,2
+18,tintes-henna,Charito Ferrari,Tinte Charito Ferrari,Marrón,TINTE-CHARITO-FERRARI-MARRN,15340,13800,10,,,2
+18,tintes-henna,Golle,Kit Lash and Brow Tinte Gollee,,KIT-LASH-AND-BROW-TINTE-GOLLEE,12780,11500,10,,,1
+18,tintes-henna,Charito Ferrari,Crema protectora para no manchar con tinte Charito Ferrari,,CREMA-PROTECTORA-PARA-NO-MANCHAR-CON-TINTE-CHARITO-FERRARI,6230,5600,10,,,1
+18,tintes-henna,Charito Ferrari,Revelador de tinte Charito Ferrari,,REVELADOR-DE-TINTE-CHARITO-FERRARI,6780,6100,10,,,1
+18,tintes-henna,Iconsign,Tinte Iconsign en caja,Caja chica,TINTE-ICONSIGN-EN-CAJA-CAJACHICA,5000,4500,10,,,1
+18,tintes-henna,Iconsign,Tinte Iconsign en caja,Caja grande,TINTE-ICONSIGN-EN-CAJA-CAJAGRANDE,7230,6500,10,,,1
+18,tintes-henna,Makiaj,Henna Makiaj en polvo,Negro,HENNA-MAKIAJ-EN-POLVO-NEGRO,7700,6930,10,,,1
+18,tintes-henna,Makiaj,Henna Makiaj en polvo,Marrón,HENNA-MAKIAJ-EN-POLVO-MARRN,7700,6930,10,,,1
+18,tintes-henna,Makiaj,Henna Makiaj en polvo,Castaño claro,HENNA-MAKIAJ-EN-POLVO-CASTAOCLARO,7700,6930,10,,,1
+18,tintes-henna,Makiaj,Henna Makiaj en polvo,Castaño medio,HENNA-MAKIAJ-EN-POLVO-CASTAOMEDIO,7700,6930,10,,,1
+18,tintes-henna,Makiaj,Henna Makiaj en polvo,Castaño oscuro,HENNA-MAKIAJ-EN-POLVO-CASTAOOSCURO,7700,6930,10,,,1
+18,tintes-henna,Makiaj,Henna Makiaj en polvo,Rubio,HENNA-MAKIAJ-EN-POLVO-RUBIO,7700,6930,10,,,1
+18,tintes-henna,Makiaj,Henna Makiaj en polvo,Colorado,HENNA-MAKIAJ-EN-POLVO-COLORADO,7700,6930,10,,,1
+18,tintes-henna,Rootana,Henna para cejas Rootana,Brown,HENNA-PARA-CEJAS-ROOTANA-BROWN,4570,4110,10,,,1
+18,tintes-henna,Rootana,Henna para cejas Rootana,Coffee,HENNA-PARA-CEJAS-ROOTANA-COFFEE,4570,4110,10,,,1
+18,tintes-henna,Rootana,Henna para cejas Rootana,Black,HENNA-PARA-CEJAS-ROOTANA-BLACK,4570,4110,10,,,1
+18,tintes-henna,Sahubba,Henna para cejas Sahubba,Brown,HENNA-PARA-CEJAS-SAHUBBA-BROWN,5513,4960,10,,,1
+18,tintes-henna,Sahubba,Henna para cejas Sahubba,Coffee,HENNA-PARA-CEJAS-SAHUBBA-COFFEE,5513,4960,10,,,1
+18,tintes-henna,Sahubba,Henna para cejas Sahubba,Black,HENNA-PARA-CEJAS-SAHUBBA-BLACK,5513,4960,10,,,1
+18,tintes-henna,Refectocil,Refectocil Styling Gel 15 ml,,REFECTOCIL-STYLING-GEL-15-ML,54420,48970,10,,,1
+19,kits-lifting,The Lion Beauty,Kit de lifting Lion Beauty 10 pares,,KIT-DE-LIFTING-LION-BEAUTY-10-PARES,46700,42030,10,,,1
+19,nutricion-botox,Iconsign,Lash lifting Iconsign paso 1 y 2 monodosis 1 g,,LASH-LIFTING-ICONSIGN-PASO-1-Y-2-MONODOSIS-1-G,2700,2430,10,,,1
+19,nutricion-botox,Iconsign,Lash Lift Iconsign 1 y 2 x 10 ml,,LASH-LIFT-ICONSIGN-1-Y-2-X-10-ML,9900,8910,10,,,1
+19,kits-lifting,Golle,Kit de lifting Gollee,Kit de lifting,KIT-DE-LIFTING-GOLLEE-KITDELIFTING,30120,27100,10,,,1
+19,kits-lifting,Golle,Kit de lifting Gollee,Kit con tinte y laminado,KIT-DE-LIFTING-GOLLEE-KITCONTINTEYLAMINADO,31400,28260,10,,,1
+19,kits-lifting,Iconsign,Kit de lifting Iconsign Original,,KIT-DE-LIFTING-ICONSIGN-ORIGINAL,20780,18700,10,,,1
+19,nutricion-botox,Iconsign,Camellia Lift Kit paso 1 y 2 10 g,,CAMELLIA-LIFT-KIT-PASO-1-Y-2-10-G,11560,10400,10,,,1
+19,kits-lifting,Iconsign,Kit para lifting Iconsign con monodosis,,KIT-PARA-LIFTING-ICONSIGN-CON-MONODOSIS,24230,21800,10,,,1
+19,kits-lifting,Iconsign,Kit de lifting Iconsign Original (caja rosa),,KIT-DE-LIFTING-ICONSIGN-ORIGINAL-CAJA-ROSA,23120,20800,10,,,1
+19,kits-lifting,Iconsign,Kit laminado de cejas Brow Lift Iconsign,,KIT-LAMINADO-DE-CEJAS-BROW-LIFT-ICONSIGN,24308,21870,10,,,1
+19,kits-lifting,Iconsign,Kit laminado de cejas,,KIT-LAMINADO-DE-CEJAS,18000,16200,10,,,1
+19,nutricion-botox,,Easy Kit Fall In The Volume lifting y laminado de cejas sobre 1 y 2,,EASY-KIT-FALL-IN-THE-VOLUME-LIFTING-Y-LAMINADO-DE-CEJAS-SOBRE-1-Y-2,3120,2800,10,,,1
+19,nutricion-botox,The Lion Beauty,Lash lifting Lion Beauty paso 1 y 2 1 ml,1 par,LASH-LIFTING-LION-BEAUTY-PASO-1-Y-2-1-ML-1PAR,3100,2790,10,,,2
+19,nutricion-botox,The Lion Beauty,Lash lifting Lion Beauty paso 1 y 2 1 ml,10 pares,LASH-LIFTING-LION-BEAUTY-PASO-1-Y-2-1-ML-10PARES,26400,23760,10,,,2
+19,nutricion-botox,The Lion Beauty,Hidralash Lion Beauty paso 3 monodosis,,HIDRALASH-LION-BEAUTY-PASO-3-MONODOSIS,1280,1150,10,,,1
+19,nutricion-botox,The Lion Beauty,Botox Lion Beauty paso 4 monodosis,,BOTOX-LION-BEAUTY-PASO-4-MONODOSIS,1280,1150,10,,,1
+19,nutricion-botox,The Lion Beauty,Botox Lion Beauty paso 4 15 g,,BOTOX-LION-BEAUTY-PASO-4-15-G,13420,12070,10,,,1
+19,nutricion-botox,The Lion Beauty,Hidralash Lion Beauty paso 3 15 g,,HIDRALASH-LION-BEAUTY-PASO-3-15-G,13420,12070,10,,,1
+19,nutricion-botox,Zaphiria,Keratin Vitamin Zaphiria sérum final para lifting 15 g,,KERATIN-VITAMIN-ZAPHIRIA-SERUM-FINAL-PARA-LIFTING-15-G,21300,19170,0,sí,,1
+19,nutricion-botox,,Nutrición Lady's Eye monodosis,,NUTRICION-LADY-S-EYE-MONODOSIS,1100,990,10,,,1
+19,nutricion-botox,,Paso 1 y 2 lifting Lady's Eye,,PASO-1-Y-2-LIFTING-LADY-S-EYE,2120,1900,10,,,1
+19,nutricion-botox,Lomansa,Pasos de lifting Lomansa,Paso 1 y 2 (par),PASOS-DE-LIFTING-LOMANSA-PASO1Y2PAR,5700,5130,10,,,1
+19,nutricion-botox,Lomansa,Pasos de lifting Lomansa,Paso 3,PASOS-DE-LIFTING-LOMANSA-PASO3,2200,1980,10,,,1
+20,kits-lifting,Iconsign,Kit de lifting Iconsign Premium,,KIT-DE-LIFTING-ICONSIGN-PREMIUM,27000,24300,10,,,1
+20,kits-lifting,Iconsign,Kit 2 en 1 Iconsign laminado y lifting,,KIT-2-EN-1-ICONSIGN-LAMINADO-Y-LIFTING,20300,18270,10,,,1
+20,kits-lifting,Golle,Kit laminado y lifting acción rápida Golle,,KIT-LAMINADO-Y-LIFTING-ACCION-RAPIDA-GOLLE,28800,25920,10,,,1
+21,nutricion-botox,Melania,Paso 1 y 2 Melania 10 ml,,PASO-1-Y-2-MELANIA-10-ML,56100,50490,10,,,1
+21,nutricion-botox,Melania,Pro Lash Keratin Melania 15 g,,PRO-LASH-KERATIN-MELANIA-15-G,19250,17320,10,,,2
+21,nutricion-botox,Melania,Pro Lash Botox Melania 15 g,,PRO-LASH-BOTOX-MELANIA-15-G,20680,18610,10,,,2
+21,nutricion-botox,Melania,Pro Hidraluxe Melania,,PRO-HIDRALUXE-MELANIA,20730,18650,10,,,1
+21,nutricion-botox,Melania,Paso 1 y 2 Melania monodosis,,PASO-1-Y-2-MELANIA-MONODOSIS,4180,3760,0,sí,,1
+21,nutricion-botox,Melania,Keratina Melania monodosis,,KERATINA-MELANIA-MONODOSIS,1980,1780,10,,,1
+21,nutricion-botox,Melania,Botox Melania monodosis,,BOTOX-MELANIA-MONODOSIS,1980,1780,10,,,1
+21,nutricion-botox,Melania,Lash One crecimiento de cejas y pestañas Melania,,LASH-ONE-CRECIMIENTO-DE-CEJAS-Y-PESTANAS-MELANIA,20350,18310,10,,,1
+21,nutricion-botox,Melania,Pro Elixir Melania,,PRO-ELIXIR-MELANIA,20730,18650,10,,,1
+21,nutricion-botox,Melania,Easy Gel Melania,,EASY-GEL-MELANIA,18150,16330,10,,,1
+21,nutricion-botox,Charito Ferrari,Paso 1 lifting Charito Ferrari 10 ml,,PASO-1-LIFTING-CHARITO-FERRARI-10-ML,18300,16470,10,,,1
+21,nutricion-botox,Charito Ferrari,Paso 2 lifting Charito Ferrari 10 ml,,PASO-2-LIFTING-CHARITO-FERRARI-10-ML,18300,16470,10,,,1
+21,nutricion-botox,Charito Ferrari,Botox Charito Ferrari,,BOTOX-CHARITO-FERRARI,22700,20430,10,,,1
+21,nutricion-botox,Iconsign,Gel nutritivo Iconsign 5 g,,GEL-NUTRITIVO-ICONSIGN-5-G,7560,6800,10,,,1
+21,nutricion-botox,Iconsign,Oil nutritivo Iconsign 5 g,,OIL-NUTRITIVO-ICONSIGN-5-G,11350,10210,10,,,1
+22,adhesivo-bigudies,Lomansa,Bálsamo para lifting Lomansa 10 g,,BALSAMO-PARA-LIFTING-LOMANSA-10-G,9800,8820,10,,,1
+22,adhesivo-bigudies,Lomansa,Pegamento para lifting Lomansa 5 ml,,PEGAMENTO-PARA-LIFTING-LOMANSA-5-ML,11550,10390,10,,,1
+22,adhesivo-bigudies,Iconsign,Adhesivo para bigudíes Iconsign,,ADHESIVO-PARA-BIGUDIES-ICONSIGN,4300,3870,10,,,1
+22,adhesivo-bigudies,,Adhesivo para bigudíes CG,,ADHESIVO-PARA-BIGUDIES-CG,4100,3690,0,sí,,1
+22,adhesivo-bigudies,Melania,Adhesivo para bigudíes Pro Glue Melania,,ADHESIVO-PARA-BIGUDIES-PRO-GLUE-MELANIA,19580,17620,10,,,1
+22,adhesivo-bigudies,,Fixing Gel adhesivo para bigudíes de silicona 8 ml,,FIXING-GEL-ADHESIVO-PARA-BIGUDIES-DE-SILICONA-8-ML,16120,14500,10,,,1
+22,adhesivo-bigudies,The Lion Beauty,Royal Stick adhesivo para bigudíes 5 ml,,ROYAL-STICK-ADHESIVO-PARA-BIGUDIES-5-ML,16500,14850,10,,,1
+22,adhesivo-bigudies,Zaphiria,Adhesivo para bigudíes Lumi Zaphiria,,ADHESIVO-PARA-BIGUDIES-LUMI-ZAPHIRIA,13120,11800,10,,,1
+22,adhesivo-bigudies,Zaphiria,Bálsamo Lumi Zaphiria 15 ml,,BALSAMO-LUMI-ZAPHIRIA-15-ML,12000,10800,10,,,1
+22,adhesivo-bigudies,Cherimoya,Bálsamo para lifting Cherimoya 5 g,,BALSAMO-PARA-LIFTING-CHERIMOYA-5-G,8900,8010,10,,,1
+22,adhesivo-bigudies,Iconsign,Bálsamo para lifting Iconsign 8 g,,BALSAMO-PARA-LIFTING-ICONSIGN-8-G,12570,11310,10,,,1
+22,adhesivo-bigudies,Iconsign,Bálsamo para lifting Iconsign 8 g peach o avocado,Peach,BALSAMO-PARA-LIFTING-ICONSIGN-8-G-PEACH-O-AVOCADO-PEACH,11666,10490,10,,,1
+22,adhesivo-bigudies,Iconsign,Bálsamo para lifting Iconsign 8 g peach o avocado,Avocado,BALSAMO-PARA-LIFTING-ICONSIGN-8-G-PEACH-O-AVOCADO-AVOCADO,11666,10490,10,,,1
+22,adhesivo-bigudies,Clione,Polvo espesante Clione,,POLVO-ESPESANTE-CLIONE,32250,29020,10,,,1
+22,adhesivo-bigudies,,Polvo espesador de paso 1 y 2 de lifting 5 g,,POLVO-ESPESADOR-DE-PASO-1-Y-2-DE-LIFTING-5-G,10250,9220,10,,,1
+22,adhesivo-bigudies,The Lion Beauty,Bálsamo para lifting Awa Stick Lion Beauty 15 g,,BALSAMO-PARA-LIFTING-AWA-STICK-LION-BEAUTY-15-G,22120,19900,10,,Solo figura $19.900; puede ser el precio final,2
+22,adhesivo-bigudies,Iconsign,Bálsamo para lifting Iconsign super sticky 8 g,,BALSAMO-PARA-LIFTING-ICONSIGN-SUPER-STICKY-8-G,10400,9360,10,,,1
+22,adhesivo-bigudies,Stars Colors,Pegamento para lifting Stars Colors 5 ml,,PEGAMENTO-PARA-LIFTING-STARS-COLORS-5-ML,4500,4050,10,,,1
+22,adhesivo-bigudies,Zaphiria,Zaphiria Lashes Spike gel para espigas,,ZAPHIRIA-LASHES-SPIKE-GEL-PARA-ESPIGAS,8000,7200,10,,,2
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku 0.03,D · 0.03 · Mix,PESTANAS-MIX-NAGARAKU-0-03-D-0.03-MIX,7500,6750,10,,,0
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku 0.03,C · 0.03 · Medida única,PESTANAS-MIX-NAGARAKU-0-03-C-0.03-MEDIDANICA,8100,7290,10,,,0
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku Premium curva D,D · 0.05 · Mix,PESTANAS-MIX-NAGARAKU-PREMIUM-CURVA-D-D-0.05-MIX,5600,5040,10,,,0
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku Premium curva D,D · 0.07 · Mix,PESTANAS-MIX-NAGARAKU-PREMIUM-CURVA-D-D-0.07-MIX,5600,5040,10,,,0
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku Premium curva D,D · 0.10 · Mix,PESTANAS-MIX-NAGARAKU-PREMIUM-CURVA-D-D-0.10-MIX,5600,5040,10,,,0
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku Premium curva D,D · 0.12 · Mix,PESTANAS-MIX-NAGARAKU-PREMIUM-CURVA-D-D-0.12-MIX,5600,5040,10,,,0
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku Premium curva D,D · 0.15 · Mix,PESTANAS-MIX-NAGARAKU-PREMIUM-CURVA-D-D-0.15-MIX,5600,5040,10,,,0
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku Premium curva D,D · 0.20 · Mix,PESTANAS-MIX-NAGARAKU-PREMIUM-CURVA-D-D-0.20-MIX,5600,5040,10,,,0
+23,pestanas-mix,Nagaraku,Pestañas Nagaraku Mix 0.07 N,D · 0.07 · Mix,PESTANAS-NAGARAKU-MIX-0-07-N-D-0.07-MIX,10300,9270,10,,,1
+23,medida-unica,Nagaraku,Pestañas Nagaraku única medida curva D,D · 0.05 · Medida única,PESTANAS-NAGARAKU-UNICA-MEDIDA-CURVA-D-D-0.05-MEDIDANICA,4830,4340,10,,,0
+23,medida-unica,Nagaraku,Pestañas Nagaraku única medida curva D,D · 0.07 · Medida única,PESTANAS-NAGARAKU-UNICA-MEDIDA-CURVA-D-D-0.07-MEDIDANICA,4830,4340,10,,,0
+23,medida-unica,Nagaraku,Pestañas Nagaraku única medida curva D,D · 0.10 · Medida única,PESTANAS-NAGARAKU-UNICA-MEDIDA-CURVA-D-D-0.10-MEDIDANICA,4830,4340,10,,,0
+23,medida-unica,Nagaraku,Pestañas Nagaraku única medida curva D,D · 0.12 · Medida única,PESTANAS-NAGARAKU-UNICA-MEDIDA-CURVA-D-D-0.12-MEDIDANICA,4830,4340,10,,,0
+23,medida-unica,Nagaraku,Pestañas Nagaraku única medida curva D,D · 0.15 · Medida única,PESTANAS-NAGARAKU-UNICA-MEDIDA-CURVA-D-D-0.15-MEDIDANICA,4830,4340,10,,,0
+23,medida-unica,Nagaraku,Pestañas Nagaraku única medida curva D,D · 0.20 · Medida única,PESTANAS-NAGARAKU-UNICA-MEDIDA-CURVA-D-D-0.20-MEDIDANICA,4830,4340,10,,,0
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku Marrón,C · 0.07 · Mix,PESTANAS-MIX-NAGARAKU-MARRON-C-0.07-MIX,6860,6170,10,,,1
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku Marrón,C · 0.10 · Mix,PESTANAS-MIX-NAGARAKU-MARRON-C-0.10-MIX,6860,6170,10,,,1
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku Marrón,C · 0.15 · Mix,PESTANAS-MIX-NAGARAKU-MARRON-C-0.15-MIX,6860,6170,10,,,1
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku Marrón,D · 0.07 · Mix,PESTANAS-MIX-NAGARAKU-MARRON-D-0.07-MIX,6860,6170,10,,,1
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku Marrón,D · 0.10 · Mix,PESTANAS-MIX-NAGARAKU-MARRON-D-0.10-MIX,6860,6170,10,,,1
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku Marrón,D · 0.15 · Mix,PESTANAS-MIX-NAGARAKU-MARRON-D-0.15-MIX,6860,6170,10,,,1
+23,pestanas-mix,Nagaraku,"Pestañas Under curva J mix 5, 6 y 7 mm",J · Única · Mix 5-7 mm,PESTANAS-UNDER-CURVA-J-MIX-5-6-Y-7-MM-J-NICA-MIX5-7MM,6200,5580,10,,,0
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku curva L,L · 0.07 · Mix,PESTANAS-MIX-NAGARAKU-CURVA-L-L-0.07-MIX,10900,9810,10,,,1
+23,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku curva L,L · 0.10 · Mix,PESTANAS-MIX-NAGARAKU-CURVA-L-L-0.10-MIX,10900,9810,10,,,1
+23,pestanas-mix,Nagaraku,Pestañas Mix 0.07 LD,LD · 0.07 · Mix,PESTANAS-MIX-0-07-LD-LD-0.07-MIX,11100,9990,10,,,1
+23,volumen-tecnologico,Nagaraku,Pestañas V-Shape Bottom 0.07 C,,PESTANAS-V-SHAPE-BOTTOM-0-07-C,5000,4500,10,,,1
+23,volumen-tecnologico,Nagaraku,Pestañas Under Bottom Ellipse 0.20 J,,PESTANAS-UNDER-BOTTOM-ELLIPSE-0-20-J,7100,6390,10,,,1
+24,volumen-tecnologico,Nagaraku,Pestañas YY-Shape Nagaraku 0.07 D medida única 8 a 14 mm,,PESTANAS-YY-SHAPE-NAGARAKU-0-07-D-MEDIDA-UNICA-8-A-14-MM,9020,8110,10,,,1
+24,volumen-tecnologico,Nagaraku,Pestañas Mix YY-Shape Nagaraku,0.05 D,PESTANAS-MIX-YY-SHAPE-NAGARAKU-0.05D,9020,8110,10,,,1
+24,volumen-tecnologico,Nagaraku,Pestañas Mix YY-Shape Nagaraku,0.07 C,PESTANAS-MIX-YY-SHAPE-NAGARAKU-0.07C,9020,8110,10,,,1
+24,volumen-tecnologico,Nagaraku,Pestañas Mix YY-Shape Nagaraku,0.07 D,PESTANAS-MIX-YY-SHAPE-NAGARAKU-0.07D,9020,8110,10,,,1
+24,volumen-tecnologico,Nagaraku,Pestañas W-Shape Nagaraku mix 0.07 D,3D,PESTANAS-W-SHAPE-NAGARAKU-MIX-0-07-D-3D,10500,9450,10,,,1
+24,volumen-tecnologico,Nagaraku,Pestañas W-Shape Nagaraku mix 0.07 D,4D,PESTANAS-W-SHAPE-NAGARAKU-MIX-0-07-D-4D,14700,13230,10,,,1
+24,volumen-tecnologico,Nagaraku,Pestañas W-Shape Nagaraku mix 0.07 D,5D,PESTANAS-W-SHAPE-NAGARAKU-MIX-0-07-D-5D,16450,14800,10,,,1
+24,volumen-tecnologico,Nagaraku,Pestañas W-Shape Nagaraku mix 0.07 D,6D,PESTANAS-W-SHAPE-NAGARAKU-MIX-0-07-D-6D,21347,19210,10,,,1
+24,volumen-tecnologico,Nagaraku,Pestañas Triple Tips Y-Shape (YYY) Nagaraku,,PESTANAS-TRIPLE-TIPS-Y-SHAPE-YYY-NAGARAKU,8000,7200,10,,,1
+24,volumen-tecnologico,Nagaraku,Pestañas Nagaraku curvas L / LU,2D,PESTANAS-NAGARAKU-CURVAS-L-LU-2D,9900,8910,10,,,3
+24,volumen-tecnologico,Nagaraku,Pestañas Nagaraku curvas L / LU,3D,PESTANAS-NAGARAKU-CURVAS-L-LU-3D,9900,8910,10,,,3
+25,volumen-tecnologico,Nagaraku,Pestañas Single Tips 2D Y Nagaraku,,PESTANAS-SINGLE-TIPS-2D-Y-NAGARAKU,6650,5980,10,,,1
+25,volumen-tecnologico,Nagaraku,Pestañas Big Box Nagaraku 54 filas,3D W,PESTANAS-BIG-BOX-NAGARAKU-54-FILAS-3DW,26680,24010,10,,,5
+25,volumen-tecnologico,Nagaraku,Pestañas Big Box Nagaraku 54 filas,Clásicas 0.07 D mix,PESTANAS-BIG-BOX-NAGARAKU-54-FILAS-CLSICAS0.07DMIX,17150,15430,10,,,5
+25,volumen-tecnologico,Nagaraku,Pestañas Big Box Nagaraku 54 filas,YY,PESTANAS-BIG-BOX-NAGARAKU-54-FILAS-YY,20580,18520,10,,,5
+25,volumen-tecnologico,Nagaraku,Pestañas Big Box Nagaraku 54 filas,4D W,PESTANAS-BIG-BOX-NAGARAKU-54-FILAS-4DW,30230,27200,10,,,5
+25,volumen-tecnologico,Nagaraku,Pestañas Big Box Nagaraku 54 filas,5D W,PESTANAS-BIG-BOX-NAGARAKU-54-FILAS-5DW,33230,29900,10,,,5
+25,volumen-tecnologico,Nagaraku,"Pestañas Nagaraku Spire, Wings y Fairy",Spire,PESTANAS-NAGARAKU-SPIRE-WINGS-Y-FAIRY-SPIRE,6980,6280,10,,,1
+25,volumen-tecnologico,Nagaraku,"Pestañas Nagaraku Spire, Wings y Fairy",Wings,PESTANAS-NAGARAKU-SPIRE-WINGS-Y-FAIRY-WINGS,6980,6280,10,,,1
+25,volumen-tecnologico,Nagaraku,"Pestañas Nagaraku Spire, Wings y Fairy",Fairy,PESTANAS-NAGARAKU-SPIRE-WINGS-Y-FAIRY-FAIRY,6980,6280,10,,,1
+25,volumen-tecnologico,Zaphiria,Pestañas Zaphiria Wings,,PESTANAS-ZAPHIRIA-WINGS,7035,6330,10,,,2
+25,volumen-tecnologico,Zaphiria,Pestañas Zaphiria Spire,,PESTANAS-ZAPHIRIA-SPIRE,7035,6330,10,,,1
+25,volumen-tecnologico,Zaphiria,Pestañas Zaphiria Spire Fan,,PESTANAS-ZAPHIRIA-SPIRE-FAN,7035,6330,10,,,1
+25,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku curva N,N · 0.07 · Mix,PESTANAS-MIX-NAGARAKU-CURVA-N-N-0.07-MIX,9400,8460,10,,,1
+25,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku curva N,N · 0.10 · Mix,PESTANAS-MIX-NAGARAKU-CURVA-N-N-0.10-MIX,9400,8460,10,,,1
+25,pestanas-mix,Nagaraku,Pestañas Mix Nagaraku curva N,N · 0.15 · Mix,PESTANAS-MIX-NAGARAKU-CURVA-N-N-0.15-MIX,9400,8460,10,,,1
+26,pestanas-de-practica,,Pestaña de práctica 8 y 10 mm,,PESTANA-DE-PRACTICA-8-Y-10-MM,2600,2340,10,,,1
+26,volumen-tecnologico,Nagaraku,Pestañas Y-Shape Brown mix 0.07 D,,PESTANAS-Y-SHAPE-BROWN-MIX-0-07-D,10800,9720,10,,,1
+26,medida-unica,Nagaraku,Pestañas Nagaraku curva J medida única (consultar medida),,PESTANAS-NAGARAKU-CURVA-J-MEDIDA-UNICA-CONSULTAR-MEDIDA,7000,6300,10,,,0
+26,pestanas-de-practica,,Pestaña de práctica x 10 pares,,PESTANA-DE-PRACTICA-X-10-PARES,5400,4860,10,,,1
+26,volumen-tecnologico,Zaphiria,Pestañas Zaphiria Lumi W mix 0.07,D · 3D · Mix 8-14 mm,PESTANAS-ZAPHIRIA-LUMI-W-MIX-0-07-D-3D-MIX8-14MM,7000,6300,10,,,3
+26,volumen-tecnologico,Zaphiria,Pestañas Zaphiria Lumi W mix 0.07,D · 4D · Mix 8-14 mm,PESTANAS-ZAPHIRIA-LUMI-W-MIX-0-07-D-4D-MIX8-14MM,7850,7060,10,,,3
+26,volumen-tecnologico,Zaphiria,Pestañas Zaphiria Lumi W mix 0.07,D · 5D · Mix 8-14 mm,PESTANAS-ZAPHIRIA-LUMI-W-MIX-0-07-D-5D-MIX8-14MM,9100,8190,10,,,3
+26,volumen-tecnologico,Zaphiria,Pestañas Zaphiria Lumi W mix 0.07,D · 6D · Mix 8-14 mm,PESTANAS-ZAPHIRIA-LUMI-W-MIX-0-07-D-6D-MIX8-14MM,9900,8910,10,,,3
+26,volumen-tecnologico,Zaphiria,Pestañas Zaphiria Lumi W mix 0.07,N · 4D · Mix 8-14 mm,PESTANAS-ZAPHIRIA-LUMI-W-MIX-0-07-N-4D-MIX8-14MM,10100,9090,10,,,3
+26,volumen-tecnologico,Zaphiria,Pestañas Zaphiria Lumi W mix 0.07,N · 5D · Mix 8-14 mm,PESTANAS-ZAPHIRIA-LUMI-W-MIX-0-07-N-5D-MIX8-14MM,12100,10890,10,,,3
+26,volumen-tecnologico,Zaphiria,Pestañas Zaphiria Lumi W mix 0.07,N · 6D · Mix 8-14 mm,PESTANAS-ZAPHIRIA-LUMI-W-MIX-0-07-N-6D-MIX8-14MM,12600,11340,10,,,3
+27,volumen-tecnologico,Zaphiria,Pestañas Zaphiria W 0.07 D mix 8 a 14 mm,D · 3D · Mix 8-14 mm,PESTANAS-ZAPHIRIA-W-0-07-D-MIX-8-A-14-MM-D-3D-MIX8-14MM,8390,7550,10,,,3
+27,volumen-tecnologico,Zaphiria,Pestañas Zaphiria W 0.07 D mix 8 a 14 mm,D · 4D · Mix 8-14 mm,PESTANAS-ZAPHIRIA-W-0-07-D-MIX-8-A-14-MM-D-4D-MIX8-14MM,10185,9160,10,,,3
+27,volumen-tecnologico,Zaphiria,Pestañas Zaphiria W 0.07 D mix 8 a 14 mm,D · 5D · Mix 8-14 mm,PESTANAS-ZAPHIRIA-W-0-07-D-MIX-8-A-14-MM-D-5D-MIX8-14MM,10500,9450,10,,,3
+27,volumen-tecnologico,Zaphiria,Pestañas Zaphiria W 0.07 D mix 8 a 14 mm,D · 6D · Mix 8-14 mm,PESTANAS-ZAPHIRIA-W-0-07-D-MIX-8-A-14-MM-D-6D-MIX8-14MM,13650,12280,10,,,3
+27,volumen-tecnologico,Nagaraku,Pestañas 2D UU Nagaraku,,PESTANAS-2D-UU-NAGARAKU,8500,7650,10,,,1
+27,volumen-tecnologico,Nagaraku,Pestañas 2D UU Nagaraku 54 filas,,PESTANAS-2D-UU-NAGARAKU-54-FILAS,27400,24660,10,,,1
+27,volumen-tecnologico,Zaphiria,Pestañas 4D U Zaphiria,,PESTANAS-4D-U-ZAPHIRIA,13000,11700,0,sí,,2
+27,volumen-tecnologico,Nagaraku,Pestañas U Nagaraku,3D U,PESTANAS-U-NAGARAKU-3DU,15620,14050,10,,,3
+27,volumen-tecnologico,Nagaraku,Pestañas U Nagaraku,4D U,PESTANAS-U-NAGARAKU-4DU,17400,15660,10,,,3
+27,volumen-tecnologico,Nagaraku,Pestañas U Nagaraku,5D U,PESTANAS-U-NAGARAKU-5DU,19459,17510,10,,,3
+28,volumen-tecnologico,Abruxlashes,Pestañas YY Mix D Abruxlashes,,PESTANAS-YY-MIX-D-ABRUXLASHES,21100,18990,0,sí,,2
+28,volumen-tecnologico,Abruxlashes,Pestañas Rimel Tech YY UU Mix M Abruxlashes,,PESTANAS-RIMEL-TECH-YY-UU-MIX-M-ABRUXLASHES,21100,18990,0,sí,,2
+28,volumen-tecnologico,Abruxlashes,Pestañas Eye Liner Effect 4U B+C+L Abruxlashes,,PESTANAS-EYE-LINER-EFFECT-4U-B-C-L-ABRUXLASHES,25000,22500,0,sí,,2
+28,volumen-tecnologico,Abruxlashes,Pestañas Foxy Effect 4U C+M Abruxlashes,,PESTANAS-FOXY-EFFECT-4U-C-M-ABRUXLASHES,25000,22500,0,sí,,2
+28,volumen-tecnologico,Abruxlashes,Pestañas Brown Chocolate Bar curva CC Abruxlashes,,PESTANAS-BROWN-CHOCOLATE-BAR-CURVA-CC-ABRUXLASHES,25000,22500,0,sí,,2
+29,volumen-tecnologico,Masscaku,Pestañas Masscaku W prehechas,YY Double Tips,PESTANAS-MASSCAKU-W-PREHECHAS-YYDOUBLETIPS,8500,7650,10,,4D y 4D M: el catálogo solo muestra la oferta; la lista se calculó (+10 %),6
+29,volumen-tecnologico,Masscaku,Pestañas Masscaku W prehechas,3D-W,PESTANAS-MASSCAKU-W-PREHECHAS-3D-W,9000,8100,10,,4D y 4D M: el catálogo solo muestra la oferta; la lista se calculó (+10 %),6
+29,volumen-tecnologico,Masscaku,Pestañas Masscaku W prehechas,4D-W,PESTANAS-MASSCAKU-W-PREHECHAS-4D-W,10000,9000,10,,4D y 4D M: el catálogo solo muestra la oferta; la lista se calculó (+10 %),6
+29,volumen-tecnologico,Masscaku,Pestañas Masscaku W prehechas,4D-W M,PESTANAS-MASSCAKU-W-PREHECHAS-4D-WM,14000,12600,10,,4D y 4D M: el catálogo solo muestra la oferta; la lista se calculó (+10 %),6
+29,volumen-tecnologico,Masscaku,Pestañas Masscaku W prehechas,5D-W,PESTANAS-MASSCAKU-W-PREHECHAS-5D-W,10500,9450,10,,4D y 4D M: el catálogo solo muestra la oferta; la lista se calculó (+10 %),6
+29,volumen-tecnologico,Masscaku,Pestañas Masscaku W prehechas,6D-WW,PESTANAS-MASSCAKU-W-PREHECHAS-6D-WW,13900,12510,10,,4D y 4D M: el catálogo solo muestra la oferta; la lista se calculó (+10 %),6
+29,volumen-tecnologico,Masscaku,Pestañas Masscaku W prehechas,2D UU (YY UU),PESTANAS-MASSCAKU-W-PREHECHAS-2DUUYYUU,10500,9450,10,,4D y 4D M: el catálogo solo muestra la oferta; la lista se calculó (+10 %),6
+30,mobiliario,,Carrito ayudante de 4 pisos metálico,,CARRITO-AYUDANTE-DE-4-PISOS-METALICO,49245,44320,0,sí,,1
+30,mobiliario,,Carrito ayudante de 3 pisos plástico,,CARRITO-AYUDANTE-DE-3-PISOS-PLASTICO,23100,20790,10,,,1
+30,mobiliario,,Carrito ayudante de 3 pisos metálico,,CARRITO-AYUDANTE-DE-3-PISOS-METALICO,43700,39330,10,,,1
+30,mobiliario,,Organizador acrílico chico,,ORGANIZADOR-ACRILICO-CHICO,9700,8730,0,sí,,1
+30,mobiliario,,Organizador acrílico con cajones,,ORGANIZADOR-ACRILICO-CON-CAJONES,20874,18780,0,sí,,1
+30,mobiliario,,Organizador acrílico grande con cajones,,ORGANIZADOR-ACRILICO-GRANDE-CON-CAJONES,30650,27580,10,,,1
+30,mobiliario,,Organizador blanco con cajones,,ORGANIZADOR-BLANCO-CON-CAJONES,28000,25200,10,,,1
+30,mobiliario,,Organizador acrílico con cajones negros,,ORGANIZADOR-ACRILICO-CON-CAJONES-NEGROS,23200,20880,10,,,1
+30,mobiliario,,Apoya cabezas,Consultar colores,APOYA-CABEZAS-CONSULTARCOLORES,19900,17910,10,,,1
+30,mobiliario,,Cubrecamilla importada,Lycra rosa,CUBRECAMILLA-IMPORTADA-LYCRAROSA,20800,18720,10,,,2
+30,mobiliario,,Cubrecamilla importada,Lycra negra,CUBRECAMILLA-IMPORTADA-LYCRANEGRA,20800,18720,10,,,2
+30,mobiliario,,Cubrecamilla importada,Negra 180 x 60,CUBRECAMILLA-IMPORTADA-NEGRA180X60,17900,16110,10,,,2
+30,mobiliario,,Cubrecamilla importada,Negra 190 x 80,CUBRECAMILLA-IMPORTADA-NEGRA190X80,22900,20610,10,,,2
+30,mobiliario,,Colchoneta para camilla,Consultar colores,COLCHONETA-PARA-CAMILLA-CONSULTARCOLORES,45000,40500,10,,,1
+30,mobiliario,,Cubrecamillas descartables,Unidad,CUBRECAMILLAS-DESCARTABLES-UNIDAD,1000,900,10,,,1
+30,mobiliario,,Cubrecamillas descartables,x 10,CUBRECAMILLAS-DESCARTABLES-X10,9500,8550,10,,,1
+30,mobiliario,,Manta de polar 180 x 180,Rosa,MANTA-DE-POLAR-180-X-180-ROSA,27000,24300,10,,,1
+30,mobiliario,,Manta de polar 180 x 180,Negro,MANTA-DE-POLAR-180-X-180-NEGRO,27000,24300,10,,,1
+31,pinzas,,Porta pinzas,Rosa,PORTA-PINZAS-ROSA,7170,6450,10,,,1
+31,pinzas,,Porta pinzas,Blanco,PORTA-PINZAS-BLANCO,7170,6450,10,,,1
+31,pinzas,,Porta pinzas de lata,,PORTA-PINZAS-DE-LATA,3300,2970,10,,,1
+31,pinzas,,Porta pinzas de cuerina,,PORTA-PINZAS-DE-CUERINA,2400,2160,10,,,1
+31,pinzas,,Tijeras,,TIJERAS,2310,2070,10,,,2
+31,pinzas,Cherimoya,Pinza de cejas Cherimoya,Oblicua,PINZA-DE-CEJAS-CHERIMOYA-OBLICUA,2058,1850,10,,,1
+31,pinzas,Cherimoya,Pinza de cejas Cherimoya,Recta,PINZA-DE-CEJAS-CHERIMOYA-RECTA,2058,1850,10,,,1
+31,pinzas,Cherimoya,Pinza de cejas Cherimoya,Diagonal,PINZA-DE-CEJAS-CHERIMOYA-DIAGONAL,2058,1850,10,,,1
+31,pinzas,,Pulsera anticaída para pinzas,,PULSERA-ANTICAIDA-PARA-PINZAS,7400,6660,10,,,1
+32,pinzas,Abruxlashes,Pinza Abruxlashes,N-01,PINZA-ABRUXLASHES-N-01,14500,13050,10,,,6
+32,pinzas,Abruxlashes,Pinza Abruxlashes,N-02,PINZA-ABRUXLASHES-N-02,13400,12060,10,,,6
+32,pinzas,Abruxlashes,Pinza Abruxlashes,N-03,PINZA-ABRUXLASHES-N-03,14500,13050,10,,,6
+32,pinzas,Abruxlashes,Pinza Abruxlashes,N-04,PINZA-ABRUXLASHES-N-04,12300,11070,10,,,6
+32,pinzas,Abruxlashes,Pinza Abruxlashes,N-05,PINZA-ABRUXLASHES-N-05,12300,11070,10,,,6
+32,pinzas,Abruxlashes,Pinza Abruxlashes,N-06,PINZA-ABRUXLASHES-N-06,13400,12060,10,,,6
+32,espejos,Abruxlashes,Espejo Master Abruxlashes,,ESPEJO-MASTER-ABRUXLASHES,13400,12060,10,,,1
+33,pinzas,,Pinza Lash Money Tweezer,10K,PINZA-LASH-MONEY-TWEEZER-10K,15500,13950,10,,,6
+33,pinzas,,Pinza Lash Money Tweezer,20K,PINZA-LASH-MONEY-TWEEZER-20K,13400,12060,10,,,6
+33,pinzas,,Pinza Lash Money Tweezer,30K,PINZA-LASH-MONEY-TWEEZER-30K,15600,14040,10,,,6
+33,pinzas,,Pinza Lash Money Tweezer,40K,PINZA-LASH-MONEY-TWEEZER-40K,13400,12060,10,,,6
+33,pinzas,,Pinza Lash Money Tweezer,50K,PINZA-LASH-MONEY-TWEEZER-50K,12300,11070,10,,,6
+33,pinzas,,Pinza Lash Money Tweezer,60K,PINZA-LASH-MONEY-TWEEZER-60K,12300,11070,10,,,6
