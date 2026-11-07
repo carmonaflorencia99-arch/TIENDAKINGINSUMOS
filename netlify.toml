@@ -1,0 +1,11 @@
+# Netlify detecta Next.js automáticamente (runtime de Next.js / OpenNext).
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Funciones propias de Netlify (la tarea diaria de mantenimiento)
+[functions]
+  directory = "netlify/functions"

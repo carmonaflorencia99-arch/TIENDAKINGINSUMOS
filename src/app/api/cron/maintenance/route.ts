@@ -1,5 +1,6 @@
 /**
- * GET /api/cron/maintenance — lo ejecuta Vercel Cron una vez por día (ver vercel.json).
+ * GET /api/cron/maintenance — la llama una vez por día la tarea programada de Netlify
+ * (netlify/functions/mantenimiento-diario.mjs).
  *  - Marca como vencidas las señas fuera de plazo y libera su stock.
  *  - Cancela pedidos sin ningún pago con más de 48 h.
  */

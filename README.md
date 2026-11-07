@@ -1,6 +1,6 @@
 # King Insumos — Tienda online
 
-Next.js 15 + Supabase + Mercado Pago Checkout Pro. Mobile-first, compra sin cuenta.
+Next.js 15 + Supabase + Mercado Pago Checkout Pro, publicado en Netlify. Mobile-first, compra sin cuenta.
 
 ## Puesta en marcha
 
@@ -26,8 +26,14 @@ npm test                     # pruebas de precios y reglas de checkout
 4. Activar el medio: tabla `payment_rules`, fila `mercadopago` → `active = true` y el `discount_pct` que se decida.
 5. Probar con usuarios y tarjetas de prueba; después cambiar a credenciales de producción.
 
-### 4. Vercel
-Importar el repo, cargar las variables de `.env.example` y desplegar. El cron diario (`vercel.json`) vence señas y cancela pedidos impagos de más de 48 h.
+### 4. Netlify
+1. app.netlify.com → **Add new site → Import an existing project → GitHub** → elegir este repo. Netlify detecta Next.js solo.
+2. Antes de desplegar, en **Environment variables**, cargar las de `.env.example` (sin Mercado Pago si todavía no está).
+3. **Deploy**. Cuando termine, copiar la dirección `https://xxxx.netlify.app`, ponerla en `NEXT_PUBLIC_SITE_URL` y volver a desplegar.
+4. La tarea diaria (`netlify/functions/mantenimiento-diario.mjs`) vence señas y cancela pedidos impagos de más de 48 h.
+
+### 5. Dominio propio (Hostinger u otro)
+En Netlify: **Domain management → Add a domain**. Netlify muestra los registros DNS a cargar en Hostinger (o los servidores de nombres, si preferís que Netlify maneje el DNS). Después actualizar `NEXT_PUBLIC_SITE_URL` y, si ya está configurado, la URL del webhook de Mercado Pago.
 
 ## Cómo está armado
 
