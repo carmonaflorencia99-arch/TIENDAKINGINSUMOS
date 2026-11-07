@@ -15,6 +15,8 @@ export interface WhatsappOrder {
   amountDueNow: number;
   items: { name: string; options: string | null; qty: number }[];
   motoAddress?: string | null;
+  /** false si la tienda todavía no tiene alias/CBU cargados */
+  hasBankData?: boolean;
 }
 
 export function orderMessage(o: WhatsappOrder): string {
@@ -30,7 +32,13 @@ export function orderMessage(o: WhatsappOrder): string {
     `Total: ${money(o.total)}`,
   ];
   if (o.plan === "deposit") lines.push(`Seña a abonar: ${money(o.amountDueNow)}`);
-  if (o.payment === "transfer") lines.push("", "Te adjunto el comprobante de la transferencia.");
+  if (o.payment === "transfer")
+    lines.push(
+      "",
+      o.hasBankData === false
+        ? "¿Me pasás los datos para hacer la transferencia?"
+        : "Te adjunto el comprobante de la transferencia.",
+    );
   return lines.join("\n");
 }
 

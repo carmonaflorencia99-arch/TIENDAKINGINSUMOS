@@ -37,7 +37,10 @@ export default async function OrderPage({ params, searchParams }: Props) {
   ]);
   if (!order) notFound();
 
+  // Mientras King no cargue alias/CBU en settings, los datos se piden por WhatsApp
+  const hasBankData = Boolean(settings.bank_alias || settings.cbu);
   const message = orderMessage({
+    hasBankData,
     number: order.number,
     customerName: order.customer_name,
     delivery: order.delivery,
@@ -67,6 +70,11 @@ export default async function OrderPage({ params, searchParams }: Props) {
       {order.payment === "transfer" && order.amount_paid === 0 && (
         <section className="mt-6 rounded-none border border-ink bg-white p-5">
           <h2 className="font-sans text-base font-bold">Transferí {money(order.amount_due_now)}</h2>
+          {!hasBankData && (
+            <p className="mt-2 text-sm leading-relaxed text-mute">
+              Escribinos por WhatsApp y te pasamos los datos para transferir. Después nos mandás el comprobante por el mismo chat.
+            </p>
+          )}
           <dl className="mt-3 space-y-2 text-sm">
             {settings.bank_alias && (
               <div className="flex items-center justify-between gap-3">
@@ -85,7 +93,7 @@ export default async function OrderPage({ params, searchParams }: Props) {
             )}
           </dl>
           <a href={wa} target="_blank" rel="noopener" className="btn mt-5 w-full bg-[#25D366] text-white">
-            Enviar comprobante por WhatsApp
+            {hasBankData ? "Enviar comprobante por WhatsApp" : "Pedir los datos por WhatsApp"}
           </a>
           <p className="mt-2 text-center text-xs text-mute">El mensaje ya incluye tu número de pedido y el detalle.</p>
         </section>
