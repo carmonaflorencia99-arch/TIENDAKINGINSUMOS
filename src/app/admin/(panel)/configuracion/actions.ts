@@ -1,6 +1,8 @@
 "use server";
 import { redirect } from "next/navigation";
 import { adminDb, refreshStore } from "@/lib/admin";
+import { adminClient } from "@/lib/supabase";
+import { verifyToken } from "@/lib/instagram";
 
 const text = (v: FormDataEntryValue | null) => String(v ?? "").trim() || null;
 const done = (q: string) => redirect(`/admin/configuracion?${q}`);
@@ -54,4 +56,31 @@ export async function saveRules(f: FormData) {
           : "Medios de pago guardados.",
       ),
   );
+}
+
+/* ---------- Instagram ---------- */
+
+export async function saveInstagram(f: FormData) {
+  await adminDb(); // comprueba que haya sesión del panel
+  const token = String(f.get("token") ?? "").trim();
+  if (token.length < 20) done("error=" + encodeURIComponent("Pegá el token de acceso completo."));
+  let username = "";
+  try {
+    username = await verifyToken(token);
+  } catch (e) {
+    done("error=" + encodeURIComponent("Instagram no aceptó el token: " + (e instanceof Error ? e.message : "revisalo.")));
+  }
+  const { error } = await adminClient()
+    .from("integration_tokens")
+    .upsert({ key: "instagram", value: token, account: username, updated_at: new Date().toISOString() });
+  if (error) done("error=" + encodeURIComponent("No se pudo guardar. ¿Ejecutaste el archivo 6-instagram.sql en Supabase?"));
+  refreshStore();
+  done("ok=" + encodeURIComponent(`Instagram conectado: @${username}. Los posts aparecen en el inicio.`));
+}
+
+export async function disconnectInstagram() {
+  await adminDb();
+  await adminClient().from("integration_tokens").delete().eq("key", "instagram");
+  refreshStore();
+  done("ok=" + encodeURIComponent("Instagram desconectado."));
 }

@@ -24,6 +24,7 @@ export interface Category {
   name: string;
   slug: string;
   sort_order: number;
+  image_url?: string | null;
 }
 
 export interface Brand {

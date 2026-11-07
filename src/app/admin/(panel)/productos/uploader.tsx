@@ -5,20 +5,7 @@
  */
 import { useRef, useState } from "react";
 import { uploadImages } from "./actions";
-
-async function shrink(file: File, max = 1600): Promise<File> {
-  const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, max / Math.max(bitmap.width, bitmap.height));
-  const canvas = document.createElement("canvas");
-  canvas.width = Math.round(bitmap.width * scale);
-  canvas.height = Math.round(bitmap.height * scale);
-  const ctx = canvas.getContext("2d")!;
-  ctx.fillStyle = "#fff";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-  const blob: Blob = await new Promise((r) => canvas.toBlob((b) => r(b!), "image/jpeg", 0.85));
-  return new File([blob], file.name.replace(/\.\w+$/, "") + ".jpg", { type: "image/jpeg" });
-}
+import { shrinkImage } from "@/lib/shrink-image";
 
 export function ImageUploader({ productId }: { productId: number }) {
   const input = useRef<HTMLInputElement>(null);
@@ -33,7 +20,7 @@ export function ImageUploader({ productId }: { productId: number }) {
     try {
       const form = new FormData();
       form.set("id", String(productId));
-      for (const f of files) form.append("files", await shrink(f));
+      for (const f of files) form.append("files", await shrinkImage(f));
       await uploadImages(form);
     } catch (e) {
       // redirect() de la acción también llega acá como excepción; solo mostramos errores reales

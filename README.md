@@ -60,13 +60,25 @@ Un solo acceso para quien esté a cargo de la tienda.
 - **Inicio:** comprobantes pendientes, señas por vencer, pedidos para preparar, motos por coordinar, ventas del día y stock bajo.
 - **Pedidos:** marcar pagado, registrar seña, completar seña con los precios del día, cambiar estado (preparando, listo para retirar, coordinando moto, entregado), cancelar (devuelve el stock), notas internas y WhatsApp a la clienta.
 - **Productos:** buscar, editar datos, variantes, precios, stock, fotos (se achican solas antes de subir) y ficha técnica de adhesivos; crear productos nuevos.
+- **Categorías:** portada de cada categoría y subcategoría (se ve en el inicio y arriba de la categoría). Sin portada propia, usa la foto de un producto destacado.
 - **Precios:** subir o bajar por % por marca, categoría o todo el catálogo.
-- **Configuración:** alias/CBU, barra de anuncios, WhatsApp, horarios, seña, feriados, descuentos y medios de pago.
+- **Configuración:** alias/CBU, barra de anuncios, WhatsApp, horarios, seña, feriados, descuentos, medios de pago e Instagram.
 
 Activarlo en Supabase (SQL Editor):
 1. `supabase/migrations/0002_panel.sql`
 2. Authentication → Users → **Add user** (email y contraseña del panel, "Auto Confirm User").
 3. `supabase/acceso-panel.sql` con ese email.
+
+## Instagram en la tienda
+
+Muestra los últimos 8 posts de la cuenta en el inicio (se actualizan cada hora). Usa la *Instagram API con inicio de sesión de Instagram*.
+
+1. Supabase → SQL Editor: `supabase/migrations/0003_instagram.sql`.
+2. La cuenta de Instagram tiene que ser **profesional** (Empresa o Creador).
+3. developers.facebook.com → crear app (tipo Empresa) → agregar el producto **Instagram** → *Configuración de la API con inicio de sesión de Instagram* → **Generar token** de la cuenta.
+4. Panel → Configuración → Instagram → pegar el token → Conectar.
+
+El token dura 60 días; la tarea diaria lo renueva sola cada semana. Si Instagram falla o no hay token, la sección no aparece.
 
 ## Catálogo
 

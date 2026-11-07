@@ -127,3 +127,31 @@ export async function getVariantsWithProduct(ids: number[]) {
   if (error) throw error;
   return data;
 }
+
+/**
+ * Portada de cada categoría: la que se subió desde el panel o, si no hay,
+ * la foto del producto más destacado de esa categoría (o de sus subcategorías).
+ */
+export async function getCategoryCovers(categories: Category[]): Promise<Record<number, string>> {
+  const { data, error } = await publicClient()
+    .from("products")
+    .select("id, category_id, featured, best_seller, images:product_images(url, sort_order)");
+  if (error) throw error;
+  const parentOf = new Map(categories.map((c) => [c.id, c.parent_id]));
+  const auto: Record<number, string> = {};
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const ranked = (data as any[])
+    .filter((p) => p.images?.length)
+    .sort((a, b) => Number(b.featured) * 2 + Number(b.best_seller) - (Number(a.featured) * 2 + Number(a.best_seller)) || a.id - b.id);
+  for (const p of ranked) {
+    const url = [...p.images].sort((x: any, y: any) => x.sort_order - y.sort_order)[0].url;
+    for (const id of [p.category_id, parentOf.get(p.category_id)]) if (id && !auto[id]) auto[id] = url;
+  }
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+  const out: Record<number, string> = {};
+  for (const c of categories) {
+    const url = c.image_url || auto[c.id];
+    if (url) out[c.id] = url;
+  }
+  return out;
+}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getBrands, getCategories, getPaymentRules, getProductsInCategory } from "@/lib/catalog";
+import { getBrands, getCategories, getCategoryCovers, getPaymentRules, getProductsInCategory } from "@/lib/catalog";
 import { ProductGrid } from "@/components/product-grid";
 
 export const revalidate = 60;
@@ -25,7 +25,12 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   const children = categories.filter((c) => c.parent_id === cat.id);
   const siblings = parent ? categories.filter((c) => c.parent_id === parent.id) : children;
 
-  let products = await getProductsInCategory([cat.id, ...children.map((c) => c.id)]);
+  const [covers, allProducts] = await Promise.all([
+    getCategoryCovers(categories),
+    getProductsInCategory([cat.id, ...children.map((c) => c.id)]),
+  ]);
+  let products = allProducts;
+  const cover = covers[cat.id];
   const brandsHere = brands.filter((b) => products.some((p) => p.brand_id === b.id));
   const brandFilter = brands.find((b) => b.slug === marca);
   if (brandFilter) products = products.filter((p) => p.brand_id === brandFilter.id);
@@ -37,7 +42,16 @@ export default async function CategoryPage({ params, searchParams }: Props) {
           ← {parent.name}
         </Link>
       )}
-      <h1 className="mt-2 text-[26px] leading-tight md:text-[32px]">{cat.name}</h1>
+      {cover ? (
+        <div className="relative mt-3 flex aspect-[16/9] items-end overflow-hidden bg-surface sm:aspect-[21/9] md:aspect-[4/1]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={cover} alt="" className="absolute inset-0 h-full w-full object-cover" />
+          <span className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" aria-hidden />
+          <h1 className="relative p-5 text-[26px] leading-tight text-paper md:p-8 md:text-[34px]">{cat.name}</h1>
+        </div>
+      ) : (
+        <h1 className="mt-2 text-[26px] leading-tight md:text-[32px]">{cat.name}</h1>
+      )}
 
       {siblings.length > 0 && (
         <nav className="-mx-4 mt-5 flex gap-2 overflow-x-auto px-4 pb-1" aria-label="Subcategorías">

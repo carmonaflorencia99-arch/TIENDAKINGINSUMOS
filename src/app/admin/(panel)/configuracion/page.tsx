@@ -1,5 +1,6 @@
 import { adminDb } from "@/lib/admin";
-import { saveRules, saveSettings } from "./actions";
+import { adminClient } from "@/lib/supabase";
+import { disconnectInstagram, saveInstagram, saveRules, saveSettings } from "./actions";
 
 export const metadata = { title: "Configuración" };
 
@@ -13,6 +14,12 @@ export default async function SettingsPage({ searchParams }: Props) {
     db.from("payment_rules").select("*"),
     db.from("categories").select("id, name"),
   ]);
+  const { data: ig } = await adminClient()
+    .from("integration_tokens")
+    .select("account, updated_at")
+    .eq("key", "instagram")
+    .maybeSingle()
+    .then((r) => r, () => ({ data: null }));
   const order = ["cash", "transfer", "mercadopago"];
   const sorted = (rules ?? []).sort((a, b) => order.indexOf(a.method) - order.indexOf(b.method));
   const catName = (id: number) => cats?.find((c) => c.id === id)?.name ?? `#${id}`;
@@ -90,6 +97,31 @@ export default async function SettingsPage({ searchParams }: Props) {
         ))}
         <button className="btn">Guardar medios de pago</button>
       </form>
+
+      <section className="space-y-3 border border-line bg-white p-5">
+        <h2 className="text-[14px]">Instagram</h2>
+        {ig ? (
+          <>
+            <p className="text-sm">
+              Conectado a <strong>@{ig.account}</strong>. Los últimos posts se ven en el inicio de la tienda (se actualizan cada hora).
+            </p>
+            <p className="text-xs text-mute">
+              Última renovación del acceso: {new Date(ig.updated_at).toLocaleDateString("es-AR")}. Se renueva solo cada semana.
+            </p>
+            <form action={disconnectInstagram}>
+              <button className="btn-ghost px-4 py-2 text-[12px]">Desconectar</button>
+            </form>
+          </>
+        ) : (
+          <form action={saveInstagram} className="space-y-3">
+            <p className="text-sm text-mute">
+              Pegá el token de acceso de la cuenta de Instagram (se genera en Meta for Developers). Mientras no esté conectado, la sección no aparece en la tienda.
+            </p>
+            <input name="token" type="password" autoComplete="off" placeholder="IGAA…" className="field font-mono text-sm" />
+            <button className="btn">Conectar Instagram</button>
+          </form>
+        )}
+      </section>
     </div>
   );
 }

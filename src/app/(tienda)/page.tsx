@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { getBrands, getCategories, getHighlighted, getPaymentRules, getSettings } from "@/lib/catalog";
+import { getBrands, getCategories, getCategoryCovers, getHighlighted, getPaymentRules, getSettings } from "@/lib/catalog";
+import { getInstagramPosts } from "@/lib/instagram";
+import { InstagramGrid } from "@/components/instagram-grid";
 import { productPrices } from "@/lib/display-prices";
 import { ProductCard } from "@/components/product-card";
 import { Carousel } from "@/components/carousel";
@@ -16,6 +18,7 @@ export default async function Home() {
     getSettings(),
   ]);
   const main = categories.filter((c) => c.parent_id == null);
+  const [covers, instagram] = await Promise.all([getCategoryCovers(categories), getInstagramPosts(8)]);
   const lion = brands.find((b) => b.featured);
 
   return (
@@ -76,9 +79,21 @@ export default async function Home() {
               <li key={c.id}>
                 <Link
                   href={`/categoria/${c.slug}`}
-                  className="flex aspect-[4/3] items-end border border-line bg-white p-4 transition-colors hover:bg-ink hover:text-paper md:aspect-[16/9]"
+                  className="group relative flex aspect-[4/3] items-end overflow-hidden border border-line bg-surface md:aspect-[16/9]"
                 >
-                  <span className="text-[13px] font-medium uppercase leading-snug tracking-[1.5px]">{c.name}</span>
+                  {covers[c.id] && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={covers[c.id]}
+                      alt=""
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                  )}
+                  <span className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/10 to-transparent" aria-hidden />
+                  <span className="relative p-4 text-[13px] font-medium uppercase leading-snug tracking-[1.5px] text-paper">
+                    {c.name}
+                  </span>
                 </Link>
               </li>
             ))}
@@ -91,6 +106,18 @@ export default async function Home() {
             <span className="mt-2 block text-[24px] font-light uppercase tracking-[4px]">{lion.name}</span>
             <span className="mt-5 inline-block border-b border-paper pb-0.5 text-[12px] uppercase tracking-[2px]">Ver productos</span>
           </Link>
+        )}
+
+        {instagram.length > 0 && (
+          <section className="mt-16">
+            <h2 className="title mb-2 text-center">Seguinos en Instagram</h2>
+            <p className="mb-7 text-center">
+              <a href="https://instagram.com/King_insumos" target="_blank" rel="noopener" className="border-b border-ink pb-0.5 text-[12px] uppercase tracking-[2px]">
+                @King_insumos
+              </a>
+            </p>
+            <InstagramGrid posts={instagram} />
+          </section>
         )}
 
         <section className="mt-16 grid border border-line md:grid-cols-3">
