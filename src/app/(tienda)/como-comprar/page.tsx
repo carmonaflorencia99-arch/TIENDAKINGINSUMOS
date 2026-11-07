@@ -84,9 +84,9 @@ export default async function HowToBuy() {
   return (
     <div className="mx-auto max-w-2xl px-4 pt-8">
       <h1 className="text-[26px] leading-tight md:text-[32px]">Cómo comprar</h1>
-      <nav className="-mx-4 mt-5 flex gap-2 overflow-x-auto px-4 pb-1">
+      <nav className="mt-5 flex flex-wrap gap-2">
         {sections.map((x) => (
-          <a key={x.id} href={`#${x.id}`} className="chip whitespace-nowrap">{x.title}</a>
+          <a key={x.id} href={`#${x.id}`} className="chip text-[12px]">{x.title}</a>
         ))}
       </nav>
       <div className="mt-8 space-y-10">

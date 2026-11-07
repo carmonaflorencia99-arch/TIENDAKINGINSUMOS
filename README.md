@@ -29,7 +29,7 @@ npm test                     # pruebas de precios y reglas de checkout
 ### 4. Netlify
 1. app.netlify.com → **Add new site → Import an existing project → GitHub** → elegir este repo. Netlify detecta Next.js solo.
 2. Antes de desplegar, en **Environment variables**, cargar las de `.env.example` (sin Mercado Pago si todavía no está).
-3. **Deploy**. Cuando termine, copiar la dirección `https://xxxx.netlify.app`, ponerla en `NEXT_PUBLIC_SITE_URL` y volver a desplegar.
+3. **Deploy**. Cuando termine, copiar la dirección (hoy `https://kinginsumostienda.netlify.app`), ponerla en `NEXT_PUBLIC_SITE_URL` y volver a desplegar.
 4. La tarea diaria (`netlify/functions/mantenimiento-diario.mjs`) vence señas y cancela pedidos impagos de más de 48 h.
 
 ### 5. Dominio propio (Hostinger u otro)

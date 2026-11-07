@@ -58,14 +58,14 @@ export default async function ProductsPage({ searchParams }: Props) {
       </form>
 
       <div className="overflow-x-auto border border-line bg-white">
-        <table className="w-full min-w-[760px] text-sm">
+        <table className="w-full text-sm sm:min-w-[760px]">
           <thead className="border-b border-line text-left text-[11px] uppercase tracking-wider text-mute">
             <tr>
               <th className="px-3 py-2.5 font-medium">Producto</th>
-              <th className="px-3 py-2.5 font-medium">Categoría</th>
-              <th className="px-3 py-2.5 text-right font-medium">Precio de lista</th>
+              <th className="hidden px-3 py-2.5 font-medium sm:table-cell">Categoría</th>
+              <th className="hidden px-3 py-2.5 text-right font-medium sm:table-cell">Precio de lista</th>
               <th className="px-3 py-2.5 text-right font-medium">Stock</th>
-              <th className="px-3 py-2.5 font-medium">Estado</th>
+              <th className="hidden px-3 py-2.5 font-medium sm:table-cell">Estado</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-line">
@@ -83,21 +83,24 @@ export default async function ProductsPage({ searchParams }: Props) {
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         {img && <img src={img} alt="" className="h-full w-full object-cover" loading="lazy" />}
                       </span>
-                      <span>
+                      <span className="min-w-0">
                         <span className="font-medium underline-offset-4 hover:underline">{p.name}</span>
                         <span className="block text-xs text-mute">
                           {p.brand?.name ?? "Sin marca"} · {vs.length} {vs.length === 1 ? "variante" : "variantes"}
                           {p.featured ? " · destacado" : ""}
                         </span>
+                        <span className="block text-xs text-mute sm:hidden">
+                          {prices.length ? money(Math.min(...prices)) : "—"}{p.status !== "active" ? ` · ${STATUS[p.status as keyof typeof STATUS]}` : ""}
+                        </span>
                       </span>
                     </Link>
                   </td>
-                  <td className="px-3 py-2 text-xs">{p.category?.name}</td>
-                  <td className="px-3 py-2 text-right tabular-nums">
+                  <td className="hidden px-3 py-2 text-xs sm:table-cell">{p.category?.name}</td>
+                  <td className="hidden px-3 py-2 text-right tabular-nums sm:table-cell">
                     {prices.length === 0 ? "—" : Math.min(...prices) === Math.max(...prices) ? money(prices[0]) : `${money(Math.min(...prices))} – ${money(Math.max(...prices))}`}
                   </td>
-                  <td className={`px-3 py-2 text-right tabular-nums ${stock === 0 ? "text-rose" : ""}`}>{stock === 0 ? "Sin stock" : stock}</td>
-                  <td className="px-3 py-2"><span className="badge">{STATUS[p.status as keyof typeof STATUS]}</span></td>
+                  <td className={`px-3 py-2 text-right tabular-nums ${stock === 0 ? "text-rose" : ""} whitespace-nowrap`}>{stock === 0 ? "Sin stock" : stock}</td>
+                  <td className="hidden px-3 py-2 sm:table-cell"><span className="badge">{STATUS[p.status as keyof typeof STATUS]}</span></td>
                 </tr>
               );
             })}

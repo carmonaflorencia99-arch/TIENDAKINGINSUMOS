@@ -10,7 +10,7 @@ function Tile({ href, n, label, tone }: { href: string; n: number; label: string
   return (
     <Link href={href} className="flex flex-col gap-1 border border-line bg-white p-4">
       <span className={`text-[32px] font-light tabular-nums ${tone === "alert" && n > 0 ? "text-rose" : ""}`}>{n}</span>
-      <span className="text-[12px] font-medium uppercase tracking-[1.5px] text-mute">{label}</span>
+      <span className="text-[11px] font-medium uppercase leading-snug tracking-[1px] text-mute">{label}</span>
     </Link>
   );
 }
@@ -88,7 +88,7 @@ export default async function Dashboard() {
                       {v.product?.name}
                       <span className="text-mute"> {[v.option1, v.option2, v.option3].filter(Boolean).join(" · ")}</span>
                     </span>
-                    <span className={`tabular-nums ${v.stock <= 0 ? "text-rose" : ""}`}>{v.stock <= 0 ? "Sin stock" : v.stock}</span>
+                    <span className={`shrink-0 whitespace-nowrap tabular-nums ${v.stock <= 0 ? "text-rose" : ""}`}>{v.stock <= 0 ? "Sin stock" : v.stock}</span>
                   </Link>
                 </li>
               ))}

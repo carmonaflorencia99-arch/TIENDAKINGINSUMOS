@@ -27,7 +27,7 @@
            font-medium uppercase tracking-[2px] transition-colors hover:bg-ink hover:text-paper;
   }
   .chip {
-    @apply min-w-[3rem] rounded-[3px] border border-divider bg-white px-4 py-2 text-[13px] font-normal
+    @apply min-w-[3rem] shrink-0 rounded-[3px] border border-divider bg-white px-4 py-2 text-[13px] font-normal
            uppercase tracking-wider transition-colors aria-pressed:border-ink aria-pressed:bg-ink
            aria-pressed:text-paper disabled:opacity-30 disabled:line-through;
   }

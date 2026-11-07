@@ -41,9 +41,9 @@ export default async function OrdersPage({ searchParams }: Props) {
     <div className="space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <h1 className="text-[22px]">Pedidos</h1>
-        <form className="flex gap-2">
+        <form className="flex w-full gap-2 sm:w-auto">
           <input type="hidden" name="estado" value={filter.key} />
-          <input name="q" defaultValue={q} placeholder="Nº de pedido o nombre" className="field w-56 py-2 text-sm" />
+          <input name="q" defaultValue={q} placeholder="Nº de pedido o nombre" className="field min-w-0 flex-1 py-2 text-sm sm:w-56 sm:flex-none" />
           <button className="btn-ghost px-4 py-2">Buscar</button>
         </form>
       </div>
@@ -61,13 +61,13 @@ export default async function OrdersPage({ searchParams }: Props) {
         <p className="border border-line bg-white p-6 text-center text-sm text-mute">No hay pedidos en esta lista.</p>
       ) : (
         <div className="overflow-x-auto border border-line bg-white">
-          <table className="w-full min-w-[720px] text-sm">
+          <table className="w-full text-sm sm:min-w-[720px]">
             <thead className="border-b border-line text-left text-[11px] uppercase tracking-wider text-mute">
               <tr>
                 <th className="px-3 py-2.5 font-medium">Pedido</th>
                 <th className="px-3 py-2.5 font-medium">Clienta</th>
-                <th className="px-3 py-2.5 font-medium">Entrega · pago</th>
-                <th className="px-3 py-2.5 font-medium">Estado</th>
+                <th className="hidden px-3 py-2.5 font-medium sm:table-cell">Entrega · pago</th>
+                <th className="hidden px-3 py-2.5 font-medium sm:table-cell">Estado</th>
                 <th className="px-3 py-2.5 text-right font-medium">Total</th>
               </tr>
             </thead>
@@ -76,23 +76,27 @@ export default async function OrdersPage({ searchParams }: Props) {
                 <tr key={o.id} className="hover:bg-surface">
                   <td className="px-3 py-2.5">
                     <Link href={`/admin/pedidos/${o.id}`} className="font-semibold underline-offset-4 hover:underline">#{o.number}</Link>
-                    <div className="text-xs text-mute">{shortDate(o.created_at)}</div>
+                    <div className="whitespace-nowrap text-xs text-mute">{shortDate(o.created_at)}</div>
                   </td>
                   <td className="px-3 py-2.5">
                     {o.customer_name}
                     <div className="text-xs text-mute">{o.customer_phone}</div>
+                    <div className="mt-1 text-xs text-mute sm:hidden">
+                      {DELIVERY_LABEL[o.delivery as DeliveryMethod]} · {PAYMENT_LABEL[o.payment as PaymentMethod]}{o.plan === "deposit" ? " · seña" : ""}
+                    </div>
+                    <span className="badge mt-1.5 sm:hidden">{STATUS_LABEL[o.status as OrderStatus]}</span>
                   </td>
-                  <td className="px-3 py-2.5 text-xs">
+                  <td className="hidden px-3 py-2.5 text-xs sm:table-cell">
                     {DELIVERY_LABEL[o.delivery as DeliveryMethod]}
                     <div className="text-mute">{PAYMENT_LABEL[o.payment as PaymentMethod]}{o.plan === "deposit" ? " · seña" : ""}</div>
                   </td>
-                  <td className="px-3 py-2.5">
+                  <td className="hidden px-3 py-2.5 sm:table-cell">
                     <span className="badge">{STATUS_LABEL[o.status as OrderStatus]}</span>
                     {o.status === "deposit_paid" && o.deposit_expires_at && (
                       <div className="mt-1 text-xs text-mute">vence {shortDate(o.deposit_expires_at)}</div>
                     )}
                   </td>
-                  <td className="px-3 py-2.5 text-right tabular-nums">
+                  <td className="whitespace-nowrap px-3 py-2.5 text-right tabular-nums">
                     {money(o.total)}
                     {o.balance_due > 0 && o.status === "deposit_paid" && <div className="text-xs text-mute">saldo {money(o.balance_due)}</div>}
                   </td>

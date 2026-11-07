@@ -11,7 +11,7 @@ type Props = { searchParams: Promise<{ ok?: string; error?: string }> };
 
 function Row({ c, cover, main }: { c: Category; cover?: string; main?: boolean }) {
   return (
-    <li className={`flex items-center gap-3 border-t border-line py-3 ${main ? "" : "pl-4 sm:pl-8"}`}>
+    <li className={`flex flex-wrap items-center gap-3 border-t border-line py-3 sm:flex-nowrap ${main ? "" : "pl-4 sm:pl-8"}`}>
       <div className={`${main ? "h-20 w-28" : "h-14 w-20"} shrink-0 overflow-hidden bg-surface`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         {cover && <img src={cover} alt="" className="h-full w-full object-cover" />}
@@ -20,7 +20,7 @@ function Row({ c, cover, main }: { c: Category; cover?: string; main?: boolean }
         <p className={main ? "font-medium" : "text-sm"}>{c.name}</p>
         <p className="text-xs text-mute">{c.image_url ? "Portada propia" : cover ? "Automática (foto de un producto)" : "Sin foto"}</p>
       </div>
-      <div className="flex flex-col items-end gap-1 sm:flex-row sm:items-center sm:gap-2">
+      <div className="flex basis-full items-center gap-3 sm:basis-auto sm:gap-2">
         <CoverUploader categoryId={c.id} hasOwn={!!c.image_url} />
         {c.image_url && (
           <form action={removeCover}>
