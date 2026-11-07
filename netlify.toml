@@ -9,3 +9,8 @@
 # Funciones propias de Netlify (la tarea diaria de mantenimiento)
 [functions]
   directory = "netlify/functions"
+
+# Adaptador oficial de Next.js para Netlify (rutas dinámicas, API, imágenes).
+# Sin esto Netlify publica .next como archivos estáticos y la tienda da 404.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
