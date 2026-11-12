@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: { default: "King Insumos · Insumos de pestañas y cejas en Mendoza", template: "%s · King Insumos" },
   description:
-    "Adhesivos, extensiones de pestañas, lifting, laminado y herramientas profesionales. Distribuidores oficiales de The Lion Beauty en Mendoza. Retiro en Av. San Martín 1074 o envío por moto.",
+    "Adhesivos, extensiones de pestañas, lifting, laminado y herramientas profesionales. Distribuidores oficiales de The Lion Beauty, Zaphiria y Abruxlashes en Mendoza. Retiro en Av. San Martín 1074 o envío por moto.",
   openGraph: { images: ["/brand/logo-gold.png"], siteName: "King Insumos", locale: "es_AR" },
 };
 

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getBrands, getCategories, getPaymentRules, getProductsByBrand } from "@/lib/catalog";
+import { getBrands, getCategories, getPaymentRules, getProductsByBrand, OFFICIAL_BRAND_SLUGS } from "@/lib/catalog";
 import { ProductGrid } from "@/components/product-grid";
 
 export const revalidate = 60;
@@ -21,7 +21,7 @@ export default async function BrandPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-6xl px-4 pt-6">
-      {brand.featured && <p className="eyebrow">Distribuidores oficiales en Mendoza</p>}
+      {OFFICIAL_BRAND_SLUGS.includes(brand.slug) && <p className="eyebrow">Distribuidores oficiales en Mendoza</p>}
       <h1 className="mt-2 text-[26px] leading-tight md:text-[32px]">{brand.name}</h1>
       <div className="mt-7">
         <ProductGrid products={products} rules={rules} categories={categories} />

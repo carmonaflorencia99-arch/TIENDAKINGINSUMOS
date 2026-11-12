@@ -39,7 +39,7 @@ export default async function StoreLayout({ children }: { children: React.ReactN
               </div>
             </div>
             <p className="mx-auto mt-12 max-w-6xl border-t border-paper/20 pt-6 text-[11px] uppercase tracking-[2px] text-paper/50">
-              King Insumos · Distribuidores oficiales de The Lion Beauty en Mendoza
+              King Insumos · Distribuidores oficiales de The Lion Beauty, Zaphiria y Abruxlashes en Mendoza
             </p>
           </footer>
           <WhatsAppFab phone={settings.whatsapp} />

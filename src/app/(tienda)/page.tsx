@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getBrands, getCategories, getCategoryCovers, getHighlighted, getPaymentRules, getSettings } from "@/lib/catalog";
+import { getBrands, getCategories, getCategoryCovers, getHighlighted, getPaymentRules, getSettings, OFFICIAL_BRANDS_TEXT, officialBrands } from "@/lib/catalog";
 import { getInstagramPosts } from "@/lib/instagram";
 import { InstagramGrid } from "@/components/instagram-grid";
 import { productPrices } from "@/lib/display-prices";
@@ -19,7 +19,7 @@ export default async function Home() {
   ]);
   const main = categories.filter((c) => c.parent_id == null);
   const [covers, instagram] = await Promise.all([getCategoryCovers(categories), getInstagramPosts(8)]);
-  const lion = brands.find((b) => b.featured);
+  const official = officialBrands(brands);
 
   return (
     <>
@@ -54,7 +54,7 @@ export default async function Home() {
 
       <Marquee
         items={[
-          lion ? `Distribuidores oficiales ${lion.name}` : "Insumos profesionales",
+          `Distribuidores oficiales ${OFFICIAL_BRANDS_TEXT}`,
           "Efectivo 10% OFF en todo",
           "Retiro en el showroom · Mendoza Centro",
           "Envíos por moto",
@@ -100,12 +100,22 @@ export default async function Home() {
           </ul>
         </section>
 
-        {lion && (
-          <Link href={`/marca/${lion.slug}`} className="mt-16 block bg-ink px-6 py-10 text-center text-paper">
+        {official.length > 0 && (
+          <section className="mt-16 bg-ink px-6 py-10 text-center text-paper">
             <span className="eyebrow block text-paper/60">Distribuidores oficiales en Mendoza</span>
-            <span className="mt-2 block text-[24px] font-light uppercase tracking-[4px]">{lion.name}</span>
-            <span className="mt-5 inline-block border-b border-paper pb-0.5 text-[12px] uppercase tracking-[2px]">Ver productos</span>
-          </Link>
+            <ul className="mt-6 grid gap-3 sm:grid-cols-3">
+              {official.map((b) => (
+                <li key={b.id}>
+                  <Link href={`/marca/${b.slug}`} className="group block border border-paper/25 px-4 py-4 transition-colors hover:border-paper sm:py-6">
+                    <span className="block text-[20px] font-light uppercase tracking-[3px]">{b.name}</span>
+                    <span className="mt-3 inline-block border-b border-paper/60 pb-0.5 text-[11px] uppercase tracking-[2px] text-paper/80 group-hover:border-paper">
+                      Ver productos
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
         )}
 
         {instagram.length > 0 && (

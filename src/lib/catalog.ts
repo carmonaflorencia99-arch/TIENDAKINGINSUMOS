@@ -155,3 +155,11 @@ export async function getCategoryCovers(categories: Category[]): Promise<Record<
   }
   return out;
 }
+
+/** Marcas de las que King es distribuidor oficial (en este orden se muestran). */
+export const OFFICIAL_BRAND_SLUGS = ["the-lion-beauty", "zaphiria", "abruxlashes"];
+export const OFFICIAL_BRANDS_TEXT = "The Lion Beauty, Zaphiria y Abruxlashes";
+
+export function officialBrands<T extends { slug: string }>(brands: T[]): T[] {
+  return OFFICIAL_BRAND_SLUGS.map((s) => brands.find((b) => b.slug === s)).filter((b): b is T => !!b);
+}
