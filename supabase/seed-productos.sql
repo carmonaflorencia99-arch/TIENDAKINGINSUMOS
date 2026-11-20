@@ -983,14 +983,16 @@ begin
   insert into product_images (product_id, url, alt, sort_order) values (pid, '/products/cera-para-depilar-rostro-mely.jpg', 'Cera para depilar rostro Mely', 0);
 
   insert into products (name, slug, brand_id, category_id, kind, option_names, status, featured, best_seller, description)
-  values ('Guantes 100% nitrilo caja x 100', 'guantes-100-nitrilo-caja-x-100', null, (select id from categories where slug = 'guantes-descartables'), 'variants', '{"Color"}', 'active', false, true, null)
+  values ('Guantes 100% nitrilo caja x 100', 'guantes-100-nitrilo-caja-x-100', null, (select id from categories where slug = 'guantes-descartables'), 'variants', '{"Color","Talle"}', 'active', false, true, null)
   returning id into pid;
-  insert into variants (product_id, sku, option1, option2, option3, price_list, stock, sort_order) values (pid, 'GUANTES-100-NITRILO-CAJA-X-100-AZUL', 'Azul', null, null, 9780, 10, 0);
-  insert into variants (product_id, sku, option1, option2, option3, price_list, stock, sort_order) values (pid, 'GUANTES-100-NITRILO-CAJA-X-100-ROSA', 'Rosa', null, null, 9780, 10, 1);
-  insert into variants (product_id, sku, option1, option2, option3, price_list, stock, sort_order) values (pid, 'GUANTES-100-NITRILO-CAJA-X-100-NEGRO', 'Negro', null, null, 9780, 10, 2);
-  insert into product_images (product_id, url, alt, sort_order) values (pid, '/products/guantes-100-nitrilo-caja-x-100.jpg', 'Guantes 100% nitrilo caja x 100', 0);
-  insert into product_images (product_id, url, alt, sort_order) values (pid, '/products/guantes-100-nitrilo-caja-x-100-2.jpg', 'Guantes 100% nitrilo caja x 100', 1);
-  insert into product_images (product_id, url, alt, sort_order) values (pid, '/products/guantes-100-nitrilo-caja-x-100-3.jpg', 'Guantes 100% nitrilo caja x 100', 2);
+  insert into variants (product_id, sku, option1, option2, option3, price_list, stock, sort_order) values (pid, 'GUANTES-100-NITRILO-CAJA-X-100-ROSA-S', 'Rosa', 'S', null, 9780, 0, 0);
+  insert into variants (product_id, sku, option1, option2, option3, price_list, stock, sort_order) values (pid, 'GUANTES-100-NITRILO-CAJA-X-100-ROSA-M', 'Rosa', 'M', null, 9780, 0, 1);
+  insert into variants (product_id, sku, option1, option2, option3, price_list, stock, sort_order) values (pid, 'GUANTES-100-NITRILO-CAJA-X-100-ROSA-L', 'Rosa', 'L', null, 9780, 0, 2);
+  insert into variants (product_id, sku, option1, option2, option3, price_list, stock, sort_order) values (pid, 'GUANTES-100-NITRILO-CAJA-X-100-NEGRO-S', 'Negro', 'S', null, 9780, 0, 3);
+  insert into variants (product_id, sku, option1, option2, option3, price_list, stock, sort_order) values (pid, 'GUANTES-100-NITRILO-CAJA-X-100-NEGRO-M', 'Negro', 'M', null, 9780, 0, 4);
+  insert into variants (product_id, sku, option1, option2, option3, price_list, stock, sort_order) values (pid, 'GUANTES-100-NITRILO-CAJA-X-100-NEGRO-L', 'Negro', 'L', null, 9780, 0, 5);
+  insert into product_images (product_id, url, alt, sort_order) values (pid, '/products/guantes-100-nitrilo-caja-x-100-2.jpg', 'Guantes 100% nitrilo caja x 100', 0);
+  insert into product_images (product_id, url, alt, sort_order) values (pid, '/products/guantes-100-nitrilo-caja-x-100-3.jpg', 'Guantes 100% nitrilo caja x 100', 1);
 
   insert into products (name, slug, brand_id, category_id, kind, option_names, status, featured, best_seller, description)
   values ('Bandeja de acero inoxidable', 'bandeja-de-acero-inoxidable', null, (select id from categories where slug = 'herramientas-lifting'), 'simple', '{}', 'active', false, false, null)

@@ -240,8 +240,8 @@ p(14, H, None, "Piel sintética para cejas", [], {"": 3180}, [474])
 p(14, H, None, "Mezclador de tinta", [], {"": 4160}, [505])
 p(14, "cuidado-facial-y-corporal", "zaphiria", "Mini derretidor de cera Zaphiria", [], {"": 16380}, [518])
 p(14, "cuidado-facial-y-corporal", None, "Cera para depilar rostro Mely", ["Presentación"], {"100 g": 5400, "400 g": 8900}, [517], sin_stock=True)
-p(14, "guantes-descartables", None, "Guantes 100% nitrilo caja x 100", ["Color"], {"Azul": 9780, "Rosa": 9780, "Negro": 9780},
-  [502, 504, 501], best=True)
+p(14, "guantes-descartables", None, "Guantes 100% nitrilo caja x 100", ["Color", "Talle"],
+  grid(["Rosa", "Negro"], ["S", "M", "L"], {"S": 9780, "M": 9780, "L": 9780}), [504, 501], best=True)
 p(14, H, None, "Bandeja de acero inoxidable", [], {"": 4035}, [507])
 p(14, H, None, "Bandeja esmaltada", [], {"": 3425}, [506])
 p(14, "cuidado-facial-y-corporal", None, "Soporte de pigmentos para microblading y dermapen", [], {"": 3700}, [508])
