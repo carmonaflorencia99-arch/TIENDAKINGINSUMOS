@@ -7,7 +7,7 @@ import { useRef, useState } from "react";
 import { uploadImages } from "./actions";
 import { shrinkImage } from "@/lib/shrink-image";
 
-export function ImageUploader({ productId }: { productId: number }) {
+export function ImageUploader({ productId, from = "" }: { productId: number; from?: string }) {
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -20,6 +20,7 @@ export function ImageUploader({ productId }: { productId: number }) {
     try {
       const form = new FormData();
       form.set("id", String(productId));
+      form.set("from", from);
       for (const f of files) form.append("files", await shrinkImage(f));
       await uploadImages(form);
     } catch (e) {

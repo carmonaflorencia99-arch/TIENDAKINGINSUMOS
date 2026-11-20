@@ -17,7 +17,16 @@ const int = (v: FormDataEntryValue | null, min = 0) => {
   return Number.isFinite(n) ? Math.max(n, min) : min;
 };
 const text = (v: FormDataEntryValue | null) => String(v ?? "").trim();
-const back = (id: number, q: string) => redirect(`/admin/productos/${id}?${q}`);
+/** Volver a la ficha del producto, manteniendo de qué lista se vino. */
+const back = (id: number, q: string, f?: FormData) => {
+  const from = f ? text(f.get("from")) : "";
+  redirect(`/admin/productos/${id}?${q}${from ? `&from=${encodeURIComponent(from)}` : ""}`);
+};
+/** Volver a la lista (con la misma búsqueda), marcando el producto editado. */
+const toList = (id: number, f: FormData, msg: string) => {
+  const from = text(f.get("from"));
+  redirect(`/admin/productos?${from ? from + "&" : ""}editado=${id}&ok=${encodeURIComponent(msg)}#p-${id}`);
+};
 
 export async function createProduct(f: FormData) {
   const db = await adminDb();
@@ -69,7 +78,7 @@ export async function saveProduct(f: FormData) {
       best_seller: f.get("best_seller") === "on",
     })
     .eq("id", id);
-  if (error) back(id, "error=" + encodeURIComponent("No se pudo guardar el producto."));
+  if (error) back(id, "error=" + encodeURIComponent("No se pudo guardar el producto."), f);
 
   // Variantes: filas v-<id>-campo (existentes) y n-<i>-campo (nuevas)
   const rows = new Map<string, Record<string, string>>();
@@ -99,7 +108,7 @@ export async function saveProduct(f: FormData) {
     }
   }
   refreshStore();
-  back(id, "ok=" + encodeURIComponent("Cambios guardados. La tienda se actualiza en unos segundos."));
+  toList(id, f, `Guardado: ${text(f.get("name"))}.`);
 }
 
 /** Sube fotos ya achicadas en el navegador al bucket público "products". */
@@ -118,7 +127,7 @@ export async function uploadImages(f: FormData) {
     await db.from("product_images").insert({ product_id: id, url: data.publicUrl, sort_order: order++ });
   }
   refreshStore();
-  back(id, failed ? "error=" + encodeURIComponent(`No se pudieron subir ${failed} fotos.`) : "ok=" + encodeURIComponent("Fotos subidas."));
+  back(id, failed ? "error=" + encodeURIComponent(`No se pudieron subir ${failed} fotos.`) : "ok=" + encodeURIComponent("Fotos subidas."), f);
 }
 
 export async function makeMainImage(f: FormData) {
@@ -129,7 +138,7 @@ export async function makeMainImage(f: FormData) {
   const ordered = [imageId, ...(imgs ?? []).map((i) => i.id).filter((x) => x !== imageId)];
   for (const [i, imgId] of ordered.entries()) await db.from("product_images").update({ sort_order: i }).eq("id", imgId);
   refreshStore();
-  back(id, "ok=" + encodeURIComponent("Foto principal actualizada."));
+  back(id, "ok=" + encodeURIComponent("Foto principal actualizada."), f);
 }
 
 export async function deleteImage(f: FormData) {
@@ -142,7 +151,7 @@ export async function deleteImage(f: FormData) {
     if (img.url.includes(marker)) await db.storage.from("products").remove([img.url.split(marker)[1]]);
   }
   refreshStore();
-  back(id, "ok=" + encodeURIComponent("Foto eliminada."));
+  back(id, "ok=" + encodeURIComponent("Foto eliminada."), f);
 }
 
 export async function saveAdhesiveSpecs(f: FormData) {
@@ -163,5 +172,60 @@ export async function saveAdhesiveSpecs(f: FormData) {
   if (empty) await db.from("adhesive_specs").delete().eq("product_id", id);
   else await db.from("adhesive_specs").upsert(row);
   refreshStore();
-  back(id, "ok=" + encodeURIComponent("Ficha técnica guardada."));
+  back(id, "ok=" + encodeURIComponent("Ficha técnica guardada."), f);
+}
+
+/* ---------- Edición rápida desde la lista (sin recargar la página) ---------- */
+
+export type QuickResult = { ok: true } | { ok: false; error: string };
+
+/** Cambia precio, stock o "activa" de una variante. Lo usa la lista al editar en el lugar. */
+export async function quickUpdateVariant(
+  variantId: number,
+  patch: { price_list?: number; stock?: number; active?: boolean },
+): Promise<QuickResult> {
+  const db = await adminDb();
+  const data: Record<string, number | boolean> = {};
+  if (patch.price_list !== undefined) {
+    const v = Math.round(Number(patch.price_list));
+    if (!Number.isFinite(v) || v < 0 || v > 100_000_000) return { ok: false, error: "Precio inválido" };
+    data.price_list = v;
+  }
+  if (patch.stock !== undefined) {
+    const v = Math.round(Number(patch.stock));
+    if (!Number.isFinite(v) || v < -999 || v > 100_000) return { ok: false, error: "Stock inválido" };
+    data.stock = v;
+  }
+  if (patch.active !== undefined) data.active = !!patch.active;
+  if (Object.keys(data).length === 0) return { ok: true };
+  const { error } = await db.from("variants").update(data).eq("id", variantId);
+  if (error) return { ok: false, error: "No se pudo guardar" };
+  refreshStore();
+  return { ok: true };
+}
+
+/** Publica u oculta un producto desde la lista. */
+export async function quickSetStatus(productId: number, status: "active" | "draft" | "archived"): Promise<QuickResult> {
+  const db = await adminDb();
+  if (!["active", "draft", "archived"].includes(status)) return { ok: false, error: "Estado inválido" };
+  const { error } = await db.from("products").update({ status }).eq("id", productId);
+  if (error) return { ok: false, error: "No se pudo cambiar el estado" };
+  refreshStore();
+  return { ok: true };
+}
+
+/**
+ * Elimina un producto con sus variantes y fotos. Los pedidos viejos no se rompen:
+ * guardan el nombre y el precio del momento de la compra.
+ */
+export async function deleteProduct(productId: number): Promise<QuickResult> {
+  const db = await adminDb();
+  const { data: imgs } = await db.from("product_images").select("url").eq("product_id", productId);
+  const { error } = await db.from("products").delete().eq("id", productId);
+  if (error) return { ok: false, error: "No se pudo eliminar" };
+  const marker = "/storage/v1/object/public/products/";
+  const paths = (imgs ?? []).map((i) => i.url).filter((u) => u.includes(marker)).map((u) => u.split(marker)[1]);
+  if (paths.length) await db.storage.from("products").remove(paths);
+  refreshStore();
+  return { ok: true };
 }

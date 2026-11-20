@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Flash } from "@/app/admin/(panel)/flash";
 import { notFound } from "next/navigation";
 import { adminDb } from "@/lib/admin";
 import { DELIVERY_LABEL, money, PAYMENT_LABEL, shortDate } from "@/lib/format";
@@ -52,8 +53,7 @@ export default async function OrderDetail({ params, searchParams }: Props) {
         <span className="badge text-[12px]">{STATUS_LABEL[status]}</span>
       </div>
 
-      {ok && <p role="status" className="border border-ok/30 bg-ok/10 p-3 text-sm text-ok">{ok}</p>}
-      {error && <p role="alert" className="border border-rose/30 bg-rose/10 p-3 text-sm text-rose">{error}</p>}
+      <Flash ok={ok} error={error} />
 
       <div className="grid gap-5 md:grid-cols-[1fr_320px]">
         {/* Detalle */}

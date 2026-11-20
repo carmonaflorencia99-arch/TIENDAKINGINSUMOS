@@ -1,4 +1,5 @@
 import { adminDb } from "@/lib/admin";
+import { Flash } from "@/app/admin/(panel)/flash";
 import { adminClient } from "@/lib/supabase";
 import { disconnectInstagram, saveInstagram, saveRules, saveSettings } from "./actions";
 
@@ -35,8 +36,7 @@ export default async function SettingsPage({ searchParams }: Props) {
   return (
     <div className="max-w-2xl space-y-6">
       <h1 className="text-[22px]">Configuración</h1>
-      {ok && <p role="status" className="border border-ok/30 bg-ok/10 p-3 text-sm text-ok">{ok}</p>}
-      {error && <p role="alert" className="border border-rose/30 bg-rose/10 p-3 text-sm text-rose">{error}</p>}
+      <Flash ok={ok} error={error} />
 
       <form action={saveSettings} className="space-y-5 border border-line bg-white p-5">
         <h2 className="text-[14px]">Datos para transferencias</h2>

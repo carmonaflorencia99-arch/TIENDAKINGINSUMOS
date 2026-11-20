@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { Flash } from "@/app/admin/(panel)/flash";
 import { notFound } from "next/navigation";
 import { adminDb } from "@/lib/admin";
 import { money } from "@/lib/format";
 import { deleteImage, makeMainImage, saveAdhesiveSpecs, saveProduct } from "../actions";
 import { ImageUploader } from "../uploader";
 
-type Props = { params: Promise<{ id: string }>; searchParams: Promise<{ ok?: string; error?: string }> };
+type Props = { params: Promise<{ id: string }>; searchParams: Promise<{ ok?: string; error?: string; from?: string }> };
 
 export async function generateMetadata({ params }: Props) {
   return { title: `Producto ${(await params).id}` };
@@ -15,7 +16,8 @@ const NEW_ROWS = 3;
 
 export default async function EditProduct({ params, searchParams }: Props) {
   const { id } = await params;
-  const { ok, error } = await searchParams;
+  const { ok, error, from = "" } = await searchParams;
+  const fromField = <input type="hidden" name="from" value={from} />;
   const db = await adminDb();
   const [{ data: p }, { data: categories }, { data: brands }] = await Promise.all([
     db.from("products").select("*, variants(*), images:product_images(*), adhesive_specs(*)").eq("id", Number(id)).maybeSingle(),
@@ -35,19 +37,18 @@ export default async function EditProduct({ params, searchParams }: Props) {
 
   return (
     <div className="space-y-5">
-      <Link href="/admin/productos" className="eyebrow">← Productos</Link>
+      <Link href={`/admin/productos${from ? `?${from}` : ""}#p-${id}`} className="eyebrow">← Volver a la lista</Link>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-[22px]">{p.name}</h1>
         {p.status === "active" && (
           <Link href={`/producto/${p.slug}`} target="_blank" className="text-[12px] uppercase tracking-[1.5px] text-mute">Ver en la tienda ↗</Link>
         )}
       </div>
-      {ok && <p role="status" className="border border-ok/30 bg-ok/10 p-3 text-sm text-ok">{ok}</p>}
-      {error && <p role="alert" className="border border-rose/30 bg-rose/10 p-3 text-sm text-rose">{error}</p>}
+      <Flash ok={ok} error={error} />
 
       <div className="grid gap-5 lg:grid-cols-[1fr_300px]">
         <form action={saveProduct} className="space-y-5">
-          <input type="hidden" name="id" value={p.id} />
+          <input type="hidden" name="id" value={p.id} />{fromField}
 
           <section className="grid gap-4 border border-line bg-white p-4 sm:grid-cols-2">
             <label className="sm:col-span-2">
@@ -159,7 +160,10 @@ export default async function EditProduct({ params, searchParams }: Props) {
           </section>
 
           <div className="sticky bottom-0 -mx-4 border-t border-line bg-surface/95 px-4 py-3 backdrop-blur">
-            <button className="btn w-full sm:w-auto">Guardar cambios</button>
+            <div className="flex flex-wrap items-center gap-3">
+              <button className="btn w-full sm:w-auto">Guardar y volver a la lista</button>
+              <Link href={`/admin/productos${from ? `?${from}` : ""}#p-${id}`} className="text-[12px] uppercase tracking-[1.5px] text-mute underline underline-offset-4">Cancelar</Link>
+            </div>
           </div>
         </form>
 
@@ -180,13 +184,13 @@ export default async function EditProduct({ params, searchParams }: Props) {
                       <span className="font-medium uppercase tracking-wider">Principal</span>
                     ) : (
                       <form action={makeMainImage}>
-                        <input type="hidden" name="id" value={p.id} />
+                        <input type="hidden" name="id" value={p.id} />{fromField}
                         <input type="hidden" name="image_id" value={img.id} />
                         <button className="underline">Hacer principal</button>
                       </form>
                     )}
                     <form action={deleteImage}>
-                      <input type="hidden" name="id" value={p.id} />
+                      <input type="hidden" name="id" value={p.id} />{fromField}
                       <input type="hidden" name="image_id" value={img.id} />
                       <button className="text-rose underline">Borrar</button>
                     </form>
@@ -194,12 +198,12 @@ export default async function EditProduct({ params, searchParams }: Props) {
                 </li>
               ))}
             </ul>
-            <ImageUploader productId={p.id} />
+            <ImageUploader productId={p.id} from={from} />
           </section>
 
           {isAdhesive && (
             <form action={saveAdhesiveSpecs} className="space-y-3 border border-line bg-white p-4 text-sm">
-              <input type="hidden" name="id" value={p.id} />
+              <input type="hidden" name="id" value={p.id} />{fromField}
               <h2 className="text-[14px]">Ficha técnica del adhesivo</h2>
               <div className="grid grid-cols-2 gap-2">
                 {([

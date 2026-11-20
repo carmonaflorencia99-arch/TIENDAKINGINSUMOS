@@ -1,4 +1,5 @@
 import { adminDb } from "@/lib/admin";
+import { Flash } from "@/app/admin/(panel)/flash";
 import { bulkPrices } from "./actions";
 
 export const metadata = { title: "Precios" };
@@ -20,8 +21,7 @@ export default async function PricesPage({ searchParams }: Props) {
       <p className="text-sm text-mute">
         Sube (o baja) el precio de lista de muchos productos a la vez. Los precios se redondean a $10. Los pedidos ya hechos no cambian.
       </p>
-      {ok && <p role="status" className="border border-ok/30 bg-ok/10 p-3 text-sm text-ok">{ok}</p>}
-      {error && <p role="alert" className="border border-rose/30 bg-rose/10 p-3 text-sm text-rose">{error}</p>}
+      <Flash ok={ok} error={error} />
 
       <form action={bulkPrices} className="space-y-4 border border-line bg-white p-5">
         <label className="block">

@@ -1,4 +1,5 @@
 import { requireAdmin } from "@/lib/admin";
+import { Flash } from "@/app/admin/(panel)/flash";
 import { getCategories, getCategoryCovers } from "@/lib/catalog";
 import type { Category } from "@/lib/types";
 import { CoverUploader } from "./cover-uploader";
@@ -49,8 +50,7 @@ export default async function CategoriesPage({ searchParams }: Props) {
           Conviene una foto horizontal.
         </p>
       </div>
-      {ok && <p role="status" className="border border-ok/30 bg-ok/10 p-3 text-sm text-ok">{ok}</p>}
-      {error && <p role="alert" className="border border-rose/30 bg-rose/10 p-3 text-sm text-rose">{error}</p>}
+      <Flash ok={ok} error={error} />
       <div className="border border-line bg-white px-4">
         <ul>
           {mains.map((m) => (

@@ -1,22 +1,22 @@
 import Link from "next/link";
+import { Flash } from "@/app/admin/(panel)/flash";
 import { adminDb } from "@/lib/admin";
-import { money } from "@/lib/format";
+import { ProductList, type ListProduct } from "./product-list";
 
 export const metadata = { title: "Productos" };
 
-type Props = { searchParams: Promise<{ q?: string; cat?: string; estado?: string; ok?: string }> };
+type Props = { searchParams: Promise<{ q?: string; cat?: string; estado?: string; ok?: string; editado?: string }> };
 
-const STATUS = { active: "Publicado", draft: "Borrador", archived: "Archivado" } as const;
 
 export default async function ProductsPage({ searchParams }: Props) {
-  const { q = "", cat = "", estado = "", ok } = await searchParams;
+  const { q = "", cat = "", estado = "", ok, editado } = await searchParams;
   const db = await adminDb();
   const { data: categories } = await db.from("categories").select("id, name, parent_id, sort_order").order("sort_order");
   const mains = (categories ?? []).filter((c) => !c.parent_id);
 
   let query = db
     .from("products")
-    .select("id, name, slug, status, featured, best_seller, brand:brands(name), category:categories(name), variants(price_list, stock, active), images:product_images(url, sort_order)")
+    .select("id, name, slug, status, featured, best_seller, brand:brands(name), category:categories(name), option_names, variants(id, option1, option2, option3, price_list, stock, active, sort_order), images:product_images(url, sort_order)")
     .order("id")
     .limit(400);
   if (q.trim()) query = query.ilike("name", `%${q.trim().replace(/[%,()]/g, " ")}%`);
@@ -26,6 +26,26 @@ export default async function ProductsPage({ searchParams }: Props) {
   }
   if (estado) query = query.eq("status", estado);
   const { data: products } = await query;
+  const from = new URLSearchParams(Object.entries({ q, cat, estado }).filter(([, v]) => v)).toString();
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const list: ListProduct[] = ((products as any[]) ?? []).map((p) => ({
+    id: p.id,
+    name: p.name,
+    status: p.status,
+    brand: p.brand?.name ?? null,
+    category: p.category?.name ?? null,
+    image: [...p.images].sort((a, b) => a.sort_order - b.sort_order)[0]?.url ?? null,
+    variants: [...p.variants]
+      .sort((a, b) => a.sort_order - b.sort_order || a.id - b.id)
+      .map((v) => ({
+        id: v.id,
+        label: [v.option1, v.option2, v.option3].filter(Boolean).join(" · ") || "Única",
+        price_list: v.price_list,
+        stock: v.stock,
+        active: v.active,
+      })),
+  }));
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   return (
     <div className="space-y-5">
@@ -33,10 +53,10 @@ export default async function ProductsPage({ searchParams }: Props) {
         <h1 className="text-[22px]">Productos <span className="text-mute">({products?.length ?? 0})</span></h1>
         <Link href="/admin/productos/nuevo" className="btn px-4 py-2.5">+ Nuevo producto</Link>
       </div>
-      {ok && <p role="status" className="border border-ok/30 bg-ok/10 p-3 text-sm text-ok">{ok}</p>}
+      <Flash ok={ok} />
 
       <form className="flex flex-wrap gap-2">
-        <input name="q" defaultValue={q} placeholder="Buscar por nombre" className="field w-56 py-2 text-sm" />
+        <input name="q" defaultValue={q} placeholder="Buscar por nombre" className="field w-full py-2 text-sm sm:w-56" />
         <select name="cat" defaultValue={cat} className="field w-auto py-2 text-sm">
           <option value="">Todas las categorías</option>
           {mains.map((m) => (
@@ -51,62 +71,16 @@ export default async function ProductsPage({ searchParams }: Props) {
         <select name="estado" defaultValue={estado} className="field w-auto py-2 text-sm">
           <option value="">Todos los estados</option>
           <option value="active">Publicados</option>
-          <option value="draft">Borradores</option>
+          <option value="draft">Ocultos</option>
           <option value="archived">Archivados</option>
         </select>
         <button className="btn-ghost px-4 py-2">Filtrar</button>
       </form>
 
-      <div className="overflow-x-auto border border-line bg-white">
-        <table className="w-full text-sm sm:min-w-[760px]">
-          <thead className="border-b border-line text-left text-[11px] uppercase tracking-wider text-mute">
-            <tr>
-              <th className="px-3 py-2.5 font-medium">Producto</th>
-              <th className="hidden px-3 py-2.5 font-medium sm:table-cell">Categoría</th>
-              <th className="hidden px-3 py-2.5 text-right font-medium sm:table-cell">Precio de lista</th>
-              <th className="px-3 py-2.5 text-right font-medium">Stock</th>
-              <th className="hidden px-3 py-2.5 font-medium sm:table-cell">Estado</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-line">
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-            {(products as any[] | null)?.map((p) => {
-              const vs = p.variants.filter((v: { active: boolean }) => v.active);
-              const prices = vs.map((v: { price_list: number }) => v.price_list);
-              const stock = vs.reduce((s: number, v: { stock: number }) => s + Math.max(v.stock, 0), 0);
-              const img = [...p.images].sort((a, b) => a.sort_order - b.sort_order)[0]?.url;
-              return (
-                <tr key={p.id} className="hover:bg-surface">
-                  <td className="px-3 py-2">
-                    <Link href={`/admin/productos/${p.id}`} className="flex items-center gap-3">
-                      <span className="h-11 w-11 shrink-0 overflow-hidden border border-line bg-surface">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        {img && <img src={img} alt="" className="h-full w-full object-cover" loading="lazy" />}
-                      </span>
-                      <span className="min-w-0">
-                        <span className="font-medium underline-offset-4 hover:underline">{p.name}</span>
-                        <span className="block text-xs text-mute">
-                          {p.brand?.name ?? "Sin marca"} · {vs.length} {vs.length === 1 ? "variante" : "variantes"}
-                          {p.featured ? " · destacado" : ""}
-                        </span>
-                        <span className="block text-xs text-mute sm:hidden">
-                          {prices.length ? money(Math.min(...prices)) : "—"}{p.status !== "active" ? ` · ${STATUS[p.status as keyof typeof STATUS]}` : ""}
-                        </span>
-                      </span>
-                    </Link>
-                  </td>
-                  <td className="hidden px-3 py-2 text-xs sm:table-cell">{p.category?.name}</td>
-                  <td className="hidden px-3 py-2 text-right tabular-nums sm:table-cell">
-                    {prices.length === 0 ? "—" : Math.min(...prices) === Math.max(...prices) ? money(prices[0]) : `${money(Math.min(...prices))} – ${money(Math.max(...prices))}`}
-                  </td>
-                  <td className={`px-3 py-2 text-right tabular-nums ${stock === 0 ? "text-rose" : ""} whitespace-nowrap`}>{stock === 0 ? "Sin stock" : stock}</td>
-                  <td className="hidden px-3 py-2 sm:table-cell"><span className="badge">{STATUS[p.status as keyof typeof STATUS]}</span></td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <p className="text-xs text-mute">
+        Cambiá el precio o el stock acá mismo: se guarda solo. Tocá el estado (Publicado / Oculto) para mostrarlo u ocultarlo en la tienda.
+      </p>
+      <ProductList products={list} from={from} highlightId={editado ? Number(editado) : undefined} />
     </div>
   );
 }
