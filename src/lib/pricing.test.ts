@@ -36,6 +36,12 @@ describe("descuentos", () => {
   });
   it("precio con descuento coincide con el catálogo (Lion $24.800 → $22.320)", () => {
     expect(unitPrice(24800, 10)).toBe(22320);
+    // redondeo a los $10 más cercanos, no siempre hacia abajo
+    expect(unitPrice(26833, 10)).toBe(24150); // 24.149,70
+    expect(unitPrice(33666, 10)).toBe(30300); // 30.299,40
+    expect(unitPrice(3910, 10)).toBe(3520); // 3.519
+    expect(unitPrice(4645, 10)).toBe(4180); // 4.180,50
+    expect(unitPrice(14500, 10)).toBe(13050);
     expect(unitPrice(24800, 0)).toBe(24800);
     expect(unitPrice(24800, 10, 22250)).toBe(22250); // override manual
   });

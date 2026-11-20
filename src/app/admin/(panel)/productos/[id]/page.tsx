@@ -3,6 +3,7 @@ import { Flash } from "@/app/admin/(panel)/flash";
 import { notFound } from "next/navigation";
 import { adminDb } from "@/lib/admin";
 import { money } from "@/lib/format";
+import { unitPrice } from "@/lib/pricing";
 import { deleteImage, makeMainImage, saveAdhesiveSpecs, saveProduct } from "../actions";
 import { ImageUploader } from "../uploader";
 
@@ -24,6 +25,8 @@ export default async function EditProduct({ params, searchParams }: Props) {
     db.from("categories").select("id, name, parent_id, sort_order").order("sort_order"),
     db.from("brands").select("id, name").order("name"),
   ]);
+  const { data: cashRule } = await db.from("payment_rules").select("discount_pct").eq("method", "cash").maybeSingle();
+  const cashPct = cashRule?.discount_pct ?? 10;
   if (!p) notFound();
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -132,7 +135,7 @@ export default async function EditProduct({ params, searchParams }: Props) {
                       ) : null))}
                       <td className="py-1.5 pr-2">
                         <input name={`v-${v.id}-price_list`} defaultValue={v.price_list} inputMode="numeric" className="field w-28 px-2 py-1.5 text-sm tabular-nums" />
-                        <span className="mt-0.5 block text-[11px] text-mute">efect. {money(Math.floor((v.price_list * 0.9) / 10) * 10)}</span>
+                        <span className="mt-0.5 block text-[11px] text-mute">efect. {money(unitPrice(v.price_list, cashPct))}</span>
                       </td>
                       <td className="py-1.5 pr-2">
                         <input name={`v-${v.id}-stock`} defaultValue={v.stock} inputMode="numeric" className={`field w-20 px-2 py-1.5 text-sm tabular-nums ${v.stock <= 0 ? "border-rose" : ""}`} />

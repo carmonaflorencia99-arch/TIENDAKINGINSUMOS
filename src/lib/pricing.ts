@@ -47,7 +47,10 @@ export function discountPctFor(
   return excluded ? 0 : rule.discount_pct;
 }
 
-/** Precio unitario final. Redondea a $10 hacia abajo, como en el catálogo. */
+/**
+ * Precio unitario final con descuento, redondeado a los $10 más cercanos
+ * (como los precios del catálogo). Ej.: $26.833 con 10% OFF = $24.149,70 → $24.150.
+ */
 export function unitPrice(
   priceList: number,
   pct: number,
@@ -55,7 +58,8 @@ export function unitPrice(
 ): number {
   if (pct <= 0) return priceList;
   if (priceOverride != null) return priceOverride;
-  return Math.floor((priceList * (100 - pct)) / 100 / 10) * 10;
+  // se trabaja en enteros (pesos × 100 − pct) para evitar errores de coma flotante
+  return Math.round((priceList * (100 - pct)) / 1000) * 10;
 }
 
 export interface PricedLine {
