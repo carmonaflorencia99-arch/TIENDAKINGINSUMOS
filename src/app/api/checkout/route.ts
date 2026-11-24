@@ -24,6 +24,7 @@ const Body = z
       email: z.string().trim().email("El email no es válido.").optional().or(z.literal("")),
     }),
     payment: z.enum(["transfer", "card"]).default("transfer"),
+    zone: z.string().trim().min(2, "Elegí la zona de envío.").max(80),
     address: z.string().trim().min(5, "Ingresá la dirección de entrega.").max(300),
     notes: z.string().trim().max(500).optional(),
   });
@@ -40,6 +41,8 @@ export async function POST(req: Request) {
   // Unifica líneas repetidas de la misma variante
   const qtyById = new Map<number, number>();
   for (const l of body.lines) qtyById.set(l.variantId, (qtyById.get(l.variantId) ?? 0) + l.qty);
+
+  const fullAddress = `${body.address} (${body.zone})`;
 
   const db = adminClient();
   const [rulesRes, catsRes, settingsRes, variantsRes] = await Promise.all([
@@ -93,7 +96,7 @@ export async function POST(req: Request) {
       customer_phone: body.customer.phone,
       customer_email: body.customer.email || null,
       delivery: "moto",
-      moto_address: body.address,
+      moto_address: fullAddress,
       // la tarjeta se guarda como "mercadopago" (en el panel figura como "Tarjeta (link de pago o QR)")
       payment: body.payment === "card" ? "mercadopago" : "transfer",
       plan: "full",
@@ -132,7 +135,7 @@ export async function POST(req: Request) {
     total: totals.total,
     discount: totals.discount,
     payment: body.payment,
-    address: body.address,
+    address: fullAddress,
     notes: body.notes || null,
     items: priced.map((p) => ({ name: p.name, options: p.options || null, qty: p.qty })),
   });

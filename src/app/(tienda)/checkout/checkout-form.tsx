@@ -11,6 +11,9 @@ import { money } from "@/lib/format";
 import { computeTotals, discountPctFor, unitPrice } from "@/lib/pricing";
 import type { Category, PaymentRule } from "@/lib/types";
 
+/** Zonas de envío (Gran Mendoza). "Otros" pide escribir la localidad. */
+const ZONES = ["Capital", "Godoy Cruz", "Las Heras", "Guaymallén", "Luján", "Otros"] as const;
+
 interface Props {
   transferRule: PaymentRule | undefined;
   categories: Pick<Category, "id" | "parent_id">[];
@@ -18,7 +21,7 @@ interface Props {
 
 export function CheckoutForm({ transferRule, categories }: Props) {
   const { lines, clear } = useCart();
-  const [form, setForm] = useState({ name: "", phone: "", email: "", address: "", notes: "" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "", zone: "", otherZone: "", address: "", notes: "" });
   const [payment, setPayment] = useState<"transfer" | "card">("transfer");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -64,6 +67,7 @@ export function CheckoutForm({ transferRule, categories }: Props) {
         body: JSON.stringify({
           lines: lines.map((l) => ({ variantId: l.variantId, qty: l.qty })),
           customer: { name: form.name, phone: form.phone, email: form.email },
+          zone: form.zone === "Otros" ? form.otherZone : form.zone,
           address: form.address,
           payment,
           notes: form.notes,
@@ -80,7 +84,7 @@ export function CheckoutForm({ transferRule, categories }: Props) {
     }
   };
 
-  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.value }));
 
   return (
@@ -102,9 +106,18 @@ export function CheckoutForm({ transferRule, categories }: Props) {
 
       <section className="space-y-3">
         <h2 className="eyebrow">2 · Envío</h2>
+        <select className="field" value={form.zone} onChange={set("zone")} required aria-label="Zona de envío">
+          <option value="" disabled>Elegí tu zona</option>
+          {ZONES.map((z) => (
+            <option key={z} value={z}>{z}</option>
+          ))}
+        </select>
+        {form.zone === "Otros" && (
+          <input className="field" placeholder="¿Qué localidad?" value={form.otherZone} onChange={set("otherZone")} required />
+        )}
         <input
           className="field"
-          placeholder="Dirección de entrega (calle, número, depto, localidad)"
+          placeholder="Dirección (calle, número, piso/depto)"
           autoComplete="street-address"
           value={form.address}
           onChange={set("address")}
