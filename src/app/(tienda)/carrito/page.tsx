@@ -76,7 +76,7 @@ export default function CartPage() {
         </div>
         <p className="mt-2 text-mute">
           En el siguiente paso dejás tus datos y la dirección de envío, y mandás el pedido por WhatsApp. Pago por
-          transferencia: 10% OFF excepto pestañas.
+          transferencia: 10% OFF en todo.
         </p>
       </div>
 

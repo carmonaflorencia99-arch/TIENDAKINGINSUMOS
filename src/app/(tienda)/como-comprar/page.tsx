@@ -36,7 +36,7 @@ export default async function HowToBuy() {
       body: (
         <ul className="list-disc space-y-1.5 pl-5">
           <li><strong>Solo transferencia.</strong> Te pasamos los datos por WhatsApp cuando recibimos tu pedido.</li>
-          <li><strong>10% de descuento</strong> en todo, excepto pestañas.</li>
+          <li><strong>10% de descuento</strong> en todos los productos, pestañas incluidas.</li>
           <li>El pedido se abona completo antes del envío.</li>
         </ul>
       ),

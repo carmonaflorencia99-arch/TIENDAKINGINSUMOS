@@ -94,8 +94,9 @@ export function Header() {
 }
 
 /**
- * Botón flotante de WhatsApp. En la ficha de producto sube para no tapar
- * la barra fija de "Agregar al carrito".
+ * Botón flotante de WhatsApp. Va más arriba de la esquina para no quedar debajo
+ * del cartel "Powered by Netlify", y en la ficha de producto sube más para no
+ * tapar la barra fija de "Agregar al carrito".
  */
 export function WhatsAppFab({ phone }: { phone: string }) {
   const path = usePathname();
@@ -110,7 +111,7 @@ export function WhatsAppFab({ phone }: { phone: string }) {
       rel="noopener"
       aria-label="Escribinos por WhatsApp"
       className={`fixed right-4 z-40 grid h-12 w-12 place-items-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/15 transition-[bottom] ${
-        raised ? "bottom-28 md:bottom-6" : "bottom-5"
+        raised ? "bottom-36 md:bottom-20" : "bottom-20"
       }`}
     >
       <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>

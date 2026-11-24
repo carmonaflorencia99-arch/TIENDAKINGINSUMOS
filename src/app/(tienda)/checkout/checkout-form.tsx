@@ -125,7 +125,7 @@ export function CheckoutForm({ transferRule, categories }: Props) {
           <div className="flex justify-between border-t border-line pt-2 text-lg font-bold"><span>Total por transferencia</span><span>{money(summary.total)}</span></div>
         </div>
         <p className="mt-3 text-xs text-mute">
-          Pago solo por transferencia: 10% OFF en todo excepto pestañas. No realizamos cambios ni devoluciones.
+          Pago solo por transferencia: 10% OFF en todo. No realizamos cambios ni devoluciones.
         </p>
       </section>
 

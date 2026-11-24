@@ -54,7 +54,7 @@ export default async function Home() {
       <Marquee
         items={[
           `Distribuidores oficiales ${OFFICIAL_BRANDS_TEXT}`,
-          "Transferencia 10% OFF (excepto pestañas)",
+          "Transferencia 10% OFF en todo",
           "Pedí por la web y confirmá por WhatsApp",
           "Envíos a domicilio",
         ]}
@@ -131,7 +131,7 @@ export default async function Home() {
         <section className="mt-16 grid border border-line md:grid-cols-3">
           {[
             ["Armá tu pedido", "Sumá todo al carrito, completá tus datos y lo mandás por WhatsApp con un toque."],
-            ["Pagá por transferencia", "10% OFF en todo excepto pestañas. Te pasamos los datos por WhatsApp."],
+            ["Pagá por transferencia", "10% OFF en todo. Te pasamos los datos por WhatsApp."],
             ["Recibilo en tu casa", "Trabajamos solo con envíos. Se despacha cuando se acredita el pago."],
           ].map(([t, d], i) => (
             <div key={t} className={`p-6 ${i > 0 ? "border-t border-line md:border-l md:border-t-0" : ""}`}>
