@@ -2,7 +2,7 @@
 /**
  * Checkout por WhatsApp: la clienta deja sus datos y la dirección, se registra
  * el pedido y se abre WhatsApp con el pedido armado. King le pasa los datos
- * para transferir y coordina el envío. Solo envíos y solo transferencia.
+ * para transferir (o el link de pago / QR) y coordina el envío. Solo envíos.
  */
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -19,24 +19,25 @@ interface Props {
 export function CheckoutForm({ transferRule, categories }: Props) {
   const { lines, clear } = useCart();
   const [form, setForm] = useState({ name: "", phone: "", email: "", address: "", notes: "" });
+  const [payment, setPayment] = useState<"transfer" | "card">("transfer");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [sent, setSent] = useState<{ whatsapp: string; orderUrl: string } | null>(null);
 
   const summary = useMemo(() => {
     const priced = lines.map((l) => {
-      const pct = discountPctFor(transferRule, l.categoryId, categories);
+      const pct = payment === "transfer" ? discountPctFor(transferRule, l.categoryId, categories) : 0;
       return { variantId: l.variantId, qty: l.qty, unitListPrice: l.priceList, unitPrice: unitPrice(l.priceList, pct) };
     });
     return computeTotals(priced);
-  }, [lines, transferRule, categories]);
+  }, [lines, transferRule, categories, payment]);
 
   // Si el navegador no abrió WhatsApp solo, queda el botón para abrirlo a mano
   if (sent)
     return (
       <div className="mx-auto max-w-md px-4 py-16 text-center">
         <h1 className="title">¡Listo! Ya armamos tu pedido</h1>
-        <p className="mt-3 text-mute">Mandalo por WhatsApp y te pasamos los datos para transferir y coordinar el envío.</p>
+        <p className="mt-3 text-mute">Mandalo por WhatsApp y te pasamos los datos para pagar y coordinar el envío.</p>
         <a href={sent.whatsapp} className="btn mt-6 w-full bg-[#25D366] text-white">Enviar pedido por WhatsApp</a>
         <Link href={sent.orderUrl} className="mt-4 inline-block border-b border-ink pb-0.5 text-[12px] uppercase tracking-[2px]">
           Ver mi pedido
@@ -64,6 +65,7 @@ export function CheckoutForm({ transferRule, categories }: Props) {
           lines: lines.map((l) => ({ variantId: l.variantId, qty: l.qty })),
           customer: { name: form.name, phone: form.phone, email: form.email },
           address: form.address,
+          payment,
           notes: form.notes,
         }),
       });
@@ -87,7 +89,7 @@ export function CheckoutForm({ transferRule, categories }: Props) {
         <h1 className="text-[26px] leading-tight md:text-[32px]">Finalizar pedido</h1>
         <p className="mt-2 text-[15px] leading-relaxed text-mute">
           Completá tus datos y te abrimos WhatsApp con el pedido listo para mandar. Ahí te pasamos los datos para
-          transferir y coordinamos el envío.
+          pagar y coordinamos el envío.
         </p>
       </div>
 
@@ -109,10 +111,33 @@ export function CheckoutForm({ transferRule, categories }: Props) {
           required
         />
         <p className="text-sm leading-relaxed text-mute">
-          Trabajamos solo con envíos. El pedido se abona completo por transferencia antes de enviarlo y el costo del
-          envío corre por tu cuenta.
+          Trabajamos solo con envíos. El pedido se abona completo antes de enviarlo y el costo del envío corre por tu
+          cuenta.
         </p>
         <textarea className="field min-h-20" placeholder="¿Algo que tengamos que saber? (opcional)" value={form.notes} onChange={set("notes")} />
+      </section>
+
+      <section className="space-y-3">
+        <h2 className="eyebrow">3 · Pago</h2>
+        {(
+          [
+            ["transfer", "Transferencia — 10% OFF en todo", "Te pasamos el alias por WhatsApp."],
+            ["card", "Tarjeta de crédito o débito", "Te mandamos un link de pago o un QR. Precio de lista."],
+          ] as const
+        ).map(([value, title, hint]) => (
+          <label
+            key={value}
+            className={`flex cursor-pointer gap-3 rounded-none border bg-white p-4 transition ${
+              payment === value ? "border-ink ring-1 ring-ink" : "border-line"
+            }`}
+          >
+            <input type="radio" name="payment" checked={payment === value} onChange={() => setPayment(value)} className="mt-1 accent-ink" />
+            <span>
+              <span className="block text-[15px] font-semibold">{title}</span>
+              <span className="mt-0.5 block text-sm leading-relaxed text-mute">{hint}</span>
+            </span>
+          </label>
+        ))}
       </section>
 
       <section className="rounded-none bg-white p-5 text-[15px]">
@@ -122,10 +147,10 @@ export function CheckoutForm({ transferRule, categories }: Props) {
           {summary.discount > 0 && (
             <div className="flex justify-between text-ok"><span>Transferencia 10% OFF</span><span>−{money(summary.discount)}</span></div>
           )}
-          <div className="flex justify-between border-t border-line pt-2 text-lg font-bold"><span>Total por transferencia</span><span>{money(summary.total)}</span></div>
+          <div className="flex justify-between border-t border-line pt-2 text-lg font-bold"><span>Total{payment === "transfer" ? " por transferencia" : " con tarjeta"}</span><span>{money(summary.total)}</span></div>
         </div>
         <p className="mt-3 text-xs text-mute">
-          Pago solo por transferencia: 10% OFF en todo. No realizamos cambios ni devoluciones.
+          No realizamos cambios ni devoluciones.
         </p>
       </section>
 

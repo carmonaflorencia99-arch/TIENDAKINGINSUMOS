@@ -35,8 +35,9 @@ export default async function HowToBuy() {
       title: "Pago",
       body: (
         <ul className="list-disc space-y-1.5 pl-5">
-          <li><strong>Solo transferencia.</strong> Te pasamos los datos por WhatsApp cuando recibimos tu pedido.</li>
-          <li><strong>10% de descuento</strong> en todos los productos, pestañas incluidas.</li>
+          <li><strong>Transferencia:</strong> 10% de descuento en todos los productos, pestañas incluidas.</li>
+          <li><strong>Tarjeta de crédito o débito:</strong> con link de pago o QR, a precio de lista.</li>
+          <li>Cuando recibimos tu pedido te pasamos por WhatsApp los datos para transferir o el link / QR.</li>
           <li>El pedido se abona completo antes del envío.</li>
         </ul>
       ),

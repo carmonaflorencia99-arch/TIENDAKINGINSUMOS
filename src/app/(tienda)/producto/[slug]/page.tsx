@@ -82,7 +82,7 @@ export default async function ProductPage({ params }: Props) {
           ) : (
             <p>No realizamos cambios ni devoluciones.</p>
           )}
-          <p className="mt-2">Solo envíos · Pago por transferencia (10% OFF).</p>
+          <p className="mt-2">Solo envíos · Transferencia 10% OFF o tarjeta con link de pago / QR.</p>
         </div>
       </div>
     </div>

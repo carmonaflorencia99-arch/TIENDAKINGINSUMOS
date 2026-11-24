@@ -1,8 +1,9 @@
 /**
  * POST /api/checkout
  * Crea el pedido con precios recalculados en el servidor y devuelve el link de
- * WhatsApp con el pedido armado. Por ahora la única opción es envío + pago por
- * transferencia (King pasa los datos y coordina el envío por WhatsApp).
+ * WhatsApp con el pedido armado. Solo envíos. Pago por transferencia (10% OFF)
+ * o con tarjeta por link de pago / QR (precio de lista). King pasa los datos
+ * y coordina el envío por WhatsApp.
  */
 import { NextResponse } from "next/server";
 import { z } from "zod";
@@ -22,6 +23,7 @@ const Body = z
       phone: z.string().trim().min(8, "Ingresá un WhatsApp válido."),
       email: z.string().trim().email("El email no es válido.").optional().or(z.literal("")),
     }),
+    payment: z.enum(["transfer", "card"]).default("transfer"),
     address: z.string().trim().min(5, "Ingresá la dirección de entrega.").max(300),
     notes: z.string().trim().max(500).optional(),
   });
@@ -55,8 +57,8 @@ export async function POST(req: Request) {
   const rules = rulesRes.data as PaymentRule[];
   const categories = catsRes.data as Pick<Category, "id" | "parent_id">[];
 
-  // Única opción por ahora: transferencia (con su descuento) + envío
-  const rule = rules.find((r) => r.method === "transfer");
+  // Transferencia tiene descuento; la tarjeta (link de pago / QR) va a precio de lista
+  const rule = body.payment === "transfer" ? rules.find((r) => r.method === "transfer") : undefined;
 
   // Precios y stock desde la base
   const priced: (PricedLine & { name: string; options: string })[] = [];
@@ -92,14 +94,15 @@ export async function POST(req: Request) {
       customer_email: body.customer.email || null,
       delivery: "moto",
       moto_address: body.address,
-      payment: "transfer",
+      // la tarjeta se guarda como "mercadopago" (en el panel figura como "Tarjeta (link de pago o QR)")
+      payment: body.payment === "card" ? "mercadopago" : "transfer",
       plan: "full",
       subtotal: totals.subtotal,
       discount: totals.discount,
       total: totals.total,
       amount_due_now: totals.total,
       balance_due: totals.total,
-      status: "awaiting_proof",
+      status: body.payment === "card" ? "pending_payment" : "awaiting_proof",
       notes: body.notes || null,
     })
     .select("id, number, public_token")
@@ -128,6 +131,7 @@ export async function POST(req: Request) {
     customerName: body.customer.name,
     total: totals.total,
     discount: totals.discount,
+    payment: body.payment,
     address: body.address,
     notes: body.notes || null,
     items: priced.map((p) => ({ name: p.name, options: p.options || null, qty: p.qty })),

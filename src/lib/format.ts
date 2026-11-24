@@ -29,7 +29,7 @@ export function shortDate(iso: string): string {
 }
 
 export const PAYMENT_LABEL = {
-  mercadopago: "Mercado Pago",
+  mercadopago: "Tarjeta (link de pago o QR)",
   transfer: "Transferencia",
   cash: "Efectivo en el local",
 } as const;

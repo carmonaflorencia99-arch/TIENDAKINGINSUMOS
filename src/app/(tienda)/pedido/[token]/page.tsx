@@ -40,6 +40,7 @@ export default async function OrderPage({ params }: Props) {
     customerName: order.customer_name,
     total: order.total,
     discount: order.discount,
+    payment: order.payment === "transfer" ? "transfer" : "card",
     address: order.moto_address,
     notes: order.notes,
     items: order.items.map((i: { name_snapshot: string; options_snapshot: string | null; qty: number }) => ({
@@ -62,7 +63,9 @@ export default async function OrderPage({ params }: Props) {
         <section className="mt-6 rounded-none border border-ink bg-white p-5">
           <h2 className="font-sans text-base font-bold">Mandanos el pedido por WhatsApp</h2>
           <p className="mt-2 text-sm leading-relaxed text-mute">
-            Te pasamos los datos para transferir {money(order.total)} y coordinamos el envío.
+            {order.payment === "transfer"
+              ? `Te pasamos los datos para transferir ${money(order.total)} y coordinamos el envío.`
+              : `Te pasamos el link de pago o el QR por ${money(order.total)} y coordinamos el envío.`}
           </p>
           <a href={wa} target="_blank" rel="noopener" className="btn mt-5 w-full bg-[#25D366] text-white">
             Enviar pedido por WhatsApp
@@ -93,7 +96,7 @@ export default async function OrderPage({ params }: Props) {
           {order.moto_address && (
             <div className="flex justify-between gap-3 text-mute"><dt>Envío a</dt><dd className="text-right">{order.moto_address}</dd></div>
           )}
-          <div className="flex justify-between text-mute"><dt>Pago</dt><dd>Transferencia</dd></div>
+          <div className="flex justify-between text-mute"><dt>Pago</dt><dd>{order.payment === "transfer" ? "Transferencia" : "Tarjeta (link de pago o QR)"}</dd></div>
         </dl>
       </section>
 

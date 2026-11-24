@@ -75,8 +75,8 @@ export default function CartPage() {
           <span className="font-bold">{money(subtotal)}</span>
         </div>
         <p className="mt-2 text-mute">
-          En el siguiente paso dejás tus datos y la dirección de envío, y mandás el pedido por WhatsApp. Pago por
-          transferencia: 10% OFF en todo.
+          En el siguiente paso dejás tus datos y la dirección de envío, y mandás el pedido por WhatsApp. Transferencia
+          10% OFF en todo, o tarjeta con link de pago o QR.
         </p>
       </div>
 
