@@ -1,21 +1,15 @@
 /**
  * POST /api/checkout
- * Crea el pedido con precios recalculados en el servidor y, si el pago es
- * por Mercado Pago, la preferencia de Checkout Pro.
+ * Crea el pedido con precios recalculados en el servidor y devuelve el link de
+ * WhatsApp con el pedido armado. Por ahora la única opción es envío + pago por
+ * transferencia (King pasa los datos y coordina el envío por WhatsApp).
  */
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { adminClient } from "@/lib/supabase";
-import { createPreference } from "@/lib/mercadopago";
+import { orderMessage, whatsappLink } from "@/lib/whatsapp";
 import { optionsLabel } from "@/lib/format";
-import {
-  computeTotals,
-  depositAmount,
-  discountPctFor,
-  unitPrice,
-  validateChoice,
-  type PricedLine,
-} from "@/lib/pricing";
+import { computeTotals, discountPctFor, unitPrice, type PricedLine } from "@/lib/pricing";
 import type { PaymentRule, Category } from "@/lib/types";
 
 const Body = z
@@ -28,15 +22,8 @@ const Body = z
       phone: z.string().trim().min(8, "Ingresá un WhatsApp válido."),
       email: z.string().trim().email("El email no es válido.").optional().or(z.literal("")),
     }),
-    delivery: z.enum(["pickup", "moto"]),
-    payment: z.enum(["mercadopago", "transfer", "cash"]),
-    plan: z.enum(["full", "deposit"]),
-    motoAddress: z.string().trim().optional(),
+    address: z.string().trim().min(5, "Ingresá la dirección de entrega.").max(300),
     notes: z.string().trim().max(500).optional(),
-  })
-  .refine((b) => b.delivery !== "moto" || (b.motoAddress && b.motoAddress.length > 4), {
-    message: "Ingresá la dirección para el envío por moto.",
-    path: ["motoAddress"],
   });
 
 function fail(message: string, status = 400) {
@@ -56,7 +43,7 @@ export async function POST(req: Request) {
   const [rulesRes, catsRes, settingsRes, variantsRes] = await Promise.all([
     db.from("payment_rules").select("*"),
     db.from("categories").select("id, parent_id"),
-    db.from("settings").select("deposit_pct").eq("id", 1).single(),
+    db.from("settings").select("whatsapp").eq("id", 1).single(),
     db
       .from("variants")
       .select("*, product:products(id, name, category_id, status)")
@@ -68,9 +55,8 @@ export async function POST(req: Request) {
   const rules = rulesRes.data as PaymentRule[];
   const categories = catsRes.data as Pick<Category, "id" | "parent_id">[];
 
-  const choiceError = validateChoice(body, rules);
-  if (choiceError) return fail(choiceError);
-  const rule = rules.find((r) => r.method === body.payment)!;
+  // Única opción por ahora: transferencia (con su descuento) + envío
+  const rule = rules.find((r) => r.method === "transfer");
 
   // Precios y stock desde la base
   const priced: (PricedLine & { name: string; options: string })[] = [];
@@ -97,8 +83,6 @@ export async function POST(req: Request) {
   }
 
   const totals = computeTotals(priced);
-  const amountDueNow =
-    body.plan === "deposit" ? depositAmount(totals.total, settingsRes.data.deposit_pct) : totals.total;
 
   const { data: order, error: orderErr } = await db
     .from("orders")
@@ -106,16 +90,16 @@ export async function POST(req: Request) {
       customer_name: body.customer.name,
       customer_phone: body.customer.phone,
       customer_email: body.customer.email || null,
-      delivery: body.delivery,
-      moto_address: body.delivery === "moto" ? body.motoAddress : null,
-      payment: body.payment,
-      plan: body.plan,
+      delivery: "moto",
+      moto_address: body.address,
+      payment: "transfer",
+      plan: "full",
       subtotal: totals.subtotal,
       discount: totals.discount,
       total: totals.total,
-      amount_due_now: amountDueNow,
+      amount_due_now: totals.total,
       balance_due: totals.total,
-      status: body.payment === "transfer" ? "awaiting_proof" : "pending_payment",
+      status: "awaiting_proof",
       notes: body.notes || null,
     })
     .select("id, number, public_token")
@@ -139,33 +123,18 @@ export async function POST(req: Request) {
     return fail("No pudimos crear el pedido. Probá de nuevo.", 500);
   }
 
-  const orderUrl = `/pedido/${order.public_token}`;
+  const message = orderMessage({
+    number: order.number,
+    customerName: body.customer.name,
+    total: totals.total,
+    discount: totals.discount,
+    address: body.address,
+    notes: body.notes || null,
+    items: priced.map((p) => ({ name: p.name, options: p.options || null, qty: p.qty })),
+  });
 
-  if (body.payment === "mercadopago") {
-    try {
-      const pref = await createPreference({
-        orderId: order.id,
-        orderNumber: order.number,
-        publicToken: order.public_token,
-        payerName: body.customer.name,
-        payerEmail: body.customer.email,
-        items: priced.map((p) => ({
-          id: String(p.variantId),
-          title: `${p.name}${p.options ? ` ${p.options}` : ""}`.slice(0, 250),
-          quantity: p.qty,
-          unit_price: p.unitPrice,
-        })),
-      });
-      await db.from("orders").update({ mp_preference_id: pref.id }).eq("id", order.id);
-      return NextResponse.json({ redirect: pref.initPoint, orderUrl });
-    } catch (e) {
-      console.error("[checkout] Mercado Pago", e);
-      return NextResponse.json({
-        redirect: orderUrl,
-        warning: "No pudimos abrir Mercado Pago. Tu pedido quedó registrado: escribinos por WhatsApp.",
-      });
-    }
-  }
-
-  return NextResponse.json({ redirect: orderUrl });
+  return NextResponse.json({
+    whatsapp: whatsappLink(settingsRes.data.whatsapp, message),
+    orderUrl: `/pedido/${order.public_token}`,
+  });
 }

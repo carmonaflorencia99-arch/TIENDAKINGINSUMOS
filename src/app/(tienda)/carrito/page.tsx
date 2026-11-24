@@ -24,7 +24,7 @@ export default function CartPage() {
     return (
       <div className="mx-auto max-w-md px-4 py-20 text-center">
         <h1 className="title">Tu carrito está vacío</h1>
-        <p className="mt-2 text-mute">Sumá productos y retiralos en el showroom o pedí tu moto.</p>
+        <p className="mt-2 text-mute">Sumá productos y mandá tu pedido por WhatsApp.</p>
         <Link href="/" className="btn mt-6">Ver productos</Link>
       </div>
     );
@@ -75,8 +75,8 @@ export default function CartPage() {
           <span className="font-bold">{money(subtotal)}</span>
         </div>
         <p className="mt-2 text-mute">
-          En el siguiente paso elegís retiro o moto y el medio de pago. Efectivo 10% OFF en todo · Transferencia 10% OFF
-          excepto pestañas.
+          En el siguiente paso dejás tus datos y la dirección de envío, y mandás el pedido por WhatsApp. Pago por
+          transferencia: 10% OFF excepto pestañas.
         </p>
       </div>
 
@@ -86,7 +86,7 @@ export default function CartPage() {
           aria-disabled={lines.some((l) => l.trackStock && l.qty > l.stock)}
           className="btn w-full aria-disabled:pointer-events-none aria-disabled:opacity-40"
         >
-          Continuar compra
+          Continuar pedido
         </Link>
       </div>
     </div>

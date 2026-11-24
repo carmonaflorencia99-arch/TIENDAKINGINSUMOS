@@ -82,19 +82,11 @@ function PriceLines({ p }: { p: VariantPrices[number] | undefined }) {
   return (
     <div className="space-y-1">
       <p className="text-2xl font-bold">{money(p.list)}</p>
-      {p.cash != null && (
-        <p className="text-sm">
-          <span className="font-semibold text-ok">{money(p.cash)}</span>{" "}
-          <span className="text-mute">en efectivo en el local (10% OFF)</span>
-        </p>
-      )}
-      {p.transfer != null ? (
+      {p.transfer != null && (
         <p className="text-sm">
           <span className="font-semibold text-ok">{money(p.transfer)}</span>{" "}
           <span className="text-mute">por transferencia (10% OFF)</span>
         </p>
-      ) : (
-        <p className="text-xs text-mute">Transferencia: precio de lista (el 10% OFF en pestañas es solo en efectivo).</p>
       )}
     </div>
   );

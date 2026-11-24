@@ -80,9 +80,9 @@ export default async function ProductPage({ params }: Props) {
           {isAdhesive ? (
             <p><strong className="text-ink">Los adhesivos no tienen cambio ni devolución.</strong> Controlalos al momento de la compra.</p>
           ) : (
-            <p>No realizamos cambios ni devoluciones: probá los productos en el local al momento de retirar.</p>
+            <p>No realizamos cambios ni devoluciones.</p>
           )}
-          <p className="mt-2">Retiro en Av. San Martín 1074, 3° C · Lun a sáb de 10 a 18 hs.</p>
+          <p className="mt-2">Solo envíos · Pago por transferencia (10% OFF excepto pestañas).</p>
         </div>
       </div>
     </div>

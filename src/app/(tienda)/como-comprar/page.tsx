@@ -3,8 +3,8 @@ import { getSettings } from "@/lib/catalog";
 import { whatsappLink } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
-  title: "Cómo comprar, pagos, señas y envíos",
-  description: "Medios de pago, descuentos, señas, envíos por moto y retiro en el showroom de King Insumos en Mendoza.",
+  title: "Cómo comprar, pagos y envíos",
+  description: "Cómo hacer tu pedido por WhatsApp, pago por transferencia con 10% OFF y envíos de King Insumos en Mendoza.",
 };
 export const revalidate = 300;
 
@@ -16,55 +16,41 @@ export default async function HowToBuy() {
       title: "Cómo hacer tu pedido",
       body: (
         <>
-          <p>Armá el carrito acá en la web y confirmá tu compra en pocos pasos, sin crear cuenta.</p>
           <p>
-            Si preferís, también podés pedir por WhatsApp al{" "}
+            Armá el carrito acá en la web, completá tus datos y la dirección de envío, y tocá{" "}
+            <strong>Enviar pedido por WhatsApp</strong>. Se abre el chat con el pedido ya escrito: solo tenés que mandarlo. No
+            hace falta crear cuenta.
+          </p>
+          <p>
+            También podés escribirnos directo al{" "}
             <a className="underline" href={whatsappLink(s.whatsapp, "¡Hola King! Quiero hacer un pedido:")}>261 244-6705</a>. Detallá
             cada producto tal como figura en el catálogo: <strong>nombre / cantidad / medida / grosor / tipo o volumen</strong> (en
-            pestañas). Cuanto más claro, más rápido y preciso el armado.
+            pestañas).
           </p>
         </>
       ),
     },
     {
       id: "pagos",
-      title: "Medios de pago",
+      title: "Pago",
       body: (
         <ul className="list-disc space-y-1.5 pl-5">
-          <li><strong>Efectivo en el local:</strong> 10% de descuento en todos los productos.</li>
-          <li><strong>Transferencia:</strong> 10% de descuento en todo, excepto pestañas.</li>
-        </ul>
-      ),
-    },
-    {
-      id: "senas",
-      title: "Señas",
-      body: (
-        <ul className="list-disc space-y-1.5 pl-5">
-          <li>Los productos se señan con el <strong>{s.deposit_pct}% del total</strong>.</li>
-          <li>Tenés <strong>{s.deposit_business_days} días hábiles</strong> (según la ley) para retirar o completar el pago.</li>
-          <li>Pasado ese plazo, la seña no es reembolsable.</li>
-          <li>
-            <strong>Los precios no se congelan.</strong> Si el producto aumenta después de señarlo, se ajusta al precio vigente al
-            momento de completar el pago.
-          </li>
+          <li><strong>Solo transferencia.</strong> Te pasamos los datos por WhatsApp cuando recibimos tu pedido.</li>
+          <li><strong>10% de descuento</strong> en todo, excepto pestañas.</li>
+          <li>El pedido se abona completo antes del envío.</li>
         </ul>
       ),
     },
     {
       id: "envios",
-      title: "Envíos y retiros",
+      title: "Envíos",
       body: (
         <>
-          <p>
-            <strong>Retiro en el showroom:</strong> {s.pickup_address}. Podés retirar tu pedido una vez que esté señado o abonado en
-            su totalidad. {s.store_hours}.
-          </p>
-          <p><strong>Envíos:</strong> únicamente por moto (Cabify, Uber u otro servicio similar).</p>
+          <p>Trabajamos <strong>solo con envíos</strong>: no hay retiro ni compras presenciales.</p>
           <ul className="list-disc space-y-1.5 pl-5">
-            <li>El pedido debe estar abonado previamente, solo por transferencia.</li>
-            <li>Una vez enviado el comprobante, coordinamos el retiro. Vos solicitás el envío, hacés el seguimiento y recibís el pedido.</li>
-            <li>No trabajamos con efectivo en envíos, porque no es posible gestionar devoluciones de dinero en esos casos.</li>
+            <li>Una vez acreditada la transferencia, coordinamos el envío por WhatsApp.</li>
+            <li>En Gran Mendoza el envío es por moto (Uber, Cabify o similar): vos lo solicitás, lo seguís y recibís el pedido.</li>
+            <li>El costo del envío corre por cuenta de la clienta.</li>
           </ul>
         </>
       ),
@@ -74,8 +60,8 @@ export default async function HowToBuy() {
       title: "Cambios y devoluciones",
       body: (
         <>
-          <p>No realizamos cambios ni devoluciones. Todos los productos deben ser probados en el local al momento de la compra.</p>
-          <p>Los adhesivos no tienen cambio ni devolución: deben ser controlados al momento de la compra.</p>
+          <p>No realizamos cambios ni devoluciones. Controlá tu pedido al recibirlo.</p>
+          <p>Los adhesivos no tienen cambio ni devolución.</p>
         </>
       ),
     },

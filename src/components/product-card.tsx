@@ -52,10 +52,8 @@ export function ProductCard({ product, prices }: { product: Product; prices: Dis
               {prices.from && <span className="text-[11px] font-normal uppercase tracking-wider text-mute">desde </span>}
               {money(prices.list)}
             </p>
-            {prices.cash != null && (
-              <p className="text-[12px] font-normal text-ok">
-                {money(prices.cash)} {prices.transfer != null ? "efectivo o transf." : "en efectivo"}
-              </p>
+            {prices.transfer != null && (
+              <p className="text-[12px] font-normal text-ok">{money(prices.transfer)} por transferencia</p>
             )}
           </div>
         )}

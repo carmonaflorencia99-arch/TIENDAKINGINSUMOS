@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getBrands, getCategories, getCategoryCovers, getHighlighted, getPaymentRules, getSettings, OFFICIAL_BRANDS_TEXT, officialBrands } from "@/lib/catalog";
+import { getBrands, getCategories, getCategoryCovers, getHighlighted, getPaymentRules, OFFICIAL_BRANDS_TEXT, officialBrands } from "@/lib/catalog";
 import { getInstagramPosts } from "@/lib/instagram";
 import { InstagramGrid } from "@/components/instagram-grid";
 import { productPrices } from "@/lib/display-prices";
@@ -10,12 +10,11 @@ import { Marquee } from "@/components/marquee";
 export const revalidate = 60;
 
 export default async function Home() {
-  const [categories, brands, products, rules, settings] = await Promise.all([
+  const [categories, brands, products, rules] = await Promise.all([
     getCategories(),
     getBrands(),
     getHighlighted(),
     getPaymentRules(),
-    getSettings(),
   ]);
   const main = categories.filter((c) => c.parent_id == null);
   const [covers, instagram] = await Promise.all([getCategoryCovers(categories), getInstagramPosts(8)]);
@@ -40,7 +39,7 @@ export default async function Home() {
               Insumos profesionales de pestañas y cejas en Mendoza
             </h1>
             <p className="mt-4 max-w-lg animate-fade-up text-[32px] font-light uppercase leading-[1.1] tracking-[3px] [animation-delay:.1s] md:text-[48px]">
-              Todo para tu gabinete, listo para retirar hoy
+              Todo para tu gabinete, con envío a tu puerta
             </p>
             <div className="mt-8 flex animate-fade-up flex-wrap gap-3 [animation-delay:.2s]">
               <Link href="/categoria/extensiones-de-pestanas" className="btn bg-paper text-ink">Ver pestañas</Link>
@@ -55,10 +54,9 @@ export default async function Home() {
       <Marquee
         items={[
           `Distribuidores oficiales ${OFFICIAL_BRANDS_TEXT}`,
-          "Efectivo 10% OFF en todo",
-          "Retiro en el showroom · Mendoza Centro",
-          "Envíos por moto",
-          "Señá tu pedido con el 50%",
+          "Transferencia 10% OFF (excepto pestañas)",
+          "Pedí por la web y confirmá por WhatsApp",
+          "Envíos a domicilio",
         ]}
       />
 
@@ -132,9 +130,9 @@ export default async function Home() {
 
         <section className="mt-16 grid border border-line md:grid-cols-3">
           {[
-            ["Retiro en el showroom", settings.pickup_address ?? ""],
-            ["Envío por moto", "Uber, Cabify o similar. El pedido se abona por transferencia antes del envío."],
-            ["Señá con el 50%", "Tenés 10 días hábiles para completar el pago y retirar."],
+            ["Armá tu pedido", "Sumá todo al carrito, completá tus datos y lo mandás por WhatsApp con un toque."],
+            ["Pagá por transferencia", "10% OFF en todo excepto pestañas. Te pasamos los datos por WhatsApp."],
+            ["Recibilo en tu casa", "Trabajamos solo con envíos. Se despacha cuando se acredita el pago."],
           ].map(([t, d], i) => (
             <div key={t} className={`p-6 ${i > 0 ? "border-t border-line md:border-l md:border-t-0" : ""}`}>
               <h3 className="text-[13px] font-bold uppercase tracking-[1px]">{t}</h3>
@@ -145,7 +143,7 @@ export default async function Home() {
 
         <div className="mt-6 text-center">
           <Link href="/como-comprar" className="border-b border-ink pb-0.5 text-[12px] uppercase tracking-[2px]">
-            Medios de pago, señas y condiciones
+            Cómo comprar y condiciones
           </Link>
         </div>
       </div>

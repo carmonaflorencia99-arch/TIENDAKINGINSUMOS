@@ -20,8 +20,8 @@ export default async function StoreLayout({ children }: { children: React.ReactN
             </div>
             <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
               <div>
-                <p className="eyebrow mb-3 text-paper/60">Showroom y retiros</p>
-                <p>{settings.pickup_address}</p>
+                <p className="eyebrow mb-3 text-paper/60">Atención por WhatsApp</p>
+                <p>Solo envíos · Mendoza</p>
                 <p className="mt-1 text-paper/60">{settings.store_hours}</p>
               </div>
               <div>
@@ -33,8 +33,8 @@ export default async function StoreLayout({ children }: { children: React.ReactN
               </div>
               <div className="flex flex-col gap-1.5">
                 <p className="eyebrow mb-2 text-paper/60">Ayuda</p>
-                <Link href="/como-comprar">Cómo comprar, pagos y señas</Link>
-                <Link href="/como-comprar#envios">Envíos y retiros</Link>
+                <Link href="/como-comprar">Cómo comprar y pagos</Link>
+                <Link href="/como-comprar#envios">Envíos</Link>
                 <Link href="/como-comprar#cambios">Cambios y devoluciones</Link>
               </div>
             </div>
