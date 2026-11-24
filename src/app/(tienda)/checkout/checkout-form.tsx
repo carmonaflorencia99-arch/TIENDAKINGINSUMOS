@@ -12,7 +12,7 @@ import { computeTotals, discountPctFor, unitPrice } from "@/lib/pricing";
 import type { Category, PaymentRule } from "@/lib/types";
 
 /** Zonas de envío (Gran Mendoza). "Otros" pide escribir la localidad. */
-const ZONES = ["Capital", "Godoy Cruz", "Las Heras", "Guaymallén", "Luján", "Otros"] as const;
+const ZONES = ["Capital", "Godoy Cruz", "Las Heras", "Guaymallén", "Luján", "Maipú", "Otros"] as const;
 
 interface Props {
   transferRule: PaymentRule | undefined;
