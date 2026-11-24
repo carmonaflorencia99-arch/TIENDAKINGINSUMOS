@@ -7,6 +7,10 @@ import type { Config } from "tailwindcss";
  */
 export default {
   content: ["./src/**/*.{ts,tsx}"],
+  // En celulares (sin mouse) los efectos de hover no se aplican: si no, iOS usa
+  // el primer toque para "pasar el mouse" (p. ej. cambiar la foto de la tarjeta)
+  // y recién el segundo toque abre el link.
+  future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {
       colors: {
