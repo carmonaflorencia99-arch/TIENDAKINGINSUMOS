@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Flash } from "@/app/admin/(panel)/flash";
+import { AddProducts, type AddOption } from "./add-products";
 import { notFound } from "next/navigation";
 import { adminDb } from "@/lib/admin";
-import { DELIVERY_LABEL, money, PAYMENT_LABEL, shortDate } from "@/lib/format";
+import { DELIVERY_LABEL, money, optionsLabel, PAYMENT_LABEL, shortDate } from "@/lib/format";
 import { FLOW_STATES, STATUS_LABEL } from "@/lib/orders-admin";
 import { whatsappLink } from "@/lib/whatsapp";
 import type { DeliveryMethod, OrderStatus, PaymentMethod } from "@/lib/types";
@@ -42,6 +43,32 @@ export default async function OrderDetail({ params, searchParams }: Props) {
   const unpaid = status === "pending_payment" || status === "awaiting_proof";
   const hasDeposit = status === "deposit_paid" || status === "deposit_expired";
   const canEdit = status !== "delivered" && status !== "cancelled";
+
+  // Productos activos para el buscador de "Sumar productos" (de a 1000 por el límite de Supabase)
+  const addOptions: AddOption[] = [];
+  if (canEdit) {
+    for (let from = 0; ; from += 1000) {
+      const { data } = await db
+        .from("variants")
+        .select("id, option1, option2, option3, price_list, stock, track_stock, product:products!inner(name, status)")
+        .eq("active", true)
+        .eq("product.status", "active")
+        .order("id")
+        .range(from, from + 999);
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+      for (const v of (data ?? []) as any[]) {
+        addOptions.push({
+          id: v.id,
+          name: v.product.name,
+          options: optionsLabel(v),
+          price: v.price_list,
+          stock: v.track_stock ? v.stock : null,
+        });
+      }
+      if (!data || data.length < 1000) break;
+    }
+    addOptions.sort((a, b) => a.name.localeCompare(b.name, "es") || a.options.localeCompare(b.options, "es"));
+  }
   const canFlow = !unpaid && status !== "cancelled" && status !== "deposit_expired";
   const phone = String(o.customer_phone).replace(/\D/g, "");
   const waPhone = phone.startsWith("54") ? phone : `549${phone.replace(/^0/, "")}`;
@@ -96,7 +123,7 @@ export default async function OrderDetail({ params, searchParams }: Props) {
 
           {canEdit && (
             <details className="border border-line bg-white p-4 text-sm">
-              <summary className="cursor-pointer font-semibold">Modificar pedido (quitar o cambiar cantidades)</summary>
+              <summary className="cursor-pointer font-semibold">Modificar pedido (quitar, sumar o cambiar cantidades)</summary>
               <form action={editItemsAction} className="mt-3 space-y-3">
                 <input type="hidden" name="id" value={o.id} />
                 <ul className="divide-y divide-line border-y border-line">
@@ -127,8 +154,9 @@ export default async function OrderDetail({ params, searchParams }: Props) {
                     </li>
                   ))}
                 </ul>
+                <AddProducts options={addOptions} />
                 <p className="text-xs text-mute">
-                  Se mantienen los precios del pedido y se recalcula el total. Si el stock ya estaba descontado, se ajusta solo.
+                  Los productos que ya estaban mantienen su precio y se recalcula el total. Si el stock ya estaba descontado, se ajusta solo.
                   El cambio queda anotado en las notas internas.
                 </p>
                 <button className="btn w-full px-4 py-2.5 sm:w-auto">Guardar cambios</button>

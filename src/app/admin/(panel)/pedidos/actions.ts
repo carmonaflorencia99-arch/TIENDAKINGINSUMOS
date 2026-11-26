@@ -73,7 +73,7 @@ export async function notesAction(f: FormData) {
   });
 }
 
-/** Cambiar cantidades o quitar productos del pedido. Campos: qty_<itemId>, remove_<itemId>. */
+/** Cambiar cantidades, quitar o sumar productos. Campos: qty_<itemId>, remove_<itemId>, add_variant_<n>, add_qty_<n>. */
 export async function editItemsAction(f: FormData) {
   const id = idOf(f);
   const db = await adminDb();
@@ -86,5 +86,11 @@ export async function editItemsAction(f: FormData) {
     const m = /^remove_(\d+)$/.exec(k);
     if (m) changes.set(Number(m[1]), 0);
   }
-  await run(id, () => editItems(db, id, changes));
+  // productos para sumar: add_variant_<n> + add_qty_<n>
+  const adds: { variantId: number; qty: number }[] = [];
+  for (const [k, v] of f.entries()) {
+    const m = /^add_variant_(\d+)$/.exec(k);
+    if (m && v) adds.push({ variantId: Number(v), qty: Number(f.get(`add_qty_${m[1]}`) ?? 1) });
+  }
+  await run(id, () => editItems(db, id, changes, adds));
 }

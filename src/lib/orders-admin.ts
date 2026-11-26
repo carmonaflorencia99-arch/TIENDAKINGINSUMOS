@@ -120,63 +120,154 @@ export async function saveNotes(db: SupabaseClient, id: number, notes: string) {
 }
 
 /**
- * Modifica los productos de un pedido (cambiar cantidades o quitar
- * productos), por ejemplo cuando la clienta pide por WhatsApp sacar algo.
+ * Modifica los productos de un pedido: cambiar cantidades, quitar o sumar
+ * productos (por ejemplo cuando la clienta pide cambios por WhatsApp).
  * `changes` es { id de order_item: nueva cantidad } — 0 = quitar.
- * Mantiene los precios con los que se hizo el pedido, recalcula los totales
- * y, si el stock ya estaba reservado, lo ajusta. Devuelve el mensaje para Ivana.
+ * `adds` son productos para sumar: { variantId, qty }.
+ * Los productos que ya estaban mantienen su precio; los nuevos se cobran al
+ * precio de hoy (con el descuento del medio de pago del pedido). Recalcula
+ * totales y, si el stock ya estaba reservado, lo ajusta. Devuelve el mensaje para Ivana.
  */
-export async function editItems(db: SupabaseClient, id: number, changes: Map<number, number>): Promise<string> {
+export async function editItems(
+  db: SupabaseClient,
+  id: number,
+  changes: Map<number, number>,
+  adds: { variantId: number; qty: number }[] = [],
+): Promise<string> {
   const o = await getOrder(db, id);
   if (o.status === "delivered" || o.status === "cancelled")
     throw new Error("Un pedido entregado o cancelado no se puede modificar.");
 
-  const { data: items } = await db.from("order_items").select("id, name_snapshot, options_snapshot, qty, unit_list_price, unit_price").eq("order_id", id);
-  const current = items ?? [];
+  const { data: items } = await db
+    .from("order_items")
+    .select("id, variant_id, name_snapshot, options_snapshot, qty, unit_list_price, unit_price")
+    .eq("order_id", id);
+  const clamp = (n: number) => Math.max(0, Math.min(999, Math.floor(n)));
+  const label = (name: string, opts: string | null) => (opts ? `${name} (${opts})` : name);
+
+  type Line = {
+    id: number | null; // null = producto nuevo
+    variant_id: number | null;
+    name_snapshot: string;
+    options_snapshot: string | null;
+    qty: number; // cantidad anterior (0 si es nuevo)
+    newQty: number;
+    unit_list_price: number;
+    unit_price: number;
+  };
+  const lines: Line[] = (items ?? []).map((i) => {
+    const raw = changes.get(i.id);
+    return { ...i, newQty: raw == null || !Number.isFinite(raw) ? i.qty : clamp(raw) };
+  });
+
+  // Productos para sumar: si ya está en el pedido se suma a esa línea; si no, línea nueva a precio de hoy.
+  const validAdds = adds.filter((a) => Number.isFinite(a.variantId) && a.variantId > 0 && clamp(a.qty) > 0);
+  if (validAdds.length) {
+    const ids = [...new Set(validAdds.map((a) => a.variantId))];
+    const [{ data: vars }, { data: rules }, { data: cats }] = await Promise.all([
+      db.from("variants").select("*, product:products(name, category_id, status)").in("id", ids),
+      db.from("payment_rules").select("*"),
+      db.from("categories").select("id, parent_id"),
+    ]);
+    // igual que en el checkout: transferencia con descuento, tarjeta a precio de lista
+    const rule = o.payment === "transfer" ? (rules as PaymentRule[] | null)?.find((r) => r.method === "transfer") : undefined;
+    for (const a of validAdds) {
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+      const v = (vars ?? []).find((x: any) => x.id === a.variantId);
+      if (!v || !v.product) throw new Error("Uno de los productos para sumar ya no existe.");
+      const existing = lines.find((l) => l.variant_id === v.id);
+      if (existing) {
+        existing.newQty = clamp(existing.newQty + a.qty);
+        continue;
+      }
+      const opts = [v.option1, v.option2, v.option3].filter(Boolean).join(" · ") || null;
+      const pct = discountPctFor(rule, v.product.category_id, cats ?? []);
+      lines.push({
+        id: null,
+        variant_id: v.id,
+        name_snapshot: v.product.name,
+        options_snapshot: opts,
+        qty: 0,
+        newQty: clamp(a.qty),
+        unit_list_price: v.price_list,
+        unit_price: unitPrice(v.price_list, pct, v.price_override),
+      });
+    }
+  }
 
   const log: string[] = [];
-  const next = current.map((i) => {
-    const raw = changes.get(i.id);
-    const qty = raw == null || !Number.isFinite(raw) ? i.qty : Math.max(0, Math.min(999, Math.floor(raw)));
-    const name = i.options_snapshot ? `${i.name_snapshot} (${i.options_snapshot})` : i.name_snapshot;
-    if (qty === 0) log.push(`se quitó ${name}`);
-    else if (qty !== i.qty) log.push(`${name}: ${i.qty} → ${qty}`);
-    return { ...i, newQty: qty };
-  });
+  for (const l of lines) {
+    const name = label(l.name_snapshot, l.options_snapshot);
+    if (l.qty === 0 && l.newQty > 0) log.push(`se sumó ${name} ×${l.newQty}`);
+    else if (l.qty > 0 && l.newQty === 0) log.push(`se quitó ${name}`);
+    else if (l.newQty !== l.qty) log.push(`${name}: ${l.qty} → ${l.newQty}`);
+  }
   if (!log.length) throw new Error("No hubo cambios para guardar.");
-  const kept = next.filter((i) => i.newQty > 0);
+  const kept = lines.filter((l) => l.newQty > 0);
   if (!kept.length) throw new Error("No se pueden quitar todos los productos. Si la clienta no quiere nada, cancelá el pedido.");
 
-  // Si el stock ya estaba descontado: se devuelve, se cambia el pedido y se vuelve a descontar.
+  // Stock: lo que se agrega (productos nuevos o cantidades mayores) tiene que estar disponible.
+  // Si el pedido ya descontó stock, solo cuenta la diferencia; si no, la cantidad completa.
   const reserved = o.stock_reserved;
+  const need = new Map<number, number>();
+  for (const l of lines) {
+    if (l.variant_id == null) continue;
+    const extra = reserved ? l.newQty - l.qty : l.qty === 0 || l.newQty > l.qty ? l.newQty : 0;
+    if (extra > 0) need.set(l.variant_id, (need.get(l.variant_id) ?? 0) + extra);
+  }
+  if (need.size) {
+    const { data: stock } = await db.from("variants").select("id, stock, track_stock").in("id", [...need.keys()]);
+    for (const [vid, qty] of need) {
+      const v = stock?.find((x) => x.id === vid);
+      if (v?.track_stock && v.stock < qty) {
+        const l = lines.find((x) => x.variant_id === vid)!;
+        const name = label(l.name_snapshot, l.options_snapshot);
+        throw new Error(v.stock > 0 ? `De "${name}" quedan ${v.stock} unidades.` : `"${name}" está sin stock.`);
+      }
+    }
+  }
+
+  // Si el stock ya estaba descontado: se devuelve, se cambia el pedido y se vuelve a descontar.
   if (reserved) await db.rpc("release_order_stock", { p_order_id: id });
 
-  for (const i of next) {
-    if (i.newQty === 0) await db.from("order_items").delete().eq("id", i.id);
-    else if (i.newQty !== i.qty) await db.from("order_items").update({ qty: i.newQty }).eq("id", i.id);
+  for (const l of lines) {
+    if (l.id == null) {
+      if (l.newQty > 0)
+        await db.from("order_items").insert({
+          order_id: id,
+          type: "product",
+          variant_id: l.variant_id,
+          name_snapshot: l.name_snapshot,
+          options_snapshot: l.options_snapshot,
+          unit_list_price: l.unit_list_price,
+          unit_price: l.unit_price,
+          qty: l.newQty,
+        });
+    } else if (l.newQty === 0) await db.from("order_items").delete().eq("id", l.id);
+    else if (l.newQty !== l.qty) await db.from("order_items").update({ qty: l.newQty }).eq("id", l.id);
   }
 
   const totals = computeTotals(
-    kept.map((i) => ({ variantId: 0, qty: i.newQty, unitListPrice: i.unit_list_price, unitPrice: i.unit_price })),
+    kept.map((l) => ({ variantId: l.variant_id ?? 0, qty: l.newQty, unitListPrice: l.unit_list_price, unitPrice: l.unit_price })),
   );
 
   const unpaid = UNPAID.includes(o.status);
-  let money: Record<string, number>;
+  let amounts: Record<string, number>;
   if (unpaid) {
     let due = totals.total;
     if (o.plan === "deposit") {
       const { data: s } = await db.from("settings").select("deposit_pct").eq("id", 1).single();
       due = depositAmount(totals.total, s?.deposit_pct ?? 50);
     }
-    money = { amount_due_now: due, balance_due: totals.total };
+    amounts = { amount_due_now: due, balance_due: totals.total };
   } else {
-    money = { balance_due: Math.max(totals.total - o.amount_paid, 0) };
+    amounts = { balance_due: Math.max(totals.total - o.amount_paid, 0) };
   }
 
   const stamp = new Date().toLocaleDateString("es-AR", { day: "2-digit", month: "2-digit", timeZone: "America/Argentina/Mendoza" });
   const notes = `${o.notes ?? ""}\n✏️ ${stamp} pedido modificado: ${log.join("; ")}.`.trim().slice(-2000);
 
-  await db.from("orders").update({ ...totals, ...money, notes }).eq("id", id);
+  await db.from("orders").update({ ...totals, ...amounts, notes }).eq("id", id);
   if (reserved) await db.rpc("reserve_order_stock", { p_order_id: id });
 
   const fmt = (n: number) => `$${n.toLocaleString("es-AR")}`;
