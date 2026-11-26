@@ -3,7 +3,7 @@
  * servidor (ya verificado con adminDb()).
  */
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { computeTotals, discountPctFor, unitPrice } from "./pricing";
+import { computeTotals, depositAmount, discountPctFor, unitPrice } from "./pricing";
 import type { OrderStatus, PaymentRule } from "./types";
 
 export const STATUS_LABEL: Record<OrderStatus, string> = {
@@ -117,4 +117,75 @@ export async function cancelOrder(db: SupabaseClient, id: number) {
 
 export async function saveNotes(db: SupabaseClient, id: number, notes: string) {
   await db.from("orders").update({ notes: notes.slice(0, 2000) || null }).eq("id", id);
+}
+
+/**
+ * Modifica los productos de un pedido (cambiar cantidades o quitar
+ * productos), por ejemplo cuando la clienta pide por WhatsApp sacar algo.
+ * `changes` es { id de order_item: nueva cantidad } — 0 = quitar.
+ * Mantiene los precios con los que se hizo el pedido, recalcula los totales
+ * y, si el stock ya estaba reservado, lo ajusta. Devuelve el mensaje para Ivana.
+ */
+export async function editItems(db: SupabaseClient, id: number, changes: Map<number, number>): Promise<string> {
+  const o = await getOrder(db, id);
+  if (o.status === "delivered" || o.status === "cancelled")
+    throw new Error("Un pedido entregado o cancelado no se puede modificar.");
+
+  const { data: items } = await db.from("order_items").select("id, name_snapshot, options_snapshot, qty, unit_list_price, unit_price").eq("order_id", id);
+  const current = items ?? [];
+
+  const log: string[] = [];
+  const next = current.map((i) => {
+    const raw = changes.get(i.id);
+    const qty = raw == null || !Number.isFinite(raw) ? i.qty : Math.max(0, Math.min(999, Math.floor(raw)));
+    const name = i.options_snapshot ? `${i.name_snapshot} (${i.options_snapshot})` : i.name_snapshot;
+    if (qty === 0) log.push(`se quitó ${name}`);
+    else if (qty !== i.qty) log.push(`${name}: ${i.qty} → ${qty}`);
+    return { ...i, newQty: qty };
+  });
+  if (!log.length) throw new Error("No hubo cambios para guardar.");
+  const kept = next.filter((i) => i.newQty > 0);
+  if (!kept.length) throw new Error("No se pueden quitar todos los productos. Si la clienta no quiere nada, cancelá el pedido.");
+
+  // Si el stock ya estaba descontado: se devuelve, se cambia el pedido y se vuelve a descontar.
+  const reserved = o.stock_reserved;
+  if (reserved) await db.rpc("release_order_stock", { p_order_id: id });
+
+  for (const i of next) {
+    if (i.newQty === 0) await db.from("order_items").delete().eq("id", i.id);
+    else if (i.newQty !== i.qty) await db.from("order_items").update({ qty: i.newQty }).eq("id", i.id);
+  }
+
+  const totals = computeTotals(
+    kept.map((i) => ({ variantId: 0, qty: i.newQty, unitListPrice: i.unit_list_price, unitPrice: i.unit_price })),
+  );
+
+  const unpaid = UNPAID.includes(o.status);
+  let money: Record<string, number>;
+  if (unpaid) {
+    let due = totals.total;
+    if (o.plan === "deposit") {
+      const { data: s } = await db.from("settings").select("deposit_pct").eq("id", 1).single();
+      due = depositAmount(totals.total, s?.deposit_pct ?? 50);
+    }
+    money = { amount_due_now: due, balance_due: totals.total };
+  } else {
+    money = { balance_due: Math.max(totals.total - o.amount_paid, 0) };
+  }
+
+  const stamp = new Date().toLocaleDateString("es-AR", { day: "2-digit", month: "2-digit", timeZone: "America/Argentina/Mendoza" });
+  const notes = `${o.notes ?? ""}\n✏️ ${stamp} pedido modificado: ${log.join("; ")}.`.trim().slice(-2000);
+
+  await db.from("orders").update({ ...totals, ...money, notes }).eq("id", id);
+  if (reserved) await db.rpc("reserve_order_stock", { p_order_id: id });
+
+  const fmt = (n: number) => `$${n.toLocaleString("es-AR")}`;
+  let msg = `Pedido modificado. Nuevo total: ${fmt(totals.total)}.`;
+  if (!unpaid) {
+    const diff = o.amount_paid - totals.total;
+    if (diff > 0) msg += ` La clienta ya pagó ${fmt(o.amount_paid)}: hay que devolverle ${fmt(diff)}.`;
+    else if (diff < 0 && o.status !== "deposit_paid" && o.status !== "deposit_expired")
+      msg += ` Falta cobrarle ${fmt(-diff)}.`;
+  }
+  return msg;
 }

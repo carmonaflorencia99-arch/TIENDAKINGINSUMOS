@@ -9,6 +9,7 @@ import type { DeliveryMethod, OrderStatus, PaymentMethod } from "@/lib/types";
 import {
   cancelAction,
   completeDepositAction,
+  editItemsAction,
   markPaidAction,
   notesAction,
   registerDepositAction,
@@ -40,6 +41,7 @@ export default async function OrderDetail({ params, searchParams }: Props) {
   const status = o.status as OrderStatus;
   const unpaid = status === "pending_payment" || status === "awaiting_proof";
   const hasDeposit = status === "deposit_paid" || status === "deposit_expired";
+  const canEdit = status !== "delivered" && status !== "cancelled";
   const canFlow = !unpaid && status !== "cancelled" && status !== "deposit_expired";
   const phone = String(o.customer_phone).replace(/\D/g, "");
   const waPhone = phone.startsWith("54") ? phone : `549${phone.replace(/^0/, "")}`;
@@ -91,6 +93,48 @@ export default async function OrderDetail({ params, searchParams }: Props) {
               {o.balance_due > 0 && !unpaid && <Row k="Saldo" v={<strong>{money(o.balance_due)}</strong>} />}
             </dl>
           </div>
+
+          {canEdit && (
+            <details className="border border-line bg-white p-4 text-sm">
+              <summary className="cursor-pointer font-semibold">Modificar pedido (quitar o cambiar cantidades)</summary>
+              <form action={editItemsAction} className="mt-3 space-y-3">
+                <input type="hidden" name="id" value={o.id} />
+                <ul className="divide-y divide-line border-y border-line">
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                  {o.items.map((i: any) => (
+                    <li key={i.id} className="flex items-center gap-3 py-2">
+                      <div className="min-w-0 flex-1">
+                        {i.name_snapshot}
+                        {i.options_snapshot && <div className="text-xs text-mute">{i.options_snapshot}</div>}
+                        <div className="text-xs text-mute">{money(i.unit_price)} c/u</div>
+                      </div>
+                      <label className="flex items-center gap-1 text-xs text-mute">
+                        Cant.
+                        <input
+                          type="number"
+                          name={`qty_${i.id}`}
+                          defaultValue={i.qty}
+                          min={0}
+                          max={999}
+                          inputMode="numeric"
+                          className="field w-16 px-2 py-1.5 text-right text-sm text-ink"
+                        />
+                      </label>
+                      <label className="flex items-center gap-1 text-xs text-rose">
+                        <input type="checkbox" name={`remove_${i.id}`} className="accent-rose" />
+                        Quitar
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs text-mute">
+                  Se mantienen los precios del pedido y se recalcula el total. Si el stock ya estaba descontado, se ajusta solo.
+                  El cambio queda anotado en las notas internas.
+                </p>
+                <button className="btn w-full px-4 py-2.5 sm:w-auto">Guardar cambios</button>
+              </form>
+            </details>
+          )}
 
           <form action={notesAction} className="space-y-2 border border-line bg-white p-4">
             <input type="hidden" name="id" value={o.id} />

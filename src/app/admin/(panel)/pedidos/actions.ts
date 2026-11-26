@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { adminDb } from "@/lib/admin";
-import { cancelOrder, completeDeposit, markPaid, registerDeposit, saveNotes, setStatus } from "@/lib/orders-admin";
+import { cancelOrder, completeDeposit, editItems, markPaid, registerDeposit, saveNotes, setStatus } from "@/lib/orders-admin";
 import type { OrderStatus } from "@/lib/types";
 
 /** Ejecuta la acción y vuelve al pedido con un mensaje (?ok= o ?error=). */
@@ -71,4 +71,20 @@ export async function notesAction(f: FormData) {
     await saveNotes(db, id, String(f.get("notes") ?? ""));
     return "Notas guardadas.";
   });
+}
+
+/** Cambiar cantidades o quitar productos del pedido. Campos: qty_<itemId>, remove_<itemId>. */
+export async function editItemsAction(f: FormData) {
+  const id = idOf(f);
+  const db = await adminDb();
+  const changes = new Map<number, number>();
+  for (const [k, v] of f.entries()) {
+    const m = /^qty_(\d+)$/.exec(k);
+    if (m) changes.set(Number(m[1]), Number(v));
+  }
+  for (const [k] of f.entries()) {
+    const m = /^remove_(\d+)$/.exec(k);
+    if (m) changes.set(Number(m[1]), 0);
+  }
+  await run(id, () => editItems(db, id, changes));
 }
