@@ -24,13 +24,16 @@ export function Logo({ compact = false }: { compact?: boolean }) {
   );
 }
 
-export function AnnouncementBar({ text }: { text: string | null }) {
+export function AnnouncementBar({ text, href }: { text: string | null; href?: string }) {
   if (!text) return null;
-  return (
-    <div className="bg-ink px-4 py-2.5 text-center text-[11px] font-normal uppercase leading-4 tracking-[2px] text-paper">
-      {text}
-    </div>
-  );
+  const cls = "block bg-ink px-4 py-2.5 text-center text-[11px] font-normal uppercase leading-4 tracking-[2px] text-paper";
+  if (href)
+    return (
+      <Link href={href} className={cls}>
+        {text} <span className="text-gold" aria-hidden>→</span>
+      </Link>
+    );
+  return <div className={cls}>{text}</div>;
 }
 
 export function Header() {

@@ -15,6 +15,8 @@ export interface WhatsappOrder {
   discount: number;
   /** "transfer" = transferencia con 10% OFF · "card" = tarjeta con link de pago o QR */
   payment: "transfer" | "card";
+  /** true si el pedido tiene productos con precio de Black Friday */
+  promo?: boolean;
   items: { name: string; options: string | null; qty: number }[];
   address?: string | null;
   notes?: string | null;
@@ -28,7 +30,8 @@ export function orderMessage(o: WhatsappOrder): string {
     "",
     o.payment === "card"
       ? `Pago: tarjeta (link de pago o QR)`
-      : `Pago: transferencia${o.discount > 0 ? " (10% OFF)" : ""}`,
+      : `Pago: transferencia${o.discount > 0 && !o.promo ? " (10% OFF)" : ""}`,
+    ...(o.promo ? ["Incluye precios de *Black Friday*"] : []),
     `Total: *${money(o.total)}*`,
     `Envío a: ${o.address ?? "—"}`,
   ];

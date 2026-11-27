@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useCart } from "@/components/cart";
 import { money } from "@/lib/format";
-import { computeTotals, discountPctFor, unitPrice } from "@/lib/pricing";
+import { computeTotals, discountPctFor, linePrice } from "@/lib/pricing";
 import type { Category, PaymentRule } from "@/lib/types";
 
 /** Zonas de envío (Gran Mendoza). "Otros" pide escribir la localidad. */
@@ -30,10 +30,11 @@ export function CheckoutForm({ transferRule, categories }: Props) {
   const summary = useMemo(() => {
     const priced = lines.map((l) => {
       const pct = payment === "transfer" ? discountPctFor(transferRule, l.categoryId, categories) : 0;
-      return { variantId: l.variantId, qty: l.qty, unitListPrice: l.priceList, unitPrice: unitPrice(l.priceList, pct) };
+      return { variantId: l.variantId, qty: l.qty, unitListPrice: l.priceList, unitPrice: linePrice(l.priceList, pct, l.promoPct ?? 0) };
     });
     return computeTotals(priced);
   }, [lines, transferRule, categories, payment]);
+  const hasPromo = lines.some((l) => (l.promoPct ?? 0) > 0);
 
   // Si el navegador no abrió WhatsApp solo, queda el botón para abrirlo a mano
   if (sent)
@@ -135,7 +136,7 @@ export function CheckoutForm({ transferRule, categories }: Props) {
         {(
           [
             ["transfer", "Transferencia — 10% OFF en todo", "Te pasamos el alias por WhatsApp."],
-            ["card", "Tarjeta de crédito o débito", "Te mandamos un link de pago o un QR. Precio de lista."],
+            ["card", "Tarjeta de crédito o débito", hasPromo ? "Te mandamos un link de pago o un QR. Los productos de Black Friday van con su descuento; el resto, a precio de lista." : "Te mandamos un link de pago o un QR. Precio de lista."],
           ] as const
         ).map(([value, title, hint]) => (
           <label
@@ -158,7 +159,7 @@ export function CheckoutForm({ transferRule, categories }: Props) {
         <div className="space-y-1.5">
           <div className="flex justify-between"><span className="text-mute">Subtotal</span><span>{money(summary.subtotal)}</span></div>
           {summary.discount > 0 && (
-            <div className="flex justify-between text-ok"><span>Transferencia 10% OFF</span><span>−{money(summary.discount)}</span></div>
+            <div className="flex justify-between text-ok"><span>{hasPromo ? (payment === "transfer" ? "Descuentos (Black Friday y transferencia)" : "Descuento Black Friday") : "Transferencia 10% OFF"}</span><span>−{money(summary.discount)}</span></div>
           )}
           <div className="flex justify-between border-t border-line pt-2 text-lg font-bold"><span>Total{payment === "transfer" ? " por transferencia" : " con tarjeta"}</span><span>{money(summary.total)}</span></div>
         </div>

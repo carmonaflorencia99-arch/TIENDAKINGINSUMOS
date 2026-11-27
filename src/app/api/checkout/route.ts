@@ -10,7 +10,8 @@ import { z } from "zod";
 import { adminClient } from "@/lib/supabase";
 import { orderMessage, whatsappLink } from "@/lib/whatsapp";
 import { optionsLabel } from "@/lib/format";
-import { computeTotals, discountPctFor, unitPrice, type PricedLine } from "@/lib/pricing";
+import { computeTotals, discountPctFor, linePrice, type PricedLine } from "@/lib/pricing";
+import { blackFridayActive, categorySlugsFor, promoPctFor } from "@/lib/promo";
 import type { PaymentRule, Category } from "@/lib/types";
 
 const Body = z
@@ -47,24 +48,25 @@ export async function POST(req: Request) {
   const db = adminClient();
   const [rulesRes, catsRes, settingsRes, variantsRes] = await Promise.all([
     db.from("payment_rules").select("*"),
-    db.from("categories").select("id, parent_id"),
+    db.from("categories").select("id, parent_id, slug"),
     db.from("settings").select("whatsapp").eq("id", 1).single(),
     db
       .from("variants")
-      .select("*, product:products(id, name, category_id, status)")
+      .select("*, product:products(id, name, category_id, status, brand:brands(slug))")
       .in("id", [...qtyById.keys()]),
   ]);
   if (rulesRes.error || catsRes.error || settingsRes.error || variantsRes.error)
     return fail("No pudimos procesar el pedido. Probá de nuevo en unos minutos.", 500);
 
   const rules = rulesRes.data as PaymentRule[];
-  const categories = catsRes.data as Pick<Category, "id" | "parent_id">[];
+  const categories = catsRes.data as Pick<Category, "id" | "parent_id" | "slug">[];
 
   // Transferencia tiene descuento; la tarjeta (link de pago / QR) va a precio de lista
   const rule = body.payment === "transfer" ? rules.find((r) => r.method === "transfer") : undefined;
 
   // Precios y stock desde la base
   const priced: (PricedLine & { name: string; options: string })[] = [];
+  let hasPromo = false;
   for (const [variantId, qty] of qtyById) {
     const v = variantsRes.data.find((x) => x.id === variantId);
     if (!v || !v.active || v.product?.status !== "active")
@@ -77,11 +79,19 @@ export async function POST(req: Request) {
           : `"${v.product.name}${options ? ` ${options}` : ""}" está sin stock.`,
       );
     const pct = discountPctFor(rule, v.product.category_id, categories);
+    // Black Friday: % sobre precio de lista, con cualquier medio de pago (no se suma)
+    const promoPct = promoPctFor({
+      productName: v.product.name,
+      brandSlug: v.product.brand?.slug ?? null,
+      categorySlugs: categorySlugsFor(v.product.category_id, categories),
+      options: [v.option1, v.option2, v.option3],
+    });
+    if (promoPct > 0) hasPromo = true;
     priced.push({
       variantId,
       qty,
       unitListPrice: v.price_list,
-      unitPrice: unitPrice(v.price_list, pct, v.price_override),
+      unitPrice: linePrice(v.price_list, pct, promoPct, v.price_override),
       name: v.product.name,
       options,
     });
@@ -135,6 +145,7 @@ export async function POST(req: Request) {
     total: totals.total,
     discount: totals.discount,
     payment: body.payment,
+    promo: hasPromo && blackFridayActive(),
     address: fullAddress,
     notes: body.notes || null,
     items: priced.map((p) => ({ name: p.name, options: p.options || null, qty: p.qty })),

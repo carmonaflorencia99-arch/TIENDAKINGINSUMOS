@@ -6,6 +6,7 @@ import { productPrices } from "@/lib/display-prices";
 import { ProductCard } from "@/components/product-card";
 import { Carousel } from "@/components/carousel";
 import { Marquee } from "@/components/marquee";
+import { BLACK_FRIDAY, blackFridayActive } from "@/lib/promo";
 
 export const revalidate = 60;
 
@@ -19,9 +20,29 @@ export default async function Home() {
   const main = categories.filter((c) => c.parent_id == null);
   const [covers, instagram] = await Promise.all([getCategoryCovers(categories), getInstagramPosts(8)]);
   const official = officialBrands(brands);
+  const bf = blackFridayActive();
 
   return (
     <>
+      {/* Black Friday (27 y 28 de noviembre): se oculta solo cuando termina */}
+      {bf && (
+        <section className="border-b border-paper/15 bg-ink text-paper">
+          <Link href="/black-friday" className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 py-10 text-center md:py-14">
+            <span className="eyebrow text-paper/60">
+              <span className="text-gold">✦</span> {BLACK_FRIDAY.datesLabel} <span className="text-gold">✦</span>
+            </span>
+            <span className="text-[44px] font-light uppercase leading-none tracking-[6px] md:text-[72px]">Black Friday</span>
+            <span className="text-[20px] font-normal uppercase tracking-[4px] md:text-[26px]">
+              Hasta <span className="text-gold">{BLACK_FRIDAY.maxPct}% OFF</span>
+            </span>
+            <span className="mt-1 max-w-md text-[13px] text-paper/70">
+              60% en pestañas tecnológicas Zaphiria medidas únicas · 15% en Love de Clione, Lady Diana, Súper Bonder Gollee y 3D Lumi · 10% en todo The Lion Beauty
+            </span>
+            <span className="btn mt-4 bg-paper text-ink">Ver ofertas</span>
+          </Link>
+        </section>
+      )}
+
       {/* Hero: foto propia de King sobre negro (public/brand/hero.jpg) */}
       <section className="bg-ink text-paper">
         <div className="mx-auto grid max-w-6xl md:grid-cols-2 md:items-center md:px-4">
@@ -52,7 +73,13 @@ export default async function Home() {
       </section>
 
       <Marquee
-        items={[
+        items={bf ? [
+          `Black Friday · hasta ${BLACK_FRIDAY.maxPct}% OFF`,
+          "Solo viernes 27 y sábado 28",
+          "Descuentos con cualquier medio de pago",
+          `Distribuidores oficiales ${OFFICIAL_BRANDS_TEXT}`,
+          "Envíos a domicilio",
+        ] : [
           `Distribuidores oficiales ${OFFICIAL_BRANDS_TEXT}`,
           "Transferencia 10% OFF en todo",
           "Tarjetas con link de pago o QR",

@@ -27,7 +27,7 @@ export default async function ProductPage({ params }: Props) {
   if (!product) notFound();
 
   const prices: VariantPrices = Object.fromEntries(
-    product.variants.map((v) => [v.id, pricesFor(v, product.category_id, rules, categories)]),
+    product.variants.map((v) => [v.id, pricesFor(v, product, rules, categories)]),
   );
   const category = product.category;
   const isAdhesive = !!product.adhesive_specs || category?.slug === "adhesivos";
@@ -82,7 +82,11 @@ export default async function ProductPage({ params }: Props) {
           ) : (
             <p>No realizamos cambios ni devoluciones.</p>
           )}
-          <p className="mt-2">Solo envíos · Transferencia 10% OFF o tarjeta con link de pago / QR.</p>
+          <p className="mt-2">
+            {Object.values(prices).some((p) => p.promo != null)
+              ? "Solo envíos · Precio Black Friday con cualquier medio de pago (transferencia o tarjeta con link de pago / QR)."
+              : "Solo envíos · Transferencia 10% OFF o tarjeta con link de pago / QR."}
+          </p>
         </div>
       </div>
     </div>

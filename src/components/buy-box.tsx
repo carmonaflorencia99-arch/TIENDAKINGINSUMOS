@@ -9,9 +9,12 @@ import { useCart } from "./cart";
 import { money, optionsLabel } from "@/lib/format";
 import type { CartLineView, Product, Variant } from "@/lib/types";
 
-export type VariantPrices = Record<number, { list: number; cash: number | null; transfer: number | null }>;
+export type VariantPrices = Record<
+  number,
+  { list: number; cash: number | null; transfer: number | null; promoPct: number; promo: number | null }
+>;
 
-function toLine(p: Product, v: Variant, qty: number): CartLineView {
+function toLine(p: Product, v: Variant, qty: number, prices: VariantPrices): CartLineView {
   return {
     variantId: v.id,
     qty,
@@ -23,8 +26,12 @@ function toLine(p: Product, v: Variant, qty: number): CartLineView {
     image: p.images[0]?.url,
     stock: v.stock,
     trackStock: v.track_stock,
+    promoPct: prices[v.id]?.promoPct ?? 0,
   };
 }
+
+/** Precio por unidad a mostrar en botones y totales: el de Black Friday si hay. */
+const shownPrice = (v: Variant, prices: VariantPrices) => prices[v.id]?.promo ?? v.price_list;
 
 const maxFor = (v: Variant) => (v.track_stock ? Math.max(v.stock, 0) : 99);
 const unique = (xs: (string | null)[]) => [...new Set(xs.filter((x): x is string => !!x))];
@@ -79,6 +86,19 @@ function StickyBar({ children }: { children: React.ReactNode }) {
 
 function PriceLines({ p }: { p: VariantPrices[number] | undefined }) {
   if (!p) return null;
+  if (p.promo != null)
+    return (
+      <div className="space-y-1.5">
+        <p className="inline-block bg-ink px-2.5 py-1 text-[11px] font-medium uppercase tracking-[2px] text-paper">
+          Black Friday <span className="text-gold">−{p.promoPct}%</span>
+        </p>
+        <p className="flex items-baseline gap-3">
+          <span className="text-2xl font-bold text-ok">{money(p.promo)}</span>
+          <span className="text-base text-mute line-through">{money(p.list)}</span>
+        </p>
+        <p className="text-sm text-mute">Con cualquier medio de pago · solo viernes 27 y sábado 28</p>
+      </div>
+    );
   return (
     <div className="space-y-1">
       <p className="text-2xl font-bold">{money(p.list)}</p>
@@ -161,9 +181,9 @@ export function VariantPicker({ product, prices }: { product: Product; prices: V
             type="button"
             className="btn flex-1"
             disabled={!variant || max === 0 || qty === 0}
-            onClick={() => variant && add([toLine(product, variant, qty)])}
+            onClick={() => variant && add([toLine(product, variant, qty, prices)])}
           >
-            {max === 0 ? "Sin stock" : `Agregar · ${money((variant?.price_list ?? 0) * qty)}`}
+            {max === 0 ? "Sin stock" : `Agregar · ${money((variant ? shownPrice(variant, prices) : 0) * qty)}`}
           </button>
         </div>
       </StickyBar>
@@ -198,12 +218,12 @@ export function QuickAddMatrix({ product, prices }: { product: Product; prices: 
 
   const selected = product.variants.filter((v) => (qty[v.id] ?? 0) > 0);
   const totalBoxes = selected.reduce((s, v) => s + qty[v.id], 0);
-  const totalPrice = selected.reduce((s, v) => s + v.price_list * qty[v.id], 0);
+  const totalPrice = selected.reduce((s, v) => s + shownPrice(v, prices) * qty[v.id], 0);
 
   const sample = lengths[0] ?? product.variants[0];
 
   const commit = () => {
-    add(selected.map((v) => toLine(product, v, qty[v.id])));
+    add(selected.map((v) => toLine(product, v, qty[v.id], prices)));
     setQty({});
   };
 
@@ -245,7 +265,7 @@ export function QuickAddMatrix({ product, prices }: { product: Product; prices: 
                 <div>
                   <p className="font-semibold">{v.option3}</p>
                   <p className="text-xs text-mute">
-                    {max === 0 ? "Sin stock" : v.track_stock && max <= 3 ? `Quedan ${max}` : money(v.price_list)}
+                    {max === 0 ? "Sin stock" : v.track_stock && max <= 3 ? `Quedan ${max}` : money(shownPrice(v, prices))}
                   </p>
                 </div>
                 {max === 0 ? (

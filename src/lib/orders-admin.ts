@@ -3,7 +3,8 @@
  * servidor (ya verificado con adminDb()).
  */
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { computeTotals, depositAmount, discountPctFor, unitPrice } from "./pricing";
+import { computeTotals, depositAmount, discountPctFor, linePrice, unitPrice } from "./pricing";
+import { categorySlugsFor, promoPctFor } from "./promo";
 import type { OrderStatus, PaymentRule } from "./types";
 
 export const STATUS_LABEL: Record<OrderStatus, string> = {
@@ -165,9 +166,9 @@ export async function editItems(
   if (validAdds.length) {
     const ids = [...new Set(validAdds.map((a) => a.variantId))];
     const [{ data: vars }, { data: rules }, { data: cats }] = await Promise.all([
-      db.from("variants").select("*, product:products(name, category_id, status)").in("id", ids),
+      db.from("variants").select("*, product:products(name, category_id, status, brand:brands(slug))").in("id", ids),
       db.from("payment_rules").select("*"),
-      db.from("categories").select("id, parent_id"),
+      db.from("categories").select("id, parent_id, slug"),
     ]);
     // igual que en el checkout: transferencia con descuento, tarjeta a precio de lista
     const rule = o.payment === "transfer" ? (rules as PaymentRule[] | null)?.find((r) => r.method === "transfer") : undefined;
@@ -182,6 +183,13 @@ export async function editItems(
       }
       const opts = [v.option1, v.option2, v.option3].filter(Boolean).join(" · ") || null;
       const pct = discountPctFor(rule, v.product.category_id, cats ?? []);
+      // Black Friday (u otra promo vigente): mismo precio con cualquier medio de pago
+      const promoPct = promoPctFor({
+        productName: v.product.name,
+        brandSlug: v.product.brand?.slug ?? null,
+        categorySlugs: categorySlugsFor(v.product.category_id, cats ?? []),
+        options: [v.option1, v.option2, v.option3],
+      });
       lines.push({
         id: null,
         variant_id: v.id,
@@ -190,7 +198,7 @@ export async function editItems(
         qty: 0,
         newQty: clamp(a.qty),
         unit_list_price: v.price_list,
-        unit_price: unitPrice(v.price_list, pct, v.price_override),
+        unit_price: linePrice(v.price_list, pct, promoPct, v.price_override),
       });
     }
   }

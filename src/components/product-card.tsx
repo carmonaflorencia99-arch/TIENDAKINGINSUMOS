@@ -36,6 +36,11 @@ export function ProductCard({ product, prices }: { product: Product; prices: Dis
             className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
           />
         )}
+        {prices && prices.promoPct > 0 && !outOfStock && (
+          <span className="absolute left-0 top-0 bg-ink px-2.5 py-1 text-[10px] font-medium uppercase tracking-[2px] text-paper">
+            Black Friday <span className="text-gold">−{prices.promoPct}%</span>
+          </span>
+        )}
         {outOfStock && (
           <span className="absolute left-0 top-0 bg-ink px-2.5 py-1 text-[10px] font-medium uppercase tracking-[2px] text-paper">
             Sin stock
@@ -48,11 +53,24 @@ export function ProductCard({ product, prices }: { product: Product; prices: Dis
         {product.adhesive_specs && <AdhesiveBadges specs={product.adhesive_specs} compact />}
         {prices && (
           <div className="mt-auto pt-1">
-            <p className="text-[15px] font-bold">
-              {prices.from && <span className="text-[11px] font-normal uppercase tracking-wider text-mute">desde </span>}
-              {money(prices.list)}
-            </p>
-            {prices.transfer != null && (
+            {prices.promo != null ? (
+              <p className="flex flex-wrap items-baseline gap-x-2 text-[15px] font-bold text-ok">
+                <span>
+                  {prices.from && <span className="text-[11px] font-normal uppercase tracking-wider text-mute">desde </span>}
+                  {money(prices.promo)}
+                </span>
+                <span className="text-[12px] font-normal text-mute line-through">{money(prices.list)}</span>
+              </p>
+            ) : (
+              <p className="text-[15px] font-bold">
+                {prices.from && <span className="text-[11px] font-normal uppercase tracking-wider text-mute">desde </span>}
+                {money(prices.list)}
+              </p>
+            )}
+            {prices.promo != null && (
+              <p className="text-[12px] font-normal text-mute">con cualquier medio de pago</p>
+            )}
+            {prices.promo == null && prices.transfer != null && (
               <p className="text-[12px] font-normal text-ok">{money(prices.transfer)} por transferencia</p>
             )}
           </div>

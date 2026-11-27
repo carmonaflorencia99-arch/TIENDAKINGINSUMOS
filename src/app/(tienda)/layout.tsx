@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CartProvider } from "@/components/cart";
 import { AddedToast, AnnouncementBar, Header, WhatsAppFab } from "@/components/chrome";
 import { getSettings } from "@/lib/catalog";
+import { blackFridayActive, BLACK_FRIDAY } from "@/lib/promo";
 
 export const revalidate = 60;
 
@@ -9,7 +10,14 @@ export default async function StoreLayout({ children }: { children: React.ReactN
   const settings = await getSettings();
   return (
         <CartProvider>
-          <AnnouncementBar text={settings.announcement_text} />
+          <AnnouncementBar
+            text={
+              blackFridayActive()
+                ? `Black Friday · hasta ${BLACK_FRIDAY.maxPct}% OFF · solo viernes 27 y sábado 28`
+                : settings.announcement_text
+            }
+            href={blackFridayActive() ? "/black-friday" : undefined}
+          />
           <Header />
           <AddedToast />
           <main>{children}</main>

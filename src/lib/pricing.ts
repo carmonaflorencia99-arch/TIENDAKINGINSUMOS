@@ -62,6 +62,21 @@ export function unitPrice(
   return Math.round((priceList * (100 - pct)) / 1000) * 10;
 }
 
+/**
+ * Precio unitario de una línea considerando una promo (ej. Black Friday).
+ * La promo se calcula sobre el precio de lista y NO se suma al descuento del
+ * medio de pago: se aplica el mayor de los dos.
+ */
+export function linePrice(
+  priceList: number,
+  methodPct: number,
+  promoPct: number,
+  priceOverride: number | null = null,
+): number {
+  if (promoPct > 0 && promoPct >= methodPct) return unitPrice(priceList, promoPct, null);
+  return unitPrice(priceList, methodPct, priceOverride);
+}
+
 export interface PricedLine {
   variantId: number;
   qty: number;

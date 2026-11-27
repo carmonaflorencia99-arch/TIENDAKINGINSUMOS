@@ -119,4 +119,6 @@ export interface CartLineView extends CartLine {
   image?: string;
   stock: number;
   trackStock: boolean;
+  /** % de promo vigente (Black Friday). Lo recalcula el servidor; acá es solo para mostrar. */
+  promoPct?: number;
 }

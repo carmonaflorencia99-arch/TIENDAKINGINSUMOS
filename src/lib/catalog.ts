@@ -105,6 +105,13 @@ export async function getHighlighted(): Promise<Product[]> {
   return data.map(normalize);
 }
 
+/** Todo el catálogo activo (para la página de Black Friday). */
+export async function getAllProducts(): Promise<Product[]> {
+  const { data, error } = await publicClient().from("products").select(PRODUCT_SELECT).limit(2000);
+  if (error) throw error;
+  return data.map(normalize).sort(shelfOrder);
+}
+
 export async function searchProducts(q: string): Promise<Product[]> {
   const term = q.trim().replace(/[%,()]/g, " ");
   if (!term) return [];
@@ -122,7 +129,7 @@ export async function getVariantsWithProduct(ids: number[]) {
   if (ids.length === 0) return [];
   const { data, error } = await publicClient()
     .from("variants")
-    .select("*, product:products(id, name, slug, category_id, status, images:product_images(url, sort_order))")
+    .select("*, product:products(id, name, slug, category_id, status, brand:brands(slug), images:product_images(url, sort_order))")
     .in("id", ids);
   if (error) throw error;
   return data;
