@@ -56,8 +56,9 @@ export const PROMO_RULES: PromoRule[] = [
   },
   {
     pct: 60,
-    label: "Pestañas tecnológicas Zaphiria medidas únicas",
-    match: (s) => s.brandSlug === "zaphiria" && isLashes(s) && isUnica(s),
+    label: "Pestañas tecnológicas Zaphiria medidas únicas (no Lumi)",
+    // las Lumi NO entran en el 60% (solo las 3D Lumi únicas tienen 15%, regla de arriba)
+    match: (s) => s.brandSlug === "zaphiria" && isLashes(s) && isUnica(s) && !/\blumi\b/.test(norm(s.productName)),
   },
   {
     pct: 15,

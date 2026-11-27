@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 /** Títulos de cada grupo de ofertas, de mayor a menor descuento. */
 const GROUPS: { pct: number; title: string; note: string }[] = [
-  { pct: 60, title: "60% OFF", note: "Pestañas tecnológicas Zaphiria, medidas únicas. Últimas unidades." },
+  { pct: 60, title: "60% OFF", note: "Pestañas tecnológicas Zaphiria medidas únicas (no incluye Lumi). Últimas unidades." },
   { pct: 15, title: "15% OFF", note: "Adhesivo Love de Clione, Adhesivo Lady Diana, Súper Bonder de Gollee y pestañas 3D Lumi medidas únicas." },
   { pct: 10, title: "10% OFF", note: "Todo The Lion Beauty." },
 ];

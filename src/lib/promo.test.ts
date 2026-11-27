@@ -39,6 +39,8 @@ describe("Black Friday: productos", () => {
     expect(pct({ brandSlug: "zaphiria", productName: "Pestañas Zaphiria Lumi W 3D mix 0.07", categorySlugs: tecno })).toBe(0));
   it("Zaphiria tecnológicas medidas únicas 60%", () =>
     expect(pct({ brandSlug: "zaphiria", productName: "Pestañas Zaphiria W 0.07 D única medida", categorySlugs: tecno })).toBe(60));
+  it("ninguna Lumi tiene 60%", () =>
+    expect(pct({ brandSlug: "zaphiria", productName: "Pestañas LUMI 4D 007 única medida curva D", categorySlugs: pestanas })).toBe(0));
   it("otras marcas no entran", () =>
     expect(pct({ brandSlug: "nagaraku", productName: "Pestañas Nagaraku única medida curva D", categorySlugs: pestanas })).toBe(0));
   it("Zaphiria que no es pestaña no entra", () =>
