@@ -41,6 +41,10 @@ describe("Black Friday: productos", () => {
     expect(pct({ brandSlug: "zaphiria", productName: "Pestañas Zaphiria W 0.07 D única medida", categorySlugs: tecno })).toBe(60));
   it("ninguna Lumi tiene 60%", () =>
     expect(pct({ brandSlug: "zaphiria", productName: "Pestañas LUMI 4D 007 única medida curva D", categorySlugs: pestanas })).toBe(0));
+  it("las cajas grandes (Spike / Spire / Fan) no entran", () => {
+    expect(pct({ brandSlug: "zaphiria", productName: "Pestañas Zaphiria Spike única medida", categorySlugs: pestanas })).toBe(0);
+    expect(pct({ brandSlug: "zaphiria", productName: "Pestañas Zaphiria Spire Fan", categorySlugs: pestanas })).toBe(0);
+  });
   it("otras marcas no entran", () =>
     expect(pct({ brandSlug: "nagaraku", productName: "Pestañas Nagaraku única medida curva D", categorySlugs: pestanas })).toBe(0));
   it("Zaphiria que no es pestaña no entra", () =>
