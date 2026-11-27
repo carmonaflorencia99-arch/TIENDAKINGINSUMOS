@@ -27,6 +27,10 @@ describe("Black Friday: productos", () => {
   const pct = (o: Partial<PromoSubject>) => promoPctFor(s(o), VIERNES);
   it("todo The Lion Beauty 10%", () => expect(pct({ brandSlug: "the-lion-beauty", productName: "Kit de lifting Lion Beauty" })).toBe(10));
   it("Lady Diana 15% aunque sea de Lion", () => expect(pct({ brandSlug: "the-lion-beauty", productName: "Adhesivo Lady Diana" })).toBe(15));
+  it("Lady Diana como línea del Adhesivo Lion Beauty 15%; las otras líneas 10%", () => {
+    expect(pct({ brandSlug: "the-lion-beauty", productName: "Adhesivo Lion Beauty", options: ["Lady Diana", "5 g", null] })).toBe(15);
+    expect(pct({ brandSlug: "the-lion-beauty", productName: "Adhesivo Lion Beauty", options: ["Magno", "5 g", null] })).toBe(10);
+  });
   it("Súper Bonder Golle 15%", () => expect(pct({ brandSlug: "golle", productName: "Super Bonder Golle 15 ml" })).toBe(15));
   it("Clione: solo la línea Love", () => {
     expect(pct({ brandSlug: "clione", productName: "Adhesivo Clione Prime", options: ["Love (0,3-1 seg)", "3 g", null] })).toBe(15);

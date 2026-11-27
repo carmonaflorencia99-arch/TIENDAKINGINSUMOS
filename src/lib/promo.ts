@@ -69,7 +69,9 @@ export const PROMO_RULES: PromoRule[] = [
   {
     pct: 15,
     label: "Adhesivo Lady Diana (The Lion)",
-    match: (s) => /lady\s*diana/.test(norm(s.productName)),
+    byVariant: true,
+    // puede cargarse como producto propio o como una "línea" del Adhesivo Lion Beauty
+    match: (s) => [s.productName, ...(s.options ?? [])].some((t) => /lady\s*diana/.test(norm(t))),
   },
   {
     pct: 15,
