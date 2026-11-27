@@ -36,7 +36,7 @@ export default async function Home() {
               Hasta <span className="text-gold">{BLACK_FRIDAY.maxPct}% OFF</span>
             </span>
             <span className="mt-1 max-w-md text-[13px] text-paper/70">
-              60% en pestañas tecnológicas Zaphiria medidas únicas · 15% en Love de Clione, Lady Diana, Súper Bonder Gollee y 3D Lumi · 10% en todo The Lion Beauty
+              60% en pestañas tecnológicas Zaphiria medidas únicas · 15% en Love de Clione, Lady Diana y Súper Bonder Gollee · 10% en todo The Lion Beauty
             </span>
             <span className="btn mt-4 bg-paper text-ink">Ver ofertas</span>
           </Link>

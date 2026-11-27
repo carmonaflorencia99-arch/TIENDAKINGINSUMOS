@@ -37,8 +37,8 @@ describe("Black Friday: productos", () => {
     expect(pct({ brandSlug: "clione", productName: "Adhesivo Clione Prime", options: ["Master (2-3 seg)", "3 g", null] })).toBe(0);
     expect(pct({ brandSlug: "clione", productName: "Bonder Clione 20 ml" })).toBe(0);
   });
-  it("3D Lumi única medida 15% (no 60%)", () =>
-    expect(pct({ brandSlug: "zaphiria", productName: "Pestañas LUMI 3D 007 única medida curva D", categorySlugs: pestanas })).toBe(15));
+  it("3D Lumi única medida sin descuento", () =>
+    expect(pct({ brandSlug: "zaphiria", productName: "Pestañas LUMI 3D 007 única medida curva D", categorySlugs: pestanas })).toBe(0));
   it("Lumi W mix no entra", () =>
     expect(pct({ brandSlug: "zaphiria", productName: "Pestañas Zaphiria Lumi W 3D mix 0.07", categorySlugs: tecno })).toBe(0));
   it("Zaphiria tecnológicas medidas únicas 60%", () =>

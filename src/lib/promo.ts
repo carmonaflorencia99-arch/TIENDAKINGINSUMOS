@@ -50,15 +50,10 @@ interface PromoRule {
 /** Ofertas de Ivana. Gana la PRIMERA regla que coincide (por eso el orden importa). */
 export const PROMO_RULES: PromoRule[] = [
   {
-    pct: 15,
-    label: "Pestañas 3D Lumi medidas únicas",
-    match: (s) => isLashes(s) && /\blumi\b/.test(norm(s.productName)) && /\b3d\b/.test(norm(s.productName)) && isUnica(s),
-  },
-  {
     pct: 60,
     label: "Pestañas tecnológicas Zaphiria medidas únicas, cajas chicas (no Lumi ni cajas grandes)",
     // las Lumi NO entran en el 60% (solo las 3D Lumi únicas tienen 15%, regla de arriba)
-    // solo las cajas chicas: quedan afuera las Lumi y las cajas grandes (Spike, Spire, Fan, Wings)
+    // solo las cajas chicas: quedan afuera las Lumi (ninguna Lumi tiene descuento) y las cajas grandes
     match: (s) =>
       s.brandSlug === "zaphiria" &&
       isLashes(s) &&
@@ -96,6 +91,8 @@ export const PROMO_RULES: PromoRule[] = [
 /** % de Black Friday para una variante (0 si no está en oferta o no es la fecha). */
 export function promoPctFor(subject: PromoSubject, now: number = Date.now()): number {
   if (!blackFridayActive(now)) return 0;
+  // Ninguna pestaña Lumi tiene descuento (pedido de King)
+  if (isLashes(subject) && /\blumi\b/.test(norm(subject.productName))) return 0;
   return PROMO_RULES.find((r) => r.match(subject))?.pct ?? 0;
 }
 
