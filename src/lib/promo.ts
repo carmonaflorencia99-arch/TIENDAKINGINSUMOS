@@ -55,7 +55,7 @@ export const PROMO_RULES: PromoRule[] = [
     // las Lumi NO entran en el 60% (solo las 3D Lumi únicas tienen 15%, regla de arriba)
     // solo las cajas chicas: quedan afuera las Lumi (ninguna Lumi tiene descuento) y las cajas grandes
     match: (s) =>
-      s.brandSlug === "zaphiria" &&
+      (s.brandSlug === "zaphiria" || /zaphiria/.test(norm(s.productName))) && // a veces se carga sin marca
       isLashes(s) &&
       isUnica(s) &&
       !/\blumi\b/.test(norm(s.productName)) &&

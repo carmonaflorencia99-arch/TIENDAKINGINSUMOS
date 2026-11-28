@@ -43,6 +43,8 @@ describe("Black Friday: productos", () => {
     expect(pct({ brandSlug: "zaphiria", productName: "Pestañas Zaphiria Lumi W 3D mix 0.07", categorySlugs: tecno })).toBe(0));
   it("Zaphiria tecnológicas medidas únicas 60%", () =>
     expect(pct({ brandSlug: "zaphiria", productName: "Pestañas Zaphiria W 0.07 D única medida", categorySlugs: tecno })).toBe(60));
+  it("Zaphiria cargada sin marca, como la subió Ivana", () =>
+    expect(pct({ brandSlug: null, productName: "Pestañas Zaphiria medidas unicas tecnoloficas", categorySlugs: tecno, options: ["6D 8 MM", null, null] })).toBe(60));
   it("ninguna Lumi tiene 60%", () =>
     expect(pct({ brandSlug: "zaphiria", productName: "Pestañas LUMI 4D 007 única medida curva D", categorySlugs: pestanas })).toBe(0));
   it("las cajas grandes (Spike / Spire / Fan) no entran", () => {
